@@ -26,6 +26,7 @@ También se puede ejecutar el notebook completo desde la raíz:
 ```powershell
 .\.venv\Scripts\python.exe scripts/execute_notebook.py
 .\.venv\Scripts\python.exe scripts/execute_notebook.py 02_entrenamiento_comparacion.ipynb
+.\.venv\Scripts\python.exe scripts/execute_notebook.py 03_comprobacion_prueba.ipynb
 ```
 
 El notebook necesita las carpetas `src/` y `data/` del repositorio. Para usar Colab hay que cargar una copia del proyecto completo e instalar `requirements.txt`; subir únicamente el notebook no basta. No se deben guardar tokens de GitHub en las celdas.
@@ -40,13 +41,18 @@ El segundo notebook compara 34 configuraciones de regresión logística, árbol 
 
 El pipeline seleccionado se reajusta con desarrollo y se guarda en `models/modelo_seleccionado.joblib`. Los resúmenes de selección y los resultados de todas las configuraciones quedan en `reports/`. Las métricas de selección por validación cruzada no sustituyen la evaluación independiente final.
 
-La reserva de prueba no se carga en el notebook 02. Su evaluación y la simulación corresponden a las etapas siguientes.
+La reserva de prueba no se carga en el notebook 02. El notebook 03 evalúa el pipeline ya fijado, sin entrenarlo ni reajustarlo. En las 2 000 observaciones de prueba detectó 50 de las 68 fallas, omitió 18 y produjo 13 falsas alarmas. Obtuvo sensibilidad del 73,53 %, precisión del 79,37 %, F1 de 0,7634 y tasa de falsas alarmas del 0,67 %. Los conteos y tiempos locales completos están en `reports/test_evaluation.json`; las predicciones individuales, en `reports/test_predictions.csv`.
+
+`model_selection.json` conserva la selección histórica anterior a la prueba. El reporte separado `test_evaluation.json` registra que la reserva ya fue evaluada. No se deben usar estos resultados para volver a elegir parámetros y seguir llamando independiente a la misma reserva.
+
+La simulación de la interfaz es la siguiente etapa. El entrenamiento, la evaluación y los commits no modifican el informe Word.
 
 ## Organización
 
 - `notebooks/`: análisis explicado y resultados de ejecución.
 - `src/preparation.py`: auditoría, particiones y transformaciones reutilizables.
 - `src/training.py`: búsquedas, comparación y selección usando únicamente desarrollo.
+- `src/evaluation.py`: verificación del experimento congelado, evaluación final y tiempos locales de predicción.
 - `scripts/execute_notebook.py`: ejecución completa desde un kernel limpio.
 - `reports/`: resúmenes verificables de auditoría y particiones.
 - `data/processed/`: CSV preparados, regenerables y excluidos de Git.
