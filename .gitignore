@@ -1,0 +1,20 @@
+# Entornos y credenciales
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Archivos generados
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+~$*
+
+# Salidas reproducibles
+/data/processed/
+/models/
+/outputs/
