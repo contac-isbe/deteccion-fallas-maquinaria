@@ -1,0 +1,38 @@
+{
+  "seed": 42,
+  "test_fraction": 0.2,
+  "cv_folds": 5,
+  "features": [
+    "Type",
+    "Air temperature [K]",
+    "Process temperature [K]",
+    "Rotational speed [rpm]",
+    "Torque [Nm]",
+    "Tool wear [min]"
+  ],
+  "target": "Machine failure",
+  "excluded_inputs": [
+    "UDI",
+    "Product ID",
+    "Machine failure",
+    "TWF",
+    "HDF",
+    "PWF",
+    "OSF",
+    "RNF"
+  ],
+  "development_id_sha256": "688d9660d1029ac20ba25dc9d97debcda6fe3944d96b9de35075ce94e360c8b0",
+  "test_id_sha256": "348af39fd7d45c0ec607d51c7cb9fea08e79a4840f5d22b64d395094b877c1d6",
+  "split_policy": "80% desarrollo con CV estratificada de 5 pliegues; 20% prueba final aislada.",
+  "preprocessing_policy": "Ajustar codificación y escalamiento dentro de cada pipeline/pliegue; no reutilizar el ejemplo ajustado.",
+  "scope": "Clasificación binaria en datos sintéticos; sin pronóstico temporal ni validación externa.",
+  "versions": {
+    "pandas": "3.0.1",
+    "numpy": "2.3.5",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "nbformat": "5.11.1",
+    "nbclient": "0.11.0",
+    "ipykernel": "7.4.0"
+  }
+}

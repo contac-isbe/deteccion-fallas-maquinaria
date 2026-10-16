@@ -1,0 +1,13 @@
+partition,rows,no_failure,failure,failure_percent
+development,8000,7729,271,3.3875
+test,2000,1932,68,3.4
+cv_1_train,6400,6183,217,3.3906
+cv_1_validation,1600,1546,54,3.375
+cv_2_train,6400,6183,217,3.3906
+cv_2_validation,1600,1546,54,3.375
+cv_3_train,6400,6183,217,3.3906
+cv_3_validation,1600,1546,54,3.375
+cv_4_train,6400,6183,217,3.3906
+cv_4_validation,1600,1546,54,3.375
+cv_5_train,6400,6184,216,3.375
+cv_5_validation,1600,1545,55,3.4375

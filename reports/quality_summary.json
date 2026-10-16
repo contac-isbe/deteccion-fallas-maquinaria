@@ -1,0 +1,16 @@
+{
+  "rows": 10000,
+  "columns": 14,
+  "sha256": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+  "missing_cells": 0,
+  "duplicate_rows": 0,
+  "duplicate_feature_vectors": 0,
+  "target_counts": {
+    "0": 9661,
+    "1": 339
+  },
+  "target_flag_disagreements": 27,
+  "failure_without_flag": 9,
+  "flag_without_failure": 18,
+  "label_policy": "Conservar Machine failure; documentar discrepancias; no usar indicadores de falla como entradas."
+}
