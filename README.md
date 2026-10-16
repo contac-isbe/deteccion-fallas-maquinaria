@@ -6,7 +6,7 @@ Proyecto del curso Inteligencia Artificial: Principios y Técnicas, UPAO.
 
 ## Alcance
 
-Clasificar observaciones de funcionamiento como sin falla o con falla utilizando AI4I 2020. Se compararán regresión logística, árbol de decisión y Random Forest. La demostración reproducirá observaciones reservadas para prueba y mostrará predicciones y alertas.
+Clasificar observaciones de funcionamiento como sin falla o con falla utilizando AI4I 2020. Se compararon regresión logística, árbol de decisión y Random Forest. La demostración reproducirá observaciones reservadas para prueba y mostrará predicciones y alertas.
 
 La tarea no incluye estimar la vida útil restante ni controlar maquinaria física. Los datos son sintéticos y la evaluación se limitará a las condiciones que representan.
 
@@ -35,7 +35,7 @@ El notebook necesita las carpetas `src/` y `data/` del repositorio. Para usar Co
 
 El primer notebook audita los datos y prepara una reserva de prueba del 20 %, con validación cruzada estratificada de cinco pliegues dentro del 80 % de desarrollo. Comprueba el preprocesamiento para regresión logística y para árboles sin entrenar clasificadores.
 
-La auditoría documenta discrepancias entre la etiqueta principal y los indicadores de tipos de falla. Se conserva `Machine failure` sin alterar el CSV original. Este problema de etiquetado limita la interpretación de resultados futuros.
+La auditoría documenta discrepancias entre la etiqueta principal y los indicadores de tipos de falla. Se conserva `Machine failure` sin alterar el CSV original. Este problema de etiquetado limita la interpretación de los resultados.
 
 El segundo notebook compara 34 configuraciones de regresión logística, árbol de decisión y Random Forest, usando los cinco pliegues fijados en desarrollo. El criterio principal es F1 medio, con sensibilidad y tasa de falsas alarmas para desempates. Se incluye una referencia que siempre predice sin falla.
 
@@ -60,7 +60,7 @@ La simulación de la interfaz es la siguiente etapa. El entrenamiento, la evalua
 
 En el notebook 01 las transformaciones se comprueban con el entrenamiento de un pliegue de demostración. El notebook 02 crea transformadores nuevos dentro de cada pipeline de clasificación. No se utilizan los datos de prueba para elegir el modelo ni sus parámetros.
 
-En la comparación ejecutada, el árbol de decisión obtuvo el mayor F1 medio de validación (0,7229), seguido de Random Forest (0,6564) y regresión logística (0,3304). El árbol seleccionado usa un mínimo de cinco observaciones por hoja, sin profundidad máxima prefijada y con pesos uniformes. Su sensibilidad media de validación fue 67,16 %; aún omite una parte de las fallas. Estos resultados corresponden a selección por validación cruzada, con evaluación final pendiente. Los valores completos y su variación están en `reports/model_comparison.csv`.
+En la comparación ejecutada, el árbol de decisión obtuvo el mayor F1 medio de validación (0,7229), seguido de Random Forest (0,6564) y regresión logística (0,3304). El árbol seleccionado usa un mínimo de cinco observaciones por hoja, sin profundidad máxima prefijada y con pesos uniformes. Su sensibilidad media de validación fue 67,16 %; aún omite una parte de las fallas. Estos resultados corresponden a la selección por validación cruzada. La evaluación final se realizó en el notebook 03 sobre las 2 000 observaciones de prueba y se resume en la sección Estado. Los valores completos y su variación están en `reports/model_comparison.csv`.
 
 ## Datos
 
