@@ -1,0 +1,47 @@
+{
+  "selected_model": "Árbol de decisión",
+  "selected_params": {
+    "model__class_weight": null,
+    "model__max_depth": null,
+    "model__min_samples_leaf": 5
+  },
+  "selection_rule": "Mayor F1 medio; desempates por sensibilidad y menor FPR. Pliegues prefijados; sin ajuste de umbral.",
+  "development_rows": 8000,
+  "development_id_sha256": "688d9660d1029ac20ba25dc9d97debcda6fe3944d96b9de35075ce94e360c8b0",
+  "cv_folds": 5,
+  "seed": 42,
+  "features": [
+    "Type",
+    "Air temperature [K]",
+    "Process temperature [K]",
+    "Rotational speed [rpm]",
+    "Torque [Nm]",
+    "Tool wear [min]"
+  ],
+  "positive_class": 1,
+  "test_evaluated": false,
+  "evaluation_scope": "Resultados de selección por CV en desarrollo; no estimación independiente de prueba.",
+  "baseline": {
+    "f1": 0.0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "accuracy": 0.9661250000000001,
+    "neg_fpr": 0.0
+  },
+  "selected_cv": {
+    "mean_f1": 0.7228905949123946,
+    "std_f1": 0.05512211665625184,
+    "mean_precision": 0.7853180980510174,
+    "mean_recall": 0.6716498316498317,
+    "mean_fpr": 0.006598173802735528,
+    "mean_accuracy": 0.9824999999999999
+  },
+  "versions": {
+    "scikit-learn": "1.9.1",
+    "pandas": "3.0.1",
+    "numpy": "2.3.5",
+    "joblib": "1.6.0"
+  },
+  "model_artifact": "models/modelo_seleccionado.joblib",
+  "model_sha256": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a"
+}

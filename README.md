@@ -25,6 +25,7 @@ También se puede ejecutar el notebook completo desde la raíz:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/execute_notebook.py
+.\.venv\Scripts\python.exe scripts/execute_notebook.py 02_entrenamiento_comparacion.ipynb
 ```
 
 El notebook necesita las carpetas `src/` y `data/` del repositorio. Para usar Colab hay que cargar una copia del proyecto completo e instalar `requirements.txt`; subir únicamente el notebook no basta. No se deben guardar tokens de GitHub en las celdas.
@@ -35,18 +36,25 @@ El primer notebook audita los datos y prepara una reserva de prueba del 20 %, co
 
 La auditoría documenta discrepancias entre la etiqueta principal y los indicadores de tipos de falla. Se conserva `Machine failure` sin alterar el CSV original. Este problema de etiquetado limita la interpretación de resultados futuros.
 
-El entrenamiento de clasificadores y la simulación corresponden a las etapas siguientes.
+El segundo notebook compara 34 configuraciones de regresión logística, árbol de decisión y Random Forest, usando los cinco pliegues fijados en desarrollo. El criterio principal es F1 medio, con sensibilidad y tasa de falsas alarmas para desempates. Se incluye una referencia que siempre predice sin falla.
+
+El pipeline seleccionado se reajusta con desarrollo y se guarda en `models/modelo_seleccionado.joblib`. Los resúmenes de selección y los resultados de todas las configuraciones quedan en `reports/`. Las métricas de selección por validación cruzada no sustituyen la evaluación independiente final.
+
+La reserva de prueba no se carga en el notebook 02. Su evaluación y la simulación corresponden a las etapas siguientes.
 
 ## Organización
 
 - `notebooks/`: análisis explicado y resultados de ejecución.
 - `src/preparation.py`: auditoría, particiones y transformaciones reutilizables.
+- `src/training.py`: búsquedas, comparación y selección usando únicamente desarrollo.
 - `scripts/execute_notebook.py`: ejecución completa desde un kernel limpio.
 - `reports/`: resúmenes verificables de auditoría y particiones.
 - `data/processed/`: CSV preparados, regenerables y excluidos de Git.
 - `outputs/`: gráficos y archivos temporales, excluidos de Git.
 
-Las transformaciones del notebook se ajustan solo al entrenamiento de un pliegue de demostración. En la siguiente etapa se crearán transformadores nuevos dentro de cada pipeline de clasificación. No se utilizarán los datos de prueba para elegir el modelo ni sus parámetros.
+En el notebook 01 las transformaciones se comprueban con el entrenamiento de un pliegue de demostración. El notebook 02 crea transformadores nuevos dentro de cada pipeline de clasificación. No se utilizan los datos de prueba para elegir el modelo ni sus parámetros.
+
+En la comparación ejecutada, el árbol de decisión obtuvo el mayor F1 medio de validación (0,7229), seguido de Random Forest (0,6564) y regresión logística (0,3304). El árbol seleccionado usa un mínimo de cinco observaciones por hoja, sin profundidad máxima prefijada y con pesos uniformes. Su sensibilidad media de validación fue 67,16 %; aún omite una parte de las fallas. Estos resultados corresponden a selección por validación cruzada, con evaluación final pendiente. Los valores completos y su variación están en `reports/model_comparison.csv`.
 
 ## Datos
 

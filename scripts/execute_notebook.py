@@ -1,6 +1,7 @@
 """Ejecuta el notebook desde un kernel limpio y conserva sus resultados."""
 
 import os
+import argparse
 from pathlib import Path
 
 import nbformat
@@ -9,7 +10,12 @@ from nbclient import NotebookClient
 
 def main():
     root = Path(__file__).resolve().parents[1]
-    notebook_path = root / "notebooks/01_analisis_preparacion.ipynb"
+    parser = argparse.ArgumentParser()
+    parser.add_argument("notebook", nargs="?", default="01_analisis_preparacion.ipynb")
+    args = parser.parse_args()
+    notebook_path = (root / "notebooks" / args.notebook).resolve()
+    if notebook_path.parent != (root / "notebooks").resolve():
+        raise ValueError("El notebook debe estar en notebooks/.")
     for name, folder in {
         "JUPYTER_RUNTIME_DIR": "outputs/jupyter",
         "IPYTHONDIR": "outputs/ipython",
@@ -21,7 +27,7 @@ def main():
     notebook = nbformat.read(notebook_path, as_version=4)
     nbformat.validate(notebook)
     client = NotebookClient(
-        notebook, timeout=180, kernel_name="python3",
+        notebook, timeout=1800, kernel_name="python3",
         resources={"metadata": {"path": str(root)}},
         allow_errors=False, record_timing=False,
     )
