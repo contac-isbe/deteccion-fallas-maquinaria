@@ -99,4 +99,8 @@ En la comparación ejecutada, el árbol de decisión obtuvo el mayor F1 medio de
 
 El archivo original se encuentra en `data/raw/ai4i2020.csv`. Su procedencia y licencia están documentadas en [data/README.md](data/README.md).
 
-El informe se conserva en la carpeta superior `Informe - Proyecto de IA`, fuera de este repositorio.
+## Informe del proyecto
+
+La copia del informe desarrollada hasta el apartado 6.2 está disponible en [Informe - Proyecto de IA.docx](docs/Informe%20-%20Proyecto%20de%20IA.docx). Descargar el archivo para revisarlo en Word.
+
+El original editable se conserva en la carpeta superior `Informe - Proyecto de IA`. Cuando se actualice, también debe actualizarse la copia de `docs/` para mantener ambas versiones iguales.
