@@ -45,7 +45,35 @@ La reserva de prueba no se carga en el notebook 02. El notebook 03 evalúa el pi
 
 `model_selection.json` conserva la selección histórica anterior a la prueba. El reporte separado `test_evaluation.json` registra que la reserva ya fue evaluada. No se deben usar estos resultados para volver a elegir parámetros y seguir llamando independiente a la misma reserva.
 
-La simulación de la interfaz es la siguiente etapa. El entrenamiento, la evaluación y los commits no modifican el informe Word.
+La simulación local está implementada y cuenta con comprobaciones funcionales, pruebas HTTP y revisión visual del navegador. Reproduce la reserva ya evaluada con el modelo guardado, sin reentrenarlo. La evidencia está en `reports/simulation_checks.json` y `reports/simulation_review.md`. El entrenamiento, la evaluación y los commits no modifican el informe Word.
+
+## Simulación local
+
+Desde la raíz del repositorio, con el entorno virtual preparado:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_simulation.py
+```
+
+Abrir [la interfaz local](http://127.0.0.1:8765) en un navegador. El servidor escucha únicamente en este equipo. Detenerlo con `Ctrl+C` en la terminal. Si el puerto está ocupado, utilizar `--port 8766` y abrir el puerto indicado.
+
+La interfaz muestra las cinco mediciones con sus unidades, el tipo de producto, UDI y la predicción. Permite iniciar, pausar, continuar, avanzar un registro y reiniciar. Una alerta se activa cuando el modelo predice falla; la etiqueta real se muestra después para comparar y nunca entra al modelo. Una predicción sin falla no garantiza ausencia de una condición de falla.
+
+`Exportar resultados CSV` descarga todos los registros procesados de la sesión, aunque la tabla muestre solo los ocho más recientes. Incluye identificadores, entradas, etiqueta real, predicción, alerta, acierto/error y tiempos. Reiniciar borra la sesión en memoria: exportar antes si se desea conservarla. Las pestañas conectadas al mismo servidor comparten una sesión; no es una aplicación multiusuario.
+
+La reserva verificada ya se carga al iniciar. El control de carga permite comprobar una copia de `data/processed/test.csv`: solo acepta la reserva completa con las columnas, valores y orden originales. Un archivo incorrecto muestra un mensaje y conserva el avance. No se admiten otros datasets ni nuevas mediciones en esta demostración.
+
+Si faltan `data/processed/` o `models/` en una copia nueva, ejecutar primero los notebooks 01 y 02, en ese orden. Esos archivos se generan localmente y están excluidos de Git. La aplicación comprueba la integridad del modelo y la reserva antes de funcionar; no entrena automáticamente.
+
+## Comprobación de la simulación
+
+```powershell
+.\.venv\Scripts\python.exe scripts/verify_simulation.py
+```
+
+El script reproduce las 2 000 observaciones mediante avance manual automatizado, compara cada predicción con el notebook 03, verifica alertas y exportación, y prueba inicio, pausa, continuación y errores a través del servidor HTTP. Escribe el resumen en `reports/simulation_checks.json` y el CSV de comprobación en `outputs/simulation_checked_predictions.csv` (excluido de Git). No modifica el modelo ni la evaluación histórica. Las capturas y las comprobaciones manuales del navegador se documentan por separado en `reports/simulation_review.md`.
+
+Los tiempos diferencian la llamada al pipeline, el procesamiento de una observación y el recorrido HTTP local. Ninguno incluye el pintado de la pantalla ni las pausas entre registros. No se fijó un umbral de latencia ni se afirma cumplimiento de tiempo real industrial. Reproducir la prueba ya consultada no constituye una nueva evaluación independiente del modelo.
 
 ## Organización
 
@@ -53,8 +81,13 @@ La simulación de la interfaz es la siguiente etapa. El entrenamiento, la evalua
 - `src/preparation.py`: auditoría, particiones y transformaciones reutilizables.
 - `src/training.py`: búsquedas, comparación y selección usando únicamente desarrollo.
 - `src/evaluation.py`: verificación del experimento congelado, evaluación final y tiempos locales de predicción.
+- `src/simulation.py`: validación, reproducción y exportación de la sesión, sin entrenamiento.
+- `src/simulation_server.py`: servidor HTTP local de la interfaz.
+- `web/`: interfaz en español con HTML, CSS y JavaScript, sin dependencias web adicionales.
 - `scripts/execute_notebook.py`: ejecución completa desde un kernel limpio.
-- `reports/`: resúmenes verificables de auditoría y particiones.
+- `scripts/run_simulation.py`: inicio de la simulación local.
+- `scripts/verify_simulation.py`: comprobaciones funcionales y de integración reproducibles.
+- `reports/`: auditoría, particiones, selección, evaluación y evidencia de la simulación.
 - `data/processed/`: CSV preparados, regenerables y excluidos de Git.
 - `outputs/`: gráficos y archivos temporales, excluidos de Git.
 

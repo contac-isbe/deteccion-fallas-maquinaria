@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detección de fallas · Simulación AI4I</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<main>
+  <header><p class="eyebrow">Proyecto de inteligencia artificial · UPAO</p>
+    <h1>Detección de fallas en maquinaria</h1>
+    <p>Reproducción de 2 000 observaciones sintéticas de AI4I 2020 con el árbol de decisión seleccionado.</p>
+  </header>
+  <section class="controls" aria-label="Controles de reproducción">
+    <div class="buttons">
+      <button id="start" class="primary">Iniciar</button><button id="pause">Pausar</button>
+      <button id="step">Siguiente registro</button><button id="reset">Reiniciar</button>
+      <label>Intervalo <select id="interval" aria-label="Intervalo de reproducción"><option value="0.2">0,2 s</option><option value="0.5" selected>0,5 s</option><option value="1">1 s</option><option value="2">2 s</option></select></label>
+    </div>
+    <p id="status" role="status">Conectando con la simulación…</p>
+    <progress id="progress" max="2000" value="0" aria-label="Progreso de reproducción"></progress>
+    <p class="hint">Pausar conserva el avance. Reiniciar borra el registro de esta sesión; expórtalo antes si deseas conservarlo.</p>
+  </section>
+  <p id="error" role="alert" hidden></p>
+  <div class="grid">
+    <section class="panel" aria-labelledby="measurements-title">
+      <h2 id="measurements-title">Mediciones de la observación</h2>
+      <p id="identity">Avanza un registro para ver sus mediciones.</p>
+      <dl id="measurements">
+        <div><dt>Temperatura del aire</dt><dd id="air">— K</dd></div>
+        <div><dt>Temperatura del proceso</dt><dd id="process">— K</dd></div>
+        <div><dt>Velocidad de rotación</dt><dd id="speed">— rpm</dd></div>
+        <div><dt>Torque</dt><dd id="torque">— Nm</dd></div>
+        <div><dt>Desgaste de herramienta</dt><dd id="wear">— min</dd></div>
+      </dl>
+    </section>
+    <section class="panel" aria-labelledby="prediction-title">
+      <h2 id="prediction-title">Resultado del modelo</h2>
+      <div id="prediction" class="prediction neutral" role="status">Sin predicción</div>
+      <p id="reference">Etiqueta real: —</p>
+      <p class="hint">La etiqueta real se usa después de predecir para comparar resultados. No es una entrada del modelo.</p>
+      <dl class="summary"><div><dt>Alertas de esta sesión</dt><dd id="alerts">0</dd></div>
+        <div><dt>Predicción media / percentil 95</dt><dd id="latency">— / — ms</dd></div></dl>
+      <p class="hint">Tiempo del pipeline: transformaciones y clasificación. Excluye carga, interfaz y pausas. No es una garantía de tiempo real industrial.</p>
+    </section>
+  </div>
+  <section class="panel">
+    <div class="section-heading"><h2>Últimos registros procesados</h2><a id="export" class="button" href="/api/export" download>Exportar resultados CSV</a></div>
+    <div class="table-scroll"><table><caption class="sr-only">Registro de predicciones y comparación posterior</caption>
+      <thead><tr><th>UDI</th><th>Tipo</th><th>Predicción</th><th>Etiqueta real</th><th>Comparación</th><th>Predicción (ms)</th></tr></thead>
+      <tbody id="history"><tr><td colspan="6">Todavía no hay registros procesados.</td></tr></tbody>
+    </table></div>
+    <p id="counts" class="hint">Aciertos sin falla: 0 · Fallas detectadas: 0 · Falsas alarmas: 0 · Fallas omitidas: 0</p>
+  </section>
+  <section class="panel import">
+    <h2>Cargar la reserva de prueba</h2>
+    <p>La reserva verificada ya está cargada. Para comprobar una copia, selecciona <code>data/processed/test.csv</code>. Se acepta únicamente la reserva completa original, con las mismas columnas, valores y orden.</p>
+    <label for="csv">Archivo CSV de prueba (máximo 1 MB)</label><input id="csv" type="file" accept=".csv,text/csv">
+    <button id="load">Validar y cargar CSV</button><p id="load-message" role="status"></p>
+  </section>
+  <footer>Datos sintéticos · Modelo congelado · Simulación de registros, sin conexión a maquinaria física. Repetir la reproducción no constituye una nueva evaluación independiente.</footer>
+</main>
+</body>
+</html>
