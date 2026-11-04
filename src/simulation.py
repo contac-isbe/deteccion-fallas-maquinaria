@@ -72,6 +72,7 @@ class Simulator:
                 "interval_seconds": self.interval, "error": self.error,
                 "last": self.records[-1].copy() if self.records else None,
                 "recent": [row.copy() for row in reversed(self.records[-8:])],
+                "series": [row.copy() for row in self.records[-60:]],
                 "counts": {key: counts.get(key, 0) for key in ("TN", "FP", "FN", "TP")},
                 "alerts": counts.get("TP", 0) + counts.get("FP", 0),
                 "predict_mean_ms": float(np.mean(timings)) if timings else None,

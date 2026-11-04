@@ -1,66 +1,66 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Detección de fallas · Simulación AI4I</title>
-  <link rel="stylesheet" href="/style.css">
-  <script src="/app.js" defer></script>
-</head>
-<body>
-<main>
-  <header><p class="eyebrow">Proyecto de inteligencia artificial · UPAO</p>
-    <h1>Detección de fallas en maquinaria</h1>
-    <p>Reproducción de 2 000 observaciones sintéticas de AI4I 2020 con el árbol de decisión seleccionado.</p>
-  </header>
-  <section class="controls" aria-label="Controles de reproducción">
-    <div class="buttons">
-      <button id="start" class="primary">Iniciar</button><button id="pause">Pausar</button>
-      <button id="step">Siguiente registro</button><button id="reset">Reiniciar</button>
-      <label>Intervalo <select id="interval" aria-label="Intervalo de reproducción"><option value="0.2">0,2 s</option><option value="0.5" selected>0,5 s</option><option value="1">1 s</option><option value="2">2 s</option></select></label>
-    </div>
-    <p id="status" role="status">Conectando con la simulación…</p>
-    <progress id="progress" max="2000" value="0" aria-label="Progreso de reproducción"></progress>
-    <p class="hint">Pausar conserva el avance. Reiniciar borra el registro de esta sesión; expórtalo antes si deseas conservarlo.</p>
-  </section>
-  <p id="error" role="alert" hidden></p>
-  <div class="grid">
-    <section class="panel" aria-labelledby="measurements-title">
-      <h2 id="measurements-title">Mediciones de la observación</h2>
-      <p id="identity">Avanza un registro para ver sus mediciones.</p>
-      <dl id="measurements">
-        <div><dt>Temperatura del aire</dt><dd id="air">— K</dd></div>
-        <div><dt>Temperatura del proceso</dt><dd id="process">— K</dd></div>
-        <div><dt>Velocidad de rotación</dt><dd id="speed">— rpm</dd></div>
-        <div><dt>Torque</dt><dd id="torque">— Nm</dd></div>
-        <div><dt>Desgaste de herramienta</dt><dd id="wear">— min</dd></div>
-      </dl>
-    </section>
-    <section class="panel" aria-labelledby="prediction-title">
-      <h2 id="prediction-title">Resultado del modelo</h2>
-      <div id="prediction" class="prediction neutral" role="status">Sin predicción</div>
-      <p id="reference">Etiqueta real: —</p>
-      <p class="hint">La etiqueta real se usa después de predecir para comparar resultados. No es una entrada del modelo.</p>
-      <dl class="summary"><div><dt>Alertas de esta sesión</dt><dd id="alerts">0</dd></div>
-        <div><dt>Predicción media / percentil 95</dt><dd id="latency">— / — ms</dd></div></dl>
-      <p class="hint">Tiempo del pipeline: transformaciones y clasificación. Excluye carga, interfaz y pausas. No es una garantía de tiempo real industrial.</p>
-    </section>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Monitor de maquinaria</title><link rel="preload" href="/fonts/SpaceGrotesk.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="/fonts/Inter.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="/portal.css"><link rel="stylesheet" href="/monitor.css"><script src="/app.js" defer></script><script src="/portal.js" defer></script><script src="/monitor.js" defer></script></head><body data-run="ready"><a class="skip-link" href="#main">Ir al contenido</a><aside class="sidebar"><a class="brand" href="#ejecucion" data-go="ejecucion"><span class="brand-mark">M<span>↗</span></span><span>MAQUINARIA<span class="brand-sub">Un laboratorio de inteligencia artificial</span></span></a><p class="nav-label">TU ESPACIO DE TRABAJO</p><nav role="tablist" aria-label="Apartados del proyecto" aria-orientation="vertical"><button id="tab-ejecucion" role="tab" aria-controls="ejecucion" aria-selected="true" data-panel="ejecucion"><span class="nav-symbol">◉</span><span>Monitor<small>Observa el modelo en acción</small></span></button><button id="tab-documentacion" role="tab" aria-controls="documentacion" aria-selected="false" tabindex="-1" data-panel="documentacion"><span class="nav-symbol">▤</span><span>El proyecto<small>Datos, método y resultados</small></span></button><button id="tab-codigo" role="tab" aria-controls="codigo" aria-selected="false" tabindex="-1" data-panel="codigo"><span class="nav-symbol">⌘</span><span>Código<small>Por dentro del sistema</small></span></button></nav><div class="side-note"><span class="local-dot"></span> Un modelo. Cada registro.<p>Árbol de decisión<br>AI4I 2020 · Datos sintéticos</p></div><a class="repo-link" href="https://github.com/contac-isbe/deteccion-fallas-maquinaria/tree/feature/monitor-interactivo" target="_blank" rel="noopener">Ver repositorio ↗</a></aside><div class="workspace"><div class="topbar"><span><span class="topbar-square"></span> LABORATORIO / <b>DETECCIÓN DE FALLAS</b></span><span class="badge">Sesión local</span></div><main id="main"><header class="page-header"><p class="eyebrow">MACHINE LEARNING · EXPLORACIÓN INTERACTIVA</p><h1 id="page-title">Monitor de maquinaria</h1><p id="page-description">Pon en marcha los registros y observa cómo responde el modelo.</p></header><p id="project-error" role="alert" hidden></p><section id="ejecucion" role="tabpanel" aria-labelledby="tab-ejecucion">
+  <div class="monitor-toolbar controls" aria-label="Controles de reproducción">
+    <div class="session-state"><span id="run-dot" class="run-dot"></span><div><strong id="status" role="status">Preparando el monitor…</strong><span>Observaciones independientes · AI4I 2020</span></div></div>
+    <div class="buttons"><button id="start" class="primary">Iniciar simulación</button><button id="pause">Pausar</button><button id="step" title="Procesar un registro">Siguiente</button><button id="reset" class="reset-button">Reiniciar</button><label>Intervalo <select id="interval" aria-label="Intervalo de reproducción"><option value="0.2">0,2 s</option><option value="0.5" selected>0,5 s</option><option value="1">1 s</option><option value="2">2 s</option></select></label></div>
+  </div><p id="error" role="alert" hidden></p>
+  <div class="monitor-stage">
+    <section class="machine-panel"><div class="machine-heading"><div><span class="kicker">BANCO VIRTUAL</span><h2>Una mirada al registro actual.</h2></div><span class="machine-tag">ILUSTRACIÓN</span></div>
+    <svg class="machine-drawing" viewBox="0 0 680 370" role="img" aria-labelledby="machine-title machine-description">
+<title id="machine-title">Representación ilustrativa de una máquina de mecanizado</title><desc id="machine-description">Las lecturas mostradas proceden del registro sintético actual. La ilustración no simula procesos físicos.</desc>
+<defs><linearGradient id="body-gradient" x2="1" y2="1"><stop stop-color="#eeeafb"/><stop offset="1" stop-color="#c5bbdf"/></linearGradient><linearGradient id="glass-gradient" x2="0" y2="1"><stop stop-color="#393151"/><stop offset="1" stop-color="#251e38"/></linearGradient><linearGradient id="steel-gradient"><stop stop-color="#b4a4d4"/><stop offset=".45" stop-color="#eee8f9"/><stop offset="1" stop-color="#8c79af"/></linearGradient><pattern id="stage-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#d1c9e4"/></pattern><clipPath id="window-clip"><rect x="180" y="103" width="247" height="170" rx="9"/></clipPath></defs>
+<rect width="680" height="370" fill="url(#stage-grid)"/>
+<ellipse cx="334" cy="325" rx="223" ry="16" fill="#dcd4ec" opacity=".6"/>
+<path d="M151 82L174 63H498L522 84V298L500 317H151Z" fill="#b7a9d0" stroke="#a194ba"/>
+<rect x="146" y="79" width="355" height="233" rx="13" fill="url(#body-gradient)" stroke="#b5a9cc" stroke-width="1.5"/>
+<path d="M147 287H500V300Q500 312 488 312H159Q147 312 147 300Z" fill="#a99bbf"/>
+<rect x="167" y="93" width="273" height="192" rx="14" fill="#eee9f7" stroke="#b9adce"/>
+<rect x="180" y="103" width="247" height="170" rx="9" fill="url(#glass-gradient)"/>
+<g clip-path="url(#window-clip)"><path d="M180 140H427M180 177H427M180 214H427M220 103V273M260 103V273M300 103V273M340 103V273M380 103V273" stroke="#645379" opacity=".16"/>
+<path d="M207 245H398L415 257H194Z" fill="#8e7ba8"/><rect x="194" y="257" width="221" height="13" fill="#68587f"/><path d="M222 244L235 231H374L388 244Z" fill="#bdadd5"/>
+<path d="M237 243L249 232M260 243L272 232M284 243L296 232M308 243L320 232M332 243L344 232M355 243L367 232" stroke="#7f6b99"/>
+<rect x="275" y="214" width="67" height="18" rx="3" fill="#d5cae7"/><ellipse cx="308.5" cy="214" rx="33.5" ry="7" fill="#eee8f7"/>
+<path d="M285 103H332V148H285Z" fill="#9380b3"/><rect x="290" y="130" width="38" height="50" rx="5" fill="url(#steel-gradient)"/><path d="M297 179H321L316 194H302Z" fill="#b9a9d0"/>
+<g class="spindle-motion"><path d="M305 194V212M313 194V212" stroke="#e0d4f1" stroke-width="2"/><path d="M301 200L317 205M301 206L317 211" stroke="#a68bc8" stroke-width="1.5"/></g>
+<path d="M180 117L427 246M180 135L427 264" stroke="#c4acdf" stroke-width="13" opacity=".035"/>
+<rect class="scan-beam" x="180" y="110" width="247" height="5" fill="#b8a5f4" opacity="0"/>
+</g>
+<rect x="446" y="111" width="40" height="64" rx="5" fill="#4c3c65"/><rect x="452" y="118" width="28" height="24" rx="2" fill="#20192e"/><path d="M456 135L461 128L465 133L473 124L477 129" fill="none" stroke="#b9a3f3" stroke-width="1.6"/>
+<g fill="#c4b4da"><circle cx="456" cy="150" r="2"/><circle cx="465" cy="150" r="2"/><circle cx="474" cy="150" r="2"/><circle cx="456" cy="158" r="2"/><circle cx="465" cy="158" r="2"/><circle cx="474" cy="158" r="2"/></g>
+<circle class="machine-indicator" cx="465" cy="191" r="5" fill="#a49ab4"/>
+<path d="M159 313H201V321H159M450 313H488V321H450" fill="#78688f"/>
+<rect x="298" y="294" width="44" height="5" rx="2" fill="#7d6a98"/>
+<path d="M309 168H105V147H57" stroke="#a599bd" fill="none" stroke-dasharray="3 4"/><circle cx="309" cy="168" r="3" fill="#b9a3f3"/>
+<text x="57" y="127" class="svg-label">VELOCIDAD</text><text x="57" y="142" id="machine-rpm" class="svg-value">— rpm</text>
+<path d="M340 221H556V242H616" stroke="#a599bd" fill="none" stroke-dasharray="3 4"/><circle cx="340" cy="221" r="3" fill="#b9a3f3"/>
+<text x="551" y="260" class="svg-label">TORQUE</text><text x="551" y="279" id="machine-torque" class="svg-value">— Nm</text>
+</svg>
+    <div class="machine-footer"><p id="identity">Inicia la simulación para ver la primera observación.</p><span>Sin conexión a maquinaria física</span></div></section>
+    <section class="decision-panel"><span class="kicker">EL MODELO DECIDE</span><h2>Clasificación actual</h2><div id="prediction" class="prediction neutral" role="status">Sin predicción</div><p id="decision-explanation">El árbol de decisión analizará las seis variables de cada registro.</p><div class="decision-separator"></div><span class="kicker">COMPARACIÓN POSTERIOR</span><p id="reference">Etiqueta real: —</p><p class="hint">La etiqueta real no entra al modelo. Una predicción sin falla no garantiza ausencia de una falla.</p><div class="decision-stats"><div><span>Alertas de la sesión</span><strong id="alerts">0</strong></div><div><span>Media / p95 del modelo</span><strong id="latency">— / — ms</strong></div></div></section>
   </div>
-  <section class="panel">
-    <div class="section-heading"><h2>Últimos registros procesados</h2><a id="export" class="button" href="/api/export" download>Exportar resultados CSV</a></div>
-    <div class="table-scroll"><table><caption class="sr-only">Registro de predicciones y comparación posterior</caption>
-      <thead><tr><th>UDI</th><th>Tipo</th><th>Predicción</th><th>Etiqueta real</th><th>Comparación</th><th>Predicción (ms)</th></tr></thead>
-      <tbody id="history"><tr><td colspan="6">Todavía no hay registros procesados.</td></tr></tbody>
-    </table></div>
-    <p id="counts" class="hint">Aciertos sin falla: 0 · Fallas detectadas: 0 · Falsas alarmas: 0 · Fallas omitidas: 0</p>
-  </section>
-  <section class="panel import">
-    <h2>Cargar la reserva de prueba</h2>
-    <p>La reserva verificada ya está cargada. Para comprobar una copia, selecciona <code>data/processed/test.csv</code>. Se acepta únicamente la reserva completa original, con las mismas columnas, valores y orden.</p>
-    <label for="csv">Archivo CSV de prueba (máximo 1 MB)</label><input id="csv" type="file" accept=".csv,text/csv">
-    <button id="load">Validar y cargar CSV</button><p id="load-message" role="status"></p>
-  </section>
-  <footer>Datos sintéticos · Modelo congelado · Simulación de registros, sin conexión a maquinaria física. Repetir la reproducción no constituye una nueva evaluación independiente.</footer>
-</main>
-</body>
-</html>
+  <div id="measurements" class="sensor-grid" aria-label="Mediciones del registro actual">
+    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">°</i> Aire</span><strong id="air">— K</strong><svg data-spark="Air temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Temperatura del aire</span></article>
+    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">°</i> Proceso</span><strong id="process">— K</strong><svg data-spark="Process temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Temperatura del proceso</span></article>
+    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">↻</i> Rotación</span><strong id="speed">— rpm</strong><svg data-spark="Rotational speed [rpm]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Velocidad del registro</span></article>
+    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">↗</i> Torque</span><strong id="torque">— Nm</strong><svg data-spark="Torque [Nm]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Par de giro</span></article>
+    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">◷</i> Desgaste</span><strong id="wear">— min</strong><svg data-spark="Tool wear [min]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Uso de la herramienta</span></article>
+  </div>
+  <div class="trace-layout"><section class="panel trace-panel"><div class="section-heading"><div><span class="kicker">SECUENCIA DE REPRODUCCIÓN</span><h2>Así cambian las mediciones</h2></div><span id="chart-current" class="chart-current">— rpm</span></div><div class="chart-switch" aria-label="Variable del gráfico"><button data-feature="Rotational speed [rpm]" aria-pressed="true">Rotación</button><button data-feature="Torque [Nm]" aria-pressed="false">Torque</button><button data-feature="Air temperature [K]" aria-pressed="false">Aire</button><button data-feature="Process temperature [K]" aria-pressed="false">Proceso</button><button data-feature="Tool wear [min]" aria-pressed="false">Desgaste</button></div><div class="trace-chart"><svg id="trace" viewBox="0 0 760 220" role="img" aria-label="Sin registros procesados. El gráfico aparecerá al avanzar la simulación."></svg><p id="chart-empty">Cada registro cuenta una parte.<span>Inicia la simulación para dibujar los datos.</span></p></div><div class="chart-legend"><span><i></i> Medición</span><span><i class="legend-alert"></i> Predicción de falla</span><span id="chart-range">Sin registros</span></div><p class="hint">Escala automática · Hasta 60 registros procesados. La secuencia no es una serie temporal de una máquina real.</p></section>
+  <section class="panel alerts-panel"><div class="section-heading"><div><span class="kicker">LO QUE SEÑALA EL MODELO</span><h2>Alertas recientes</h2></div><span id="window-alerts" class="window-count">0</span></div><div id="alert-feed"><div class="alert-empty">Todo empieza con una observación.<p>Aquí aparecerán las predicciones de falla de los últimos 60 registros.</p></div></div></section></div>
+  <section class="panel history-panel"><div class="section-heading"><div><span class="kicker">TRAZABILIDAD DE LA SESIÓN</span><h2>El recorrido, sin ocultar errores</h2></div><a id="export" class="button" href="/api/export" download>Exportar CSV ↓</a></div><div class="table-scroll"><table><caption class="sr-only">Registro de predicciones y comparación posterior</caption><thead><tr><th>UDI</th><th>Tipo</th><th>Predicción</th><th>Etiqueta real</th><th>Comparación</th><th>Modelo (ms)</th></tr></thead><tbody id="history"><tr><td colspan="6">Todavía no hay registros procesados.</td></tr></tbody></table></div><p id="counts" class="hint">Aciertos sin falla: 0 · Fallas detectadas: 0 · Falsas alarmas: 0 · Fallas omitidas: 0</p><progress id="progress" max="2000" value="0" aria-label="Progreso de reproducción"></progress><p class="hint">Tiempo del pipeline: transformaciones y clasificación; excluye carga, interfaz y pausas. No es una garantía de tiempo real industrial.</p></section>
+  <details class="advanced-panel"><summary>Datos de prueba y comprobaciones <span>Opciones de la sesión</span></summary><div class="advanced-content"><section class="verification-strip"><div><span class="check-icon">✓</span><div><strong><span id="check-count">—</span> <span id="check-result">comprobaciones</span></strong><p id="checks-date">Consultando evidencia…</p></div></div><a href="/project/file?file=reports%2Fsimulation_checks.json" download>Descargar evidencia JSON ↗</a></section><section class="import"><h2>Comprobar una copia de los datos</h2><p>La reserva ya está cargada. Este control acepta únicamente data/processed/test.csv con sus columnas, valores y orden originales. Una carga válida reinicia la sesión.</p><label for="csv">Archivo CSV de prueba (máximo 1 MB)</label><input id="csv" type="file" accept=".csv,text/csv"><button id="load">Validar y cargar CSV</button><p id="load-message" role="status"></p></section><p class="hint">Reiniciar borra el registro de esta sesión: expórtalo antes si deseas conservarlo. Las pestañas del mismo servidor comparten la sesión. Cambiar de pestaña no pausa la reproducción.</p></div></details>
+</section>    <section id="documentacion" role="tabpanel" aria-labelledby="tab-documentacion" hidden>
+      <div class="project-hero"><div><span class="pill">DETECCIÓN DE FALLAS</span><h2>De los datos a una<br>clasificación verificable.</h2><p>Un sistema que aprende de observaciones de maquinaria para clasificarlas como sin falla o con falla, y permite revisar sus aciertos y errores.</p><div class="hero-actions"><button class="primary" data-go="ejecucion">Explorar la simulación <span aria-hidden="true">→</span></button><a class="button" href="/project/file?file=docs%2FInforme%20-%20Proyecto%20de%20IA.docx" download>Descargar informe ↓</a></div></div><div class="hero-facts"><span class="fact-label">MODELO SELECCIONADO</span><strong id="model-name">Cargando…</strong><div class="fact-rule"></div><span class="fact-label">UNA FUENTE DE DATOS</span><strong>AI4I 2020</strong><span class="fact-caption">Datos sintéticos · 10 000 observaciones</span><span class="model-stamp">Modelo congelado · Sin reentrenamiento</span></div></div>
+      <div class="section-heading"><h2>Resultados de la evaluación</h2><span class="subtle">Reserva de prueba · 2 000 registros</span></div>
+      <div class="metrics-grid"><article class="metric"><span>Sensibilidad</span><strong id="recall">—</strong><small>Proporción de fallas detectadas</small></article><article class="metric"><span>Precisión</span><strong id="precision">—</strong><small>Alertas que corresponden a fallas</small></article><article class="metric"><span>F1</span><strong id="f1">—</strong><small>Balance entre precisión y sensibilidad</small></article><article class="metric"><span>Exactitud</span><strong id="accuracy">—</strong><small>Aciertos sobre el total de prueba</small></article></div>
+      <div class="grid documentation-grid"><section class="panel"><div class="section-heading"><h2>Cómo se desarrolló</h2><span class="mini-label">3 NOTEBOOKS</span></div><ol class="method"><li><span>01</span><div><h3>Preparar los datos</h3><p>Auditoría del CSV, revisión de etiquetas y separación de 8 000 registros de desarrollo y 2 000 de prueba.</p></div></li><li><span>02</span><div><h3>Comparar y seleccionar</h3><p>34 configuraciones de regresión logística, árbol de decisión y Random Forest; validación cruzada de cinco pliegues.</p></div></li><li><span>03</span><div><h3>Comprobar el modelo</h3><p>Evaluación con la reserva fijada, sin reajustar el modelo con esos resultados.</p></div></li></ol></section>
+      <section class="panel"><div class="section-heading"><h2>Aciertos y errores</h2><span class="mini-label">PRUEBA FINAL</span></div><div class="confusion-grid"><article class="cm-correct"><strong id="tn">—</strong><span>Aciertos sin falla</span></article><article><strong id="fp">—</strong><span>Falsas alarmas</span></article><article><strong id="fn">—</strong><span>Fallas omitidas</span></article><article class="cm-correct"><strong id="tp">—</strong><span>Fallas detectadas</span></article></div><p class="hint">La exactitud debe leerse junto con las omisiones: 18 de las 68 fallas reales no se detectaron.</p></section></div>
+      <section class="scope-note"><span class="scope-icon" aria-hidden="true">i</span><div><h3>Qué demuestra este proyecto</h3><p>Clasificación y reproducción de registros sintéticos. No estima la vida útil restante ni anticipa horas hasta una avería. Se conservan 27 discrepancias de etiquetado documentadas. No hay validación en maquinaria física.</p></div></section>
+      <section class="panel resources"><div><h2>Documentación disponible</h2><p>Informe hasta el apartado 6.2, procedencia de los datos y evidencia de las pruebas.</p></div><div class="resource-links"><a href="/project/file?file=docs%2FInforme%20-%20Proyecto%20de%20IA.docx" download>Informe Word ↗</a><a href="/project/file?file=data%2FREADME.md" download>Fuente y licencia ↗</a><a href="/project/file?file=reports%2Fportal_review.md" download>Comprobaciones ↗</a></div></section>
+      <p class="publication-note">Base del repositorio: <code id="base-revision">—</code>. Esta alternativa organiza los contenidos del 7.1 en la rama feature/monitor-interactivo, para revisión antes de integrarla en main. El despliegue del 7.2 sigue pendiente.</p>
+    </section>
+    <section id="codigo" role="tabpanel" aria-labelledby="tab-codigo" hidden>
+      <section class="panel setup"><div class="section-heading"><h2>Ejecutar en tu computadora</h2><span class="mini-label">PYTHON 3.12</span></div><p>Desde la raíz de esta copia, utiliza su entorno virtual y abre la dirección que imprime la terminal. Mantenla en ejecución mientras usas la página.</p><div class="command"><code id="run-command">.\.venv\Scripts\python.exe scripts/run_simulation.py --port 8771</code><button data-copy="run-command">Copiar</button></div><p class="hint">En una copia nueva, instala requirements.txt y ejecuta primero los notebooks 01 y 02 para generar los datos preparados y el modelo. En esta alternativa ya se copiaron los archivos verificados, sin entrenar de nuevo.</p></section>
+      <div class="source-layout"><aside class="file-panel"><h2>Archivos del proyecto</h2><div id="source-tree" aria-label="Seleccionar un archivo de código"></div></aside><section class="code-panel"><div class="code-toolbar"><span id="source-title">Selecciona un archivo</span><a id="source-download" class="button" href="/project/file?file=README.md" download>Descargar ↓</a></div><p id="source-note" class="hint">Vista de lectura de los archivos locales.</p><pre tabindex="0" aria-label="Contenido del archivo seleccionado"><code id="source-content">Cargando código…</code></pre></section></div>
+      <p class="publication-note">El visor muestra los archivos de esta versión. Las modificaciones se guardan en la rama de trabajo y requieren revisión antes de integrarlas en main.</p>
+    </section>
+<footer><span>UPAO · Inteligencia Artificial: Principios y Técnicas</span><span>Representación ilustrativa · Modelo congelado · Datos sintéticos</span></footer></main></div></body></html>

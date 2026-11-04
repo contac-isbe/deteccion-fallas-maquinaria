@@ -1,0 +1,7 @@
+{
+  "base_commit": "4406aae",
+  "remote": "https://github.com/contac-isbe/deteccion-fallas-maquinaria.git",
+  "scope": "Alternativa para el punto 7.1 en una rama de revisión; pull request, integración en main y despliegue pendientes.",
+  "runtime": "Entorno virtual independiente creado con los mismos paquetes ya instalados; modelo y particiones copiados y verificados, sin entrenamiento.",
+  "branch": "feature/monitor-interactivo"
+}

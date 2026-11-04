@@ -1,0 +1,63 @@
+{
+  "generated_at_utc": "2026-11-04T23:51:20.406499+00:00",
+  "all_checks_passed": true,
+  "base_revision": "4406aae",
+  "publication": "branch_for_review",
+  "checks": [
+    {
+      "test": "Tres pestañas con paneles asociados",
+      "status": "passed",
+      "evidence": "Documentación, Código y Ejecución y pruebas; identificadores únicos y despliegue pendiente explícito."
+    },
+    {
+      "test": "Recursos de la interfaz",
+      "status": "passed",
+      "evidence": "HTML, scripts y estilos se sirven correctamente."
+    },
+    {
+      "test": "Documentación basada en resultados guardados",
+      "status": "passed",
+      "evidence": "Métricas y huella del modelo iguales a la evaluación histórica; integración y despliegue pendientes."
+    },
+    {
+      "test": "Visor de código",
+      "status": "passed",
+      "evidence": "21 archivos locales consultados correctamente; los notebooks muestran celdas de texto y código."
+    },
+    {
+      "test": "Descargas de documentación y código",
+      "status": "passed",
+      "evidence": "Word, notebook, procedencia de datos y evidencia descargables sin alterar sus bytes."
+    },
+    {
+      "test": "Archivos limitados al contenido del proyecto",
+      "status": "passed",
+      "evidence": "Las rutas desconocidas y los archivos fuera de la lista permitida no se sirven."
+    },
+    {
+      "test": "Integración con la simulación",
+      "status": "passed",
+      "evidence": "UDI 1392 genera alerta; consultar documentación o código conserva la sesión y sus errores."
+    },
+    {
+      "test": "Modelo, datos, evaluación e informe conservados",
+      "status": "passed",
+      "evidence": "Huellas iguales antes y después de las pruebas del portal."
+    }
+  ],
+  "protected_before": {
+    "models/modelo_seleccionado.joblib": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
+    "data/processed/test.csv": "bff6ce157829bfba0481237e632d03f53abe67b4d75bebc65feb4ba579692f14",
+    "data/raw/ai4i2020.csv": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+    "reports/test_evaluation.json": "d5cb497c419a415975b41d09d4ac872f88241c4208cf4f732accccb28695533a",
+    "docs/Informe - Proyecto de IA.docx": "46695debd08d56676ce63f571d6ceba79d1b1c23898e274f5a5f7fd99615ebad"
+  },
+  "protected_after": {
+    "models/modelo_seleccionado.joblib": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
+    "data/processed/test.csv": "bff6ce157829bfba0481237e632d03f53abe67b4d75bebc65feb4ba579692f14",
+    "data/raw/ai4i2020.csv": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+    "reports/test_evaluation.json": "d5cb497c419a415975b41d09d4ac872f88241c4208cf4f732accccb28695533a",
+    "docs/Informe - Proyecto de IA.docx": "46695debd08d56676ce63f571d6ceba79d1b1c23898e274f5a5f7fd99615ebad"
+  },
+  "scope": "Pruebas HTTP y de estructura; navegación, lectura y diseño se revisan también en el navegador."
+}

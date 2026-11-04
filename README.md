@@ -1,3 +1,9 @@
+> **Monitor interactivo para el punto 7.1.** Versión alternativa basada en `4406aae`, preparada en la rama `feature/monitor-interactivo` para revisión. La integración en `main` y el despliegue siguen pendientes.
+>
+> Ejecutar `.\.venv\Scripts\python.exe scripts/run_simulation.py --port 8771` y abrir **http://127.0.0.1:8771**.
+>
+> La página abre el **Monitor** y mantiene las secciones **El proyecto** y **Código**. El monitor utiliza una representación ilustrativa de maquinaria, las cinco mediciones, gráficas de los últimos 60 registros procesados y un historial de alertas. La secuencia de reproducción no es una serie temporal de una máquina real. Las instrucciones y los límites de esta alternativa están en [docs/71_preparacion_local.md](docs/71_preparacion_local.md). Esta rama reúne la alternativa del 7.1; su integración en `main` y el despliegue del 7.2 siguen pendientes.
+
 # Detección de fallas en maquinaria
 
 Proyecto del curso Inteligencia Artificial: Principios y Técnicas, UPAO.
@@ -55,7 +61,7 @@ Desde la raíz del repositorio, con el entorno virtual preparado:
 .\.venv\Scripts\python.exe scripts/run_simulation.py
 ```
 
-Abrir [la interfaz local](http://127.0.0.1:8765) en un navegador. El servidor escucha únicamente en este equipo. Detenerlo con `Ctrl+C` en la terminal. Si el puerto está ocupado, utilizar `--port 8766` y abrir el puerto indicado.
+Abrir [la interfaz local](http://127.0.0.1:8771) en un navegador. El servidor escucha únicamente en este equipo. Detenerlo con `Ctrl+C` en la terminal. Si el puerto está ocupado, utilizar `--port 8772` y abrir el puerto indicado.
 
 La interfaz muestra las cinco mediciones con sus unidades, el tipo de producto, UDI y la predicción. Permite iniciar, pausar, continuar, avanzar un registro y reiniciar. Una alerta se activa cuando el modelo predice falla; la etiqueta real se muestra después para comparar y nunca entra al modelo. Una predicción sin falla no garantiza ausencia de una condición de falla.
 
@@ -104,3 +110,7 @@ El archivo original se encuentra en `data/raw/ai4i2020.csv`. Su procedencia y li
 La copia del informe desarrollada hasta el apartado 6.2 está disponible en [Informe - Proyecto de IA.docx](docs/Informe%20-%20Proyecto%20de%20IA.docx). Descargar el archivo para revisarlo en Word.
 
 El original editable se conserva en la carpeta superior `Informe - Proyecto de IA`. Cuando se actualice, también debe actualizarse la copia de `docs/` para mantener ambas versiones iguales.
+
+## Interfaz de monitoreo
+
+Space Grotesk e Inter se sirven desde `web/fonts/`, con sus licencias incluidas. Las cifras usan una fuente monoespaciada del sistema. No se necesita conexión a Google Fonts durante el uso. La revisión del monitor y sus capturas están en [reports/monitor_review.md](reports/monitor_review.md).
