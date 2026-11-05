@@ -1,6 +1,6 @@
-# Preparación local del apartado 7.1
+# Publicación del apartado 7.1
 
-Esta carpeta es una copia independiente del repositorio en el commit `4406aae`. Aquí se prepara una alternativa para compararla con la versión del grupo. El desarrollo comenzó de forma local y ahora se prepara en la rama feature/monitor-interactivo para revisión. El pull request, la integración en main y el despliegue siguen pendientes.
+El monitor se desarrolló a partir de la revisión `4406aae`, en la rama `feature/monitor-interactivo`. El repositorio reúne el código, la documentación y las comprobaciones del apartado 7.1. La publicación del código en GitHub permite revisarlo y descargarlo; el alojamiento de la aplicación con un enlace externo corresponde al 7.2 y sigue pendiente.
 
 ## Contenidos organizados
 
@@ -12,9 +12,9 @@ Esta carpeta es una copia independiente del repositorio en el commit `4406aae`. 
 
 En el rediseño, los nombres visibles son Monitor (ejecución y pruebas), El proyecto (documentación) y Código. El monitor es la pantalla inicial.
 
-La organización en pestañas es una interpretación práctica de los contenidos solicitados; no supone que GitHub genere automáticamente esas pestañas. La rama conserva la alternativa del 7.1 para revisión. Su integración en main y el despliegue del 7.2 siguen pendientes.
+La organización en pestañas es una interpretación práctica de los contenidos solicitados; no supone que GitHub genere automáticamente esas pestañas. El flujo de cambios utiliza ramas y pull requests antes de integrar en main.
 
-## Ejecutar esta alternativa
+## Ejecutar la aplicación
 
 En una terminal situada en esta carpeta:
 
@@ -24,7 +24,7 @@ En una terminal situada en esta carpeta:
 
 Abrir `http://127.0.0.1:8771`. Mantener la terminal activa y usar `Ctrl+C` para detener el proceso. En Windows también se puede abrir `ABRIR_PORTAL.cmd`.
 
-Esta copia contiene un entorno virtual independiente con los mismos paquetes ya instalados, el modelo y las particiones copiadas del proyecto original. No se reentrenó el modelo. Estos archivos continúan excluidos de Git. Si se prepara otra copia en otro equipo, crear un entorno Python 3.12, instalar `requirements.txt` y seguir el procedimiento de los notebooks 01 y 02 del README.
+El modelo y las particiones se generan localmente y están excluidos de Git. En otra computadora, crear un entorno Python 3.12, instalar `requirements.txt` y ejecutar los notebooks 01 y 02 del README. Consultar también el [manual de uso](MANUAL_USUARIO.md).
 
 ## Comprobar
 
@@ -33,7 +33,7 @@ Esta copia contiene un entorno virtual independiente con los mismos paquetes ya 
 .\.venv\Scripts\python.exe scripts/verify_portal.py
 ```
 
-El primer script comprueba la reproducción y la integración de la simulación; el segundo comprueba los contenidos, la consulta de código y las descargas locales. La revisión en el navegador y las capturas se registran por separado. Los resultados nuevos de esta carpeta no cambian los resultados ni el Word del proyecto original.
+El primer script comprueba la reproducción y la integración de la simulación; el segundo comprueba los contenidos, la consulta de código y las descargas locales. La revisión en el navegador y las capturas se registran por separado. La evidencia original del 6.2 se conserva en reports/simulation_checks.json; las nuevas comprobaciones del monitor se guardan en reports/monitor_simulation_checks.json.
 
 ## Límites
 

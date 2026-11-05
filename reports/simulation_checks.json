@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-04T23:40:48.310502+00:00",
+  "generated_at_utc": "2026-10-29T21:24:36.928125+00:00",
   "purpose": "Comprobación funcional de la simulación local, sin entrenamiento ni selección de modelo.",
   "all_checks_passed": true,
   "checks": [
@@ -191,21 +191,21 @@
   "timing": {
     "predict": {
       "observations": 2000,
-      "mean_ms": 1.7739301,
-      "median_ms": 1.7184499999999998,
-      "p95_ms": 2.0301849999999995
+      "mean_ms": 1.84887965,
+      "median_ms": 1.71275,
+      "p95_ms": 2.601575
     },
     "processing": {
       "observations": 2000,
-      "mean_ms": 3.3746945999999998,
-      "median_ms": 3.29125,
-      "p95_ms": 3.7458449999999996
+      "mean_ms": 3.50889885,
+      "median_ms": 3.2758,
+      "p95_ms": 4.938079999999999
     },
     "http_step_roundtrip": {
       "observations": 20,
-      "mean_ms": 6.56751,
-      "median_ms": 4.68455,
-      "p95_ms": 7.395860000000026
+      "mean_ms": 22.86517,
+      "median_ms": 28.955750000000002,
+      "p95_ms": 31.771335
     },
     "definitions": {
       "predict": "Transformaciones y clasificación de una fila, después de tres calentamientos excluidos.",
@@ -214,7 +214,7 @@
     }
   },
   "environment": {
-    "platform": "Windows-11-10.0.26300-SP0",
+    "platform": "Windows-11-10.0.26200-SP0",
     "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
     "python": "3.12.14",
     "versions": {

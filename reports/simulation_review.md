@@ -1,5 +1,3 @@
-> Registro histórico de la interfaz base del apartado 6.2. Los tiempos descritos aquí pertenecen a aquella ejecución. Para las comprobaciones de esta alternativa local, consultar `portal_review.md`, `portal_checks.json` y la nueva ejecución de `simulation_checks.json`.
-
 # Comprobación de la simulación local
 
 La simulación reproduce la reserva de 2 000 observaciones de AI4I 2020 con el árbol de decisión ya seleccionado. Se utiliza una sesión compartida por servidor local, sin conexión a maquinaria física y sin entrenamiento. Este documento registra evidencia técnica para desarrollar el apartado 6.2 del informe; no lo sustituye.

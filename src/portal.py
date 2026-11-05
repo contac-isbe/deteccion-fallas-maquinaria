@@ -9,12 +9,14 @@ SOURCE_FILES = [
     "src/evaluation.py", "src/simulation.py", "src/simulation_server.py", "src/portal.py",
     "scripts/run_simulation.py", "scripts/verify_simulation.py", "scripts/verify_portal.py",
     "web/index.html", "web/portal.css", "web/app.js", "web/portal.js", "web/monitor.js", "web/monitor.css", "web/theme.js", "web/theme.css",
+    "web/manual.js", "web/manual.css", "docs/MANUAL_USUARIO.md",
 ]
 DOWNLOAD_FILES = SOURCE_FILES + [
     "docs/Informe - Proyecto de IA.docx", "data/raw/ai4i2020.csv",
     "reports/test_evaluation.json", "reports/simulation_checks.json",
     "reports/simulation_review.md", "reports/model_comparison.csv",
     "reports/portal_review.md", "reports/portal_checks.json", "docs/71_preparacion_local.md",
+    "reports/monitor_simulation_checks.json", "reports/monitor_review.md", "reports/theme_review.md",
 ]
 
 
@@ -22,12 +24,12 @@ def metadata(root):
     def read(name):
         return json.loads((root / name).read_text(encoding="utf-8"))
     result = read("reports/test_evaluation.json")
-    checks = read("reports/simulation_checks.json")
+    checks = read("reports/monitor_simulation_checks.json")
     return {
         "title": "Detección de fallas en maquinaria",
-        "repository": "https://github.com/contac-isbe/deteccion-fallas-maquinaria/tree/feature/monitor-interactivo",
+        "repository": "https://github.com/contac-isbe/deteccion-fallas-maquinaria",
         "base_revision": "4406aae",
-        "publication": "Versión alternativa; despliegue pendiente",
+        "publication": "Código publicado; despliegue pendiente",
         "dataset": {"name": "AI4I 2020", "rows": 10000, "development_rows": 8000,
                     "test_rows": result["test_rows"], "test_failures": result["test_failure_count"],
                     "synthetic": True, "license": "CC BY 4.0", "label_disagreements": 27},

@@ -1,32 +1,26 @@
-# Revisión de la alternativa local del punto 7.1
+# Revisión del portal y del manual de uso
 
-> Registro de las pruebas locales anteriores a subir la rama. El estado actual de revisión e integración se describe en README.md.
+Revisión del cierre del apartado 7.1, realizada el 4 de noviembre de 2026. El rediseño conserva el modelo, las seis entradas y la reserva de AI4I 2020. La publicación de las fuentes en GitHub se distingue del despliegue externo del 7.2, que sigue pendiente.
 
+## Comprobaciones
 
-Base clonada: `4406aae`. Carpeta independiente: `version-local-alternativa`. Se prepararon los contenidos de las tres pestañas sin commits, ramas nuevas, pull requests, push ni despliegue. El Word y el repositorio original permanecieron sin cambios.
+- La simulación superó 21 comprobaciones: las 2 000 predicciones coincidieron con el notebook 03; se conservaron 1 919 TN, 13 FP, 18 FN y 50 TP. Evidencia actual en `monitor_simulation_checks.json`.
+- El portal superó ocho comprobaciones HTTP y de estructura: tres paneles asociados, recursos, metadatos, 26 archivos consultables, descargas idénticas a los originales, rechazo de rutas no permitidas, sesión conservada y archivos protegidos sin cambios. Evidencia en `portal_checks.json`.
+- La descarga verificada incluye el Word, un notebook, la procedencia de los datos, la evidencia original del 6.2, la nueva evidencia del monitor y `docs/MANUAL_USUARIO.md`.
+- En el navegador se abrió la guía desde Monitor, se cerró con su botón y con Escape y se regresó a una sesión que conservó su avance. La guía se revisó en claro y oscuro.
+- La revisión a 390 píxeles de ancho confirmó texto ajustado y desplazamiento vertical dentro del diálogo. Es una revisión de tamaño de pantalla, no una prueba en un teléfono físico.
+- Se navegó entre El proyecto, Código y Monitor; el avance manual hasta el registro 22 mostró la alerta del UDI 1392, con 2 737 rpm y 8,8 Nm.
 
-## Comprobaciones ejecutadas
+## Evidencia visual actual
 
-- `scripts/verify_simulation.py`: 21 comprobaciones superadas, incluidas las 2 000 predicciones idénticas a la evaluación del notebook 03. El resultado de esta ejecución pertenece a esta copia: `reports/simulation_checks.json`.
-- `scripts/verify_portal.py`: ocho comprobaciones superadas. Se comprobaron estructura de pestañas, recursos, metadatos coherentes con la evaluación histórica, 19 archivos consultables, descargas, rechazo de rutas no permitidas, integración con la sesión y conservación de archivos protegidos. Evidencia en `reports/portal_checks.json`.
-- Revisión del navegador: navegación entre Documentación, Código y Ejecución y pruebas; selección de `src/preparation.py`; correspondencia entre el archivo elegido y el texto mostrado; avance manual hasta UDI 1392, en el registro 22, con alerta de falla.
-- Revisión a 390 píxeles de ancho: Documentación y Código sin desbordamiento horizontal de la página; controles visibles en Ejecución; la sesión conservó los 22 registros y su alerta al cambiar de pestaña. Se probó la tecla Home desde la última pestaña y volvió a Documentación. La revisión estrecha es una emulación de tamaño de pantalla, no una prueba en un teléfono físico.
-- Descarga del informe desde la pestaña Documentación: el archivo descargado coincide en bytes con `docs/Informe - Proyecto de IA.docx`.
+- [Documentación](portal_evidence/71-documentacion.png).
+- [Código e instrucciones](portal_evidence/71-codigo.png).
+- [Monitor con alerta](portal_evidence/71-monitor.png).
+- [Guía en modo claro](portal_evidence/manual-light.png).
+- [Guía en pantalla estrecha](portal_evidence/manual-mobile.png).
 
-## Capturas
+Las revisiones del rediseño y del tema están en `monitor_review.md` y `theme_review.md`. Sus capturas anteriores se conservan como evidencia histórica. La evidencia original del 6.2 permanece en `simulation_checks.json` y `simulation_review.md`; las ejecuciones posteriores no sustituyen sus tiempos.
 
-- [Documentación](evidence_71/documentacion.png).
-- [Visor de código](evidence_71/codigo.png).
-- [Ejecución y alerta](evidence_71/ejecucion.png).
-- [Documentación en pantalla estrecha](evidence_71/documentacion_movil.png).
-- [Código en pantalla estrecha](evidence_71/codigo_movil.png).
-- [Ejecución en pantalla estrecha](evidence_71/ejecucion_movil.png).
-- [Vista final de escritorio](evidence_71/portal_final.png).
+## Límites
 
-## Alcance
-
-La alternativa utiliza las mismas versiones de dependencias, el mismo modelo y las mismas particiones. El entorno virtual se creó en esta carpeta y recibió una copia de los paquetes ya instalados, sin dependencias web nuevas ni reentrenamiento. Las huellas del modelo y del Word coinciden con las copias del repositorio original.
-
-Las pestañas preparan los contenidos solicitados en 7.1.1, 7.1.2 y 7.1.3. El requisito de publicación en GitHub del apartado 7.1 aún no está completado, y el despliegue del 7.2 sigue pendiente. La sesión es compartida por el proceso local; consultar documentación o código no pausa automáticamente una reproducción en marcha. Las pruebas de estructura y navegación no equivalen a un estudio de usabilidad con participantes ni a compatibilidad con todos los dispositivos.
-
-El servidor utilizado para la revisión se detuvo al finalizar. Para usar la alternativa, ejecutar `ABRIR_PORTAL.cmd` o el comando del README y abrir `http://127.0.0.1:8771`.
+El servidor escucha únicamente en el propio equipo. Las pestañas conectadas comparten sesión y cambiar de sección no pausa la reproducción. La reserva es sintética y ya fue evaluada; reproducirla no constituye una nueva prueba independiente. No se modificó ni reentrenó el modelo durante esta revisión.

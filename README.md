@@ -1,9 +1,3 @@
-> **Monitor interactivo para el punto 7.1.** Versión alternativa basada en `4406aae`, preparada en la rama `feature/monitor-interactivo` para revisión. La integración en `main` y el despliegue siguen pendientes.
->
-> Ejecutar `.\.venv\Scripts\python.exe scripts/run_simulation.py --port 8771` y abrir **http://127.0.0.1:8771**.
->
-> La página abre el **Monitor** y mantiene las secciones **El proyecto** y **Código**. El monitor utiliza una representación ilustrativa de maquinaria, las cinco mediciones, gráficas de los últimos 60 registros procesados y un historial de alertas. La secuencia de reproducción no es una serie temporal de una máquina real. Las instrucciones y los límites de esta alternativa están en [docs/71_preparacion_local.md](docs/71_preparacion_local.md). Esta rama reúne la alternativa del 7.1; su integración en `main` y el despliegue del 7.2 siguen pendientes.
-
 # Detección de fallas en maquinaria
 
 Proyecto del curso Inteligencia Artificial: Principios y Técnicas, UPAO.
@@ -12,9 +6,9 @@ Proyecto del curso Inteligencia Artificial: Principios y Técnicas, UPAO.
 
 ## Alcance
 
-Clasificar observaciones de funcionamiento como sin falla o con falla utilizando AI4I 2020. Se compararon regresión logística, árbol de decisión y Random Forest. La demostración reproducirá observaciones reservadas para prueba y mostrará predicciones y alertas.
+Clasificar observaciones de funcionamiento como sin falla o con falla utilizando AI4I 2020. Se compararon regresión logística, árbol de decisión y Random Forest. La demostración reproduce observaciones reservadas para prueba y muestra predicciones y alertas.
 
-La tarea no incluye estimar la vida útil restante ni controlar maquinaria física. Los datos son sintéticos y la evaluación se limitará a las condiciones que representan.
+La tarea no incluye estimar la vida útil restante ni controlar maquinaria física. Los datos son sintéticos y la evaluación se limita a las condiciones que representan.
 
 ## Trabajo local en VS Code
 
@@ -51,7 +45,7 @@ La reserva de prueba no se carga en el notebook 02. El notebook 03 evalúa el pi
 
 `model_selection.json` conserva la selección histórica anterior a la prueba. El reporte separado `test_evaluation.json` registra que la reserva ya fue evaluada. No se deben usar estos resultados para volver a elegir parámetros y seguir llamando independiente a la misma reserva.
 
-La simulación local está implementada y cuenta con comprobaciones funcionales, pruebas HTTP y revisión visual del navegador. Reproduce la reserva ya evaluada con el modelo guardado, sin reentrenarlo. La evidencia está en `reports/simulation_checks.json` y `reports/simulation_review.md`. El entrenamiento, la evaluación y los commits no modifican el informe Word.
+La simulación local está implementada y cuenta con comprobaciones funcionales, pruebas HTTP y revisión visual del navegador. Reproduce la reserva ya evaluada con el modelo guardado, sin reentrenarlo. La evidencia está en `reports/simulation_checks.json` y `reports/simulation_review.md`. El informe Word se actualiza por separado, después de comprobar los resultados.
 
 ## Simulación local
 
@@ -77,7 +71,7 @@ Si faltan `data/processed/` o `models/` en una copia nueva, ejecutar primero los
 .\.venv\Scripts\python.exe scripts/verify_simulation.py
 ```
 
-El script reproduce las 2 000 observaciones mediante avance manual automatizado, compara cada predicción con el notebook 03, verifica alertas y exportación, y prueba inicio, pausa, continuación y errores a través del servidor HTTP. Escribe el resumen en `reports/simulation_checks.json` y el CSV de comprobación en `outputs/simulation_checked_predictions.csv` (excluido de Git). No modifica el modelo ni la evaluación histórica. Las capturas y las comprobaciones manuales del navegador se documentan por separado en `reports/simulation_review.md`.
+El script reproduce las 2 000 observaciones mediante avance manual automatizado, compara cada predicción con el notebook 03, verifica alertas y exportación, y prueba inicio, pausa, continuación y errores a través del servidor HTTP. Escribe el resumen en `reports/monitor_simulation_checks.json` y el CSV de comprobación en `outputs/simulation_checked_predictions.csv` (excluido de Git). No modifica el modelo ni la evaluación histórica. Las capturas y las comprobaciones manuales del navegador se documentan por separado en `reports/simulation_review.md`.
 
 Los tiempos diferencian la llamada al pipeline, el procesamiento de una observación y el recorrido HTTP local. Ninguno incluye el pintado de la pantalla ni las pausas entre registros. No se fijó un umbral de latencia ni se afirma cumplimiento de tiempo real industrial. Reproducir la prueba ya consultada no constituye una nueva evaluación independiente del modelo.
 
@@ -107,7 +101,7 @@ El archivo original se encuentra en `data/raw/ai4i2020.csv`. Su procedencia y li
 
 ## Informe del proyecto
 
-La copia del informe desarrollada hasta el apartado 6.2 está disponible en [Informe - Proyecto de IA.docx](docs/Informe%20-%20Proyecto%20de%20IA.docx). Descargar el archivo para revisarlo en Word.
+La copia del informe desarrollada hasta el apartado 7.1 está disponible en [Informe - Proyecto de IA.docx](docs/Informe%20-%20Proyecto%20de%20IA.docx). Descargar el archivo para revisarlo en Word.
 
 El original editable se conserva en la carpeta superior `Informe - Proyecto de IA`. Cuando se actualice, también debe actualizarse la copia de `docs/` para mantener ambas versiones iguales.
 
@@ -118,3 +112,13 @@ Space Grotesk e Inter se sirven desde `web/fonts/`, con sus licencias incluidas.
 ## Modo claro y oscuro
 
 El interruptor de la esquina superior derecha permite alternar entre ambos temas y conserva la elección al recargar, si el navegador permite almacenamiento local. Sin una elección manual se utiliza la preferencia del sistema. El control también funciona con teclado y no modifica la sesión ni las predicciones. Las comprobaciones visuales están en [reports/theme_review.md](reports/theme_review.md).
+
+## Manual de uso
+
+[Consultar el manual completo](docs/MANUAL_USUARIO.md). La interfaz incluye el botón **Guía de uso**, disponible en Monitor y El proyecto, con instrucciones rápidas y descarga del manual.
+
+La evidencia original del apartado 6.2 se conserva en `reports/simulation_checks.json`. Las nuevas ejecuciones del monitor se registran en `reports/monitor_simulation_checks.json`, sin reemplazar ese registro histórico.
+
+## Publicación del apartado 7.1
+
+El repositorio reúne documentación, código, notebooks y evidencia de ejecución. La interfaz organiza estos contenidos en El proyecto, Código y Monitor. El manual completo está en `docs/MANUAL_USUARIO.md`; la página también ofrece una guía rápida. El código se integra mediante una rama de trabajo y un pull request. El despliegue con un enlace externo del apartado 7.2 sigue pendiente.

@@ -216,11 +216,11 @@ def main():
                         "Los tiempos dependen del equipo y de la carga; no son garantías industriales.",
                         "La revisión visual y los controles del navegador se documentan por separado; este script no certifica usabilidad con usuarios."]
     }
-    (ROOT / "reports/simulation_checks.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (ROOT / "reports/monitor_simulation_checks.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     output = ROOT / "outputs"
     output.mkdir(exist_ok=True)
     full.to_csv(output / "simulation_checked_predictions.csv", index=False)
-    print(f"Correcto: {len(cases)} comprobaciones. reports/simulation_checks.json")
+    print(f"Correcto: {len(cases)} comprobaciones. reports/monitor_simulation_checks.json")
     print(json.dumps(report["timing"], ensure_ascii=False, indent=2))
 
 

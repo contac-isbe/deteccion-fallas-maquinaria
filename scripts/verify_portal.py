@@ -55,20 +55,20 @@ def main():
         assert {x["aria-controls"] for x in page.tabs}=={x["id"] for x in page.panels}
         assert 'El despliegue del 7.2 sigue pendiente.' in html
         passed("Tres pestañas con paneles asociados", "Documentación, Código y Ejecución y pruebas; identificadores únicos y despliegue pendiente explícito.")
-        for path in ["/app.js", "/portal.js", "/portal.css", "/monitor.js", "/monitor.css", "/theme.js", "/theme.css", "/fonts/Inter.ttf", "/fonts/SpaceGrotesk.ttf"]:
+        for path in ["/app.js", "/portal.js", "/portal.css", "/monitor.js", "/monitor.css", "/theme.js", "/theme.css", "/manual.js", "/manual.css", "/fonts/Inter.ttf", "/fonts/SpaceGrotesk.ttf"]:
             assert len(get(path)[0]) > 100
         passed("Recursos de la interfaz", "HTML, scripts y estilos se sirven correctamente.")
         info = json.loads(get("/api/project")[0])
         final = json.loads((ROOT / "reports/test_evaluation.json").read_text(encoding="utf-8"))
         assert info["metrics"] == final["metrics"] and info["model_sha256"] == final["model_sha256"]
-        assert info["publication"] == "Versión alternativa; despliegue pendiente"
-        passed("Documentación basada en resultados guardados", "Métricas y huella del modelo iguales a la evaluación histórica; integración y despliegue pendientes.")
+        assert info["publication"] == "Código publicado; despliegue pendiente"
+        passed("Documentación basada en resultados guardados", "Métricas y huella del modelo iguales a la evaluación histórica; despliegue pendiente.")
         for path in info["source_files"]:
             assert path in SOURCE_FILES
             result=json.loads(get("/api/source?file=" + quote(path, safe=""))[0])
             assert result["path"]==path and result["content"]
         passed("Visor de código", f'{len(info["source_files"])} archivos locales consultados correctamente; los notebooks muestran celdas de texto y código.')
-        for path in ["docs/Informe - Proyecto de IA.docx", "notebooks/01_analisis_preparacion.ipynb", "data/README.md", "reports/simulation_checks.json"]:
+        for path in ["docs/Informe - Proyecto de IA.docx", "notebooks/01_analisis_preparacion.ipynb", "data/README.md", "reports/simulation_checks.json", "reports/monitor_simulation_checks.json", "docs/MANUAL_USUARIO.md"]:
             content,headers=get("/project/file?file="+quote(path,safe=""))
             assert content==(ROOT/path).read_bytes()
             assert "attachment" in headers["Content-Disposition"]
@@ -92,7 +92,7 @@ def main():
     assert before==after
     passed("Modelo, datos, evaluación e informe conservados", "Huellas iguales antes y después de las pruebas del portal.")
     report={"generated_at_utc":datetime.now(timezone.utc).isoformat(),"all_checks_passed":True,
-            "base_revision":"4406aae","publication":"branch_for_review","checks":cases,
+            "base_revision":"4406aae","publication":"github_71","checks":cases,
             "protected_before":before,"protected_after":after,
             "scope":"Pruebas HTTP y de estructura; navegación, lectura y diseño se revisan también en el navegador."}
     (ROOT/"reports/portal_checks.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")

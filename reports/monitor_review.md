@@ -16,7 +16,7 @@ Los títulos usan Space Grotesk, los textos Inter y las cifras una tipografía m
 ## Comprobaciones
 
 - Las 21 pruebas de scripts/verify_simulation.py pasaron. Se incluyó la comprobación de la ventana de 60 UDI al terminar los 2 000 registros y de su limpieza al reiniciar. Las predicciones y los archivos protegidos permanecieron iguales.
-- Las ocho pruebas de scripts/verify_portal.py pasaron, incluyendo los nuevos recursos de JavaScript, CSS y las dos fuentes locales. Los resultados están en simulation_checks.json y portal_checks.json.
+- Las ocho pruebas de scripts/verify_portal.py pasaron, incluyendo los nuevos recursos de JavaScript, CSS y las dos fuentes locales. Los resultados están en monitor_simulation_checks.json y portal_checks.json.
 - El navegador confirmó la carga efectiva de Space Grotesk e Inter y la ausencia de errores de JavaScript en la revisión.
 - Al procesar manualmente 22 registros se mostró la alerta de UDI 1392, con 2 737 rpm y 8,8 Nm. El gráfico mostraba 22 registros, del UDI 2998 al UDI 1392. Elegir Torque cambió su último valor a 8,8 Nm.
 - Reiniciar dejó cero registros, cero alertas, mediciones vacías, cero trazos de datos y ausencia de puntos en las gráficas pequeñas.

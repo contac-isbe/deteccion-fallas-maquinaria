@@ -17,6 +17,8 @@ def create_server(simulator, web_root, port=8765):
     assets["/monitor.js"] = ("monitor.js", "text/javascript; charset=utf-8")
     assets["/theme.js"] = ("theme.js", "text/javascript; charset=utf-8")
     assets["/theme.css"] = ("theme.css", "text/css; charset=utf-8")
+    assets["/manual.js"] = ("manual.js", "text/javascript; charset=utf-8")
+    assets["/manual.css"] = ("manual.css", "text/css; charset=utf-8")
     for font in ("SpaceGrotesk", "Inter"):
         assets[f"/fonts/{font}.ttf"] = (f"fonts/{font}.ttf", "font/ttf")
 

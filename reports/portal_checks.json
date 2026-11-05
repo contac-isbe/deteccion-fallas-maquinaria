@@ -1,8 +1,8 @@
 {
-  "generated_at_utc": "2026-11-04T23:57:37.943498+00:00",
+  "generated_at_utc": "2026-11-05T00:19:36.376349+00:00",
   "all_checks_passed": true,
   "base_revision": "4406aae",
-  "publication": "branch_for_review",
+  "publication": "github_71",
   "checks": [
     {
       "test": "Tres pestañas con paneles asociados",
@@ -17,12 +17,12 @@
     {
       "test": "Documentación basada en resultados guardados",
       "status": "passed",
-      "evidence": "Métricas y huella del modelo iguales a la evaluación histórica; integración y despliegue pendientes."
+      "evidence": "Métricas y huella del modelo iguales a la evaluación histórica; despliegue pendiente."
     },
     {
       "test": "Visor de código",
       "status": "passed",
-      "evidence": "23 archivos locales consultados correctamente; los notebooks muestran celdas de texto y código."
+      "evidence": "26 archivos locales consultados correctamente; los notebooks muestran celdas de texto y código."
     },
     {
       "test": "Descargas de documentación y código",
