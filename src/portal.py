@@ -8,7 +8,7 @@ SOURCE_FILES = [
     "notebooks/03_comprobacion_prueba.ipynb", "src/preparation.py", "src/training.py",
     "src/evaluation.py", "src/simulation.py", "src/simulation_server.py", "src/portal.py",
     "scripts/run_simulation.py", "scripts/verify_simulation.py", "scripts/verify_portal.py",
-    "web/index.html", "web/portal.css", "web/app.js", "web/portal.js", "web/monitor.js", "web/monitor.css",
+    "web/index.html", "web/portal.css", "web/app.js", "web/portal.js", "web/monitor.js", "web/monitor.css", "web/theme.js", "web/theme.css",
 ]
 DOWNLOAD_FILES = SOURCE_FILES + [
     "docs/Informe - Proyecto de IA.docx", "data/raw/ai4i2020.csv",

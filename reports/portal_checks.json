@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-04T23:51:20.406499+00:00",
+  "generated_at_utc": "2026-11-04T23:57:37.943498+00:00",
   "all_checks_passed": true,
   "base_revision": "4406aae",
   "publication": "branch_for_review",
@@ -22,7 +22,7 @@
     {
       "test": "Visor de código",
       "status": "passed",
-      "evidence": "21 archivos locales consultados correctamente; los notebooks muestran celdas de texto y código."
+      "evidence": "23 archivos locales consultados correctamente; los notebooks muestran celdas de texto y código."
     },
     {
       "test": "Descargas de documentación y código",

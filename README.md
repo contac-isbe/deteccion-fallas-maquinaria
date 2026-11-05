@@ -114,3 +114,7 @@ El original editable se conserva en la carpeta superior `Informe - Proyecto de I
 ## Interfaz de monitoreo
 
 Space Grotesk e Inter se sirven desde `web/fonts/`, con sus licencias incluidas. Las cifras usan una fuente monoespaciada del sistema. No se necesita conexión a Google Fonts durante el uso. La revisión del monitor y sus capturas están en [reports/monitor_review.md](reports/monitor_review.md).
+
+## Modo claro y oscuro
+
+El interruptor de la esquina superior derecha permite alternar entre ambos temas y conserva la elección al recargar, si el navegador permite almacenamiento local. Sin una elección manual se utiliza la preferencia del sistema. El control también funciona con teclado y no modifica la sesión ni las predicciones. Las comprobaciones visuales están en [reports/theme_review.md](reports/theme_review.md).
