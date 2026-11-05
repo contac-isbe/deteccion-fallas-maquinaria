@@ -1,8 +1,22 @@
 # Detección de fallas en maquinaria
 
-Proyecto del curso **Inteligencia Artificial: Principios y Técnicas — UPAO**.
+**Universidad Privada Antenor Orrego — UPAO**
 
-**Título:** Desarrollo de un sistema de detección de fallas en maquinaria mediante aprendizaje automático en un entorno simulado.
+Facultad de Ingeniería · Programa de Estudio de Ingeniería de Sistemas e Inteligencia Artificial
+
+**Curso:** Inteligencia Artificial: Principios y Técnicas
+
+**Docente:** Sagastegui Chigne, Hernán
+
+**Integrantes:**
+
+- Bejarano Benites, Isaí Samuel
+- Carranza Ortiz, Alejandro Gabriel
+- Cieza Llanos, Luis Eduardo
+- Chunqui Angulo, Daniela Cristina
+- Orozco Lopez, Alfredo Jhosep
+
+**Título del proyecto:** Desarrollo de un sistema de detección de fallas en maquinaria mediante aprendizaje automático en un entorno simulado
 
 **Estado:** desarrollo completado hasta el apartado **7.2**, con informe, evaluación, interfaz y despliegue publicados.
 
