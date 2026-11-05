@@ -18,12 +18,10 @@ Facultad de Ingeniería · Programa de Estudio de Ingeniería de Sistemas e Inte
 
 **Título del proyecto:** Desarrollo de un sistema de detección de fallas en maquinaria mediante aprendizaje automático en un entorno simulado
 
-**Estado:** desarrollo completado hasta el apartado **7.2**, con informe, evaluación, interfaz y despliegue publicados.
-
 ## Accesos principales
 
 - [Abrir la aplicación](https://deteccion-fallas-maquinaria.onrender.com).
-- [Informe del proyecto hasta el 7.2](docs/Informe%20-%20Proyecto%20de%20IA.docx).
+- [Informe del proyecto](docs/Informe%20-%20Proyecto%20de%20IA.docx).
 - [Manual de uso](docs/MANUAL_USUARIO.md).
 - [Configuración y límites del despliegue](docs/DESPLIEGUE.md).
 
@@ -37,19 +35,17 @@ Se utiliza únicamente **AI4I 2020**, con 10 000 observaciones sintéticas: 8 00
 
 El sistema demuestra clasificación en un entorno simulado. No está conectado a maquinaria física, no estima vida útil restante ni anticipa horas hasta una avería. Los gráficos reproducen observaciones independientes, no una serie temporal de una misma máquina.
 
-## Contenidos solicitados por el curso
+## Estructura del proyecto
 
-| Apartado | Contenido y evidencia |
+| Sección del informe | Contenido y recursos |
 | --- | --- |
-| I–II. Planteamiento y requerimientos | [Informe](docs/Informe%20-%20Proyecto%20de%20IA.docx): título, antecedentes, problema, objetivos y requisitos. |
+| I. Introducción | [Informe](docs/Informe%20-%20Proyecto%20de%20IA.docx): título, antecedentes, problema y objetivos. |
+| II. Requerimientos | [Informe](docs/Informe%20-%20Proyecto%20de%20IA.docx): dominio y requisitos funcionales y no funcionales. |
 | III. Dataset y preprocesamiento | [Notebook 01](notebooks/01_analisis_preparacion.ipynb): auditoría, variables, particiones y transformaciones. |
-| IV. Aprendizaje | [Notebook 02](notebooks/02_entrenamiento_comparacion.ipynb): comparación y selección del modelo. |
-| V y 6.1. Comprobación y evaluación del modelo | [Notebook 03](notebooks/03_comprobacion_prueba.ipynb), [métricas](reports/test_evaluation.json) y [predicciones](reports/test_predictions.csv). |
-| 6.2. Evaluación del sistema | [Comprobaciones](reports/simulation_checks.json) y [revisión de la simulación](reports/simulation_review.md). |
-| 7.1.1. Documentación del proyecto | Informe, [manual](docs/MANUAL_USUARIO.md) y sección **El proyecto** de la aplicación. |
-| 7.1.2. Código del sistema | [Código Python](src/), [interfaz](web/), [notebooks](notebooks/) y sección **Código** de la aplicación. |
-| 7.1.3. Ejecución y pruebas | Sección **Monitor**, instrucciones locales y [evidencia del portal](reports/portal_checks.json). |
-| 7.2. Despliegue | [Aplicación pública](https://deteccion-fallas-maquinaria.onrender.com), [configuración](docs/DESPLIEGUE.md) y [verificación pública](reports/public_deployment_checks.json). |
+| IV. Aprendizaje | [Notebook 02](notebooks/02_entrenamiento_comparacion.ipynb): comparación, entrenamiento y selección del modelo. |
+| V. Comprobación | [Notebook 03](notebooks/03_comprobacion_prueba.ipynb): aplicación del modelo seleccionado al conjunto de prueba y [predicciones obtenidas](reports/test_predictions.csv). |
+| VI. Evaluación | [Métricas del modelo](reports/test_evaluation.json), [comprobaciones del sistema](reports/simulation_checks.json) y [revisión funcional](reports/simulation_review.md). |
+| VII. Despliegue | [Documentación](docs/), [código](src/), [interfaz](web/), [evidencia de ejecución](reports/portal_checks.json) y [aplicación publicada](https://deteccion-fallas-maquinaria.onrender.com). |
 
 ## Modelo y resultados
 
@@ -67,7 +63,7 @@ Se compararon 34 configuraciones de regresión logística, árbol de decisión y
 
 Las alertas conservan los errores del modelo. Se documentaron 27 discrepancias de etiquetado sin alterar el CSV original. La reserva ya fue evaluada y no se usa para reajustar parámetros; reproducirla en la interfaz no constituye otra evaluación independiente.
 
-## Probar la interfaz localmente
+## Ejecución local
 
 Requiere **Python 3.12.14**. Clonar o descargar el repositorio completo, abrir una terminal en su carpeta y ejecutar en Windows:
 
@@ -80,9 +76,7 @@ python -m venv .venv
 
 Abrir **http://127.0.0.1:8772** y mantener la terminal activa; detener con `Ctrl+C`. Esta opción permite probar la interfaz con sesiones aisladas y restaura los artefactos verificados, **sin volver a entrenar**. Gunicorn se utiliza en Render; el comando de Flask anterior es solo para desarrollo local.
 
-El servidor local original también está disponible con `scripts/run_simulation.py` o `ABRIR_PORTAL.cmd`, en el puerto 8771. Ese modo comparte una sesión entre todos sus visitantes.
-
-## Reproducir los notebooks
+## Reproducción del experimento
 
 Para reproducir el análisis y el entrenamiento, instalar `requirements.txt` en el entorno virtual y ejecutar los tres notebooks en orden:
 
@@ -90,7 +84,7 @@ Para reproducir el análisis y el entrenamiento, instalar `requirements.txt` en 
 2. `02_entrenamiento_comparacion.ipynb`: compara modelos y guarda el seleccionado.
 3. `03_comprobacion_prueba.ipynb`: evalúa el modelo fijado, sin reajustarlo.
 
-En VS Code se utilizan las extensiones Python y Jupyter, seleccionando el entorno `.venv`. También pueden ejecutarse con `scripts/execute_notebook.py`. Los notebooks necesitan las carpetas del proyecto; subir únicamente un notebook a Colab no basta.
+En VS Code se utilizan las extensiones Python y Jupyter, seleccionando el entorno `.venv`. También pueden ejecutarse con `scripts/execute_notebook.py`. La reproducción requiere el repositorio completo y sus dependencias.
 
 Las carpetas de trabajo `models/` y `data/processed/` están excluidas de Git. Las copias congeladas necesarias para publicar y probar la aplicación se conservan en `deployment/artifacts/`, con un manifiesto de integridad.
 
@@ -104,10 +98,4 @@ Las carpetas de trabajo `models/` y `data/processed/` están excluidas de Git. L
 | Servicio público: 14 comprobaciones | [public_deployment_checks.json](reports/public_deployment_checks.json) |
 | Revisión visual y alcance de las pruebas públicas | [deployment_review.md](reports/deployment_review.md) |
 
-Los scripts de comprobación están en `scripts/`. La evidencia original del 6.2 se conserva separada de las ejecuciones posteriores. Las capturas y los registros históricos documentan cada etapa; el estado actual del proyecto es el indicado en este README.
-
-## Cambios del grupo
-
-Actualizar `main`, crear una rama para el cambio, probarlo localmente y abrir un **pull request**. Los cambios se revisan antes de hacer merge. La publicación automática en Render está desactivada: integrar un PR no actualiza por sí solo la aplicación pública.
-
-Las instrucciones de uso, las sesiones temporales y los límites del servicio se detallan en el manual y en la documentación de despliegue.
+Los scripts de comprobación están en `scripts/`. Los resultados, capturas y registros de verificación se conservan en `reports/`, diferenciando la evaluación del modelo, las pruebas locales y las pruebas del servicio publicado.
