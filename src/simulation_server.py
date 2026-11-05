@@ -2,13 +2,25 @@
 
 import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, parse_qs
+
+from src.portal import DOWNLOAD_FILES, metadata, source_content
 
 
 def create_server(simulator, web_root, port=8765):
     assets = {"/": ("index.html", "text/html; charset=utf-8"),
               "/app.js": ("app.js", "text/javascript; charset=utf-8"),
-              "/style.css": ("style.css", "text/css; charset=utf-8")}
+              "/style.css": ("style.css", "text/css; charset=utf-8"),
+              "/portal.js": ("portal.js", "text/javascript; charset=utf-8")}
+    assets["/portal.css"] = ("portal.css", "text/css; charset=utf-8")
+    assets["/monitor.css"] = ("monitor.css", "text/css; charset=utf-8")
+    assets["/monitor.js"] = ("monitor.js", "text/javascript; charset=utf-8")
+    assets["/theme.js"] = ("theme.js", "text/javascript; charset=utf-8")
+    assets["/theme.css"] = ("theme.css", "text/css; charset=utf-8")
+    assets["/manual.js"] = ("manual.js", "text/javascript; charset=utf-8")
+    assets["/manual.css"] = ("manual.css", "text/css; charset=utf-8")
+    for font in ("SpaceGrotesk", "Inter"):
+        assets[f"/fonts/{font}.ttf"] = (f"fonts/{font}.ttf", "font/ttf")
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_args):
@@ -31,7 +43,23 @@ def create_server(simulator, web_root, port=8765):
 
         def do_GET(self):
             path = urlsplit(self.path).path
-            if path in assets:
+            root = web_root.parent
+            query = parse_qs(urlsplit(self.path).query)
+            if path == "/api/project":
+                self.respond(200, metadata(root))
+            elif path == "/api/source":
+                try:
+                    self.respond(200, source_content(root, query.get("file", [""])[0]))
+                except ValueError as exc:
+                    self.respond(404, {"error": str(exc)})
+            elif path == "/project/file":
+                name = query.get("file", [""])[0]
+                if name not in DOWNLOAD_FILES or not (root / name).is_file():
+                    self.respond(404, {"error": "Archivo no disponible."})
+                    return
+                mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document" if name.endswith(".docx") else "application/octet-stream"
+                self.respond(200, (root / name).read_bytes(), mime, (root / name).name)
+            elif path in assets:
                 filename, mime = assets[path]
                 self.respond(200, (web_root / filename).read_bytes(), mime)
             elif path == "/api/state":

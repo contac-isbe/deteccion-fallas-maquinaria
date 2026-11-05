@@ -1,0 +1,248 @@
+{
+  "generated_at_utc": "2026-11-05T00:15:27.576930+00:00",
+  "purpose": "Comprobación funcional de la simulación local, sin entrenamiento ni selección de modelo.",
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "test": "Columna requerida ausente",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "Columnas incorrectas. Utiliza data/processed/test.csv, sin cambiar su encabezado."
+    },
+    {
+      "test": "Medición ausente",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "El CSV está vacío o contiene valores ausentes."
+    },
+    {
+      "test": "Medición infinita",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "Hay valores numéricos no finitos."
+    },
+    {
+      "test": "Tipo de producto desconocido",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "Tipo de producto inválido: solo se admiten L, M y H."
+    },
+    {
+      "test": "Medición fuera del dominio",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "Temperaturas, velocidad y torque deben ser positivos."
+    },
+    {
+      "test": "Identificador duplicado",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "El CSV contiene identificadores repetidos."
+    },
+    {
+      "test": "Etiqueta fuera del dominio binario",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "Machine failure debe ser 0 o 1."
+    },
+    {
+      "test": "Reserva reordenada",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "El archivo no coincide con la reserva completa y su orden original. Utiliza data/processed/test.csv."
+    },
+    {
+      "test": "Reserva incompleta",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "El archivo no coincide con la reserva completa y su orden original. Utiliza data/processed/test.csv."
+    },
+    {
+      "test": "Medición alterada respecto de la reserva",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "El archivo no coincide con la reserva completa y su orden original. Utiliza data/processed/test.csv."
+    },
+    {
+      "test": "Carga correcta y reinicio de sesión",
+      "requirements": [
+        "RF1",
+        "RF3"
+      ],
+      "status": "passed",
+      "evidence": "CSV completo aceptado; avance = 0."
+    },
+    {
+      "test": "Entradas del modelo separadas de la etiqueta",
+      "requirements": [
+        "RF2",
+        "RNF2"
+      ],
+      "status": "passed",
+      "evidence": "predict recibió exactamente las seis variables, también durante el calentamiento."
+    },
+    {
+      "test": "Reproducción completa y predicciones sin cambios",
+      "requirements": [
+        "RF2",
+        "RF3",
+        "RF6",
+        "RNF1",
+        "RNF2"
+      ],
+      "status": "passed",
+      "evidence": "2 000 UDI en el mismo orden y 2 000 predicciones idénticas al notebook 03; TN 1919, FP 13, FN 18, TP 50."
+    },
+    {
+      "test": "Alerta activada por la predicción",
+      "requirements": [
+        "RF4"
+      ],
+      "status": "passed",
+      "evidence": "63 alertas = 50 verdaderos positivos + 13 falsos positivos; las 18 omisiones no activan alerta."
+    },
+    {
+      "test": "Exportación completa y trazabilidad",
+      "requirements": [
+        "RF5"
+      ],
+      "status": "passed",
+      "evidence": "CSV con 2 000 filas; UDI, seis entradas, etiqueta posterior, predicción, alerta, resultado y dos tiempos por fila."
+    },
+    {
+      "test": "Bloqueo de reproducción al finalizar",
+      "requirements": [
+        "RF3"
+      ],
+      "status": "passed",
+      "evidence": "Se requiere reiniciar antes de una nueva sesión."
+    },
+    {
+      "test": "Reinicio sin resultados residuales",
+      "requirements": [
+        "RF3",
+        "RF5"
+      ],
+      "status": "passed",
+      "evidence": "Contadores, último registro y filas exportadas vacíos; encabezado conservado."
+    },
+    {
+      "test": "Inicio, pausa y continuación mediante HTTP",
+      "requirements": [
+        "RF3"
+      ],
+      "status": "passed",
+      "evidence": "El trabajador avanzó; la pausa conservó el contador durante 350 ms; continuar no duplicó UDI."
+    },
+    {
+      "test": "Avance manual y descarga HTTP",
+      "requirements": [
+        "RF3",
+        "RF5"
+      ],
+      "status": "passed",
+      "evidence": "20 pasos generan 20 filas descargables con Content-Disposition de archivo CSV."
+    },
+    {
+      "test": "Mensajes HTTP ante entradas incorrectas",
+      "requirements": [
+        "RF1"
+      ],
+      "status": "passed",
+      "evidence": "CSV inválido, intervalo negativo y cuerpo de carga incorrecto devuelven HTTP 400 con mensaje; conservan 20 registros."
+    },
+    {
+      "test": "Modelo y evaluación histórica sin modificaciones",
+      "requirements": [
+        "RNF1",
+        "RNF2"
+      ],
+      "status": "passed",
+      "evidence": "Huellas idénticas antes y después en modelo, selección, evaluación histórica, predicciones, CSV original y reserva."
+    }
+  ],
+  "confusion_counts": {
+    "TN": 1919,
+    "FP": 13,
+    "FN": 18,
+    "TP": 50
+  },
+  "alerts": 63,
+  "timing": {
+    "predict": {
+      "observations": 2000,
+      "mean_ms": 1.8686233,
+      "median_ms": 1.7959,
+      "p95_ms": 2.2369399999999997
+    },
+    "processing": {
+      "observations": 2000,
+      "mean_ms": 3.52945735,
+      "median_ms": 3.4248000000000003,
+      "p95_ms": 4.095859999999999
+    },
+    "http_step_roundtrip": {
+      "observations": 20,
+      "mean_ms": 26.141700000000004,
+      "median_ms": 29.8251,
+      "p95_ms": 34.23131500000001
+    },
+    "definitions": {
+      "predict": "Transformaciones y clasificación de una fila, después de tres calentamientos excluidos.",
+      "processing": "Selección, validación y preparación de una fila, predict y construcción del registro. Excluye espera del bloqueo, añadir al historial, CSV, HTTP, pantalla y pausas.",
+      "http_step_roundtrip": "20 solicitudes secuenciales locales: petición HTTP, procesamiento, snapshot, JSON y recepción de respuesta. No mide actualización de pantalla ni pausas. Sin objetivo de latencia preestablecido; no se determina cumplimiento de tiempo real."
+    }
+  },
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "python": "3.12.14",
+    "versions": {
+      "scikit-learn": "1.9.1",
+      "pandas": "3.0.1",
+      "numpy": "2.3.5",
+      "joblib": "1.6.0"
+    }
+  },
+  "protected_file_sha256_before": {
+    "models/modelo_seleccionado.joblib": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
+    "reports/model_selection.json": "b53dd68f699214649f10beebeda04c8df4919193a6fca2b6f7456467a93b2562",
+    "reports/test_evaluation.json": "d5cb497c419a415975b41d09d4ac872f88241c4208cf4f732accccb28695533a",
+    "reports/test_predictions.csv": "3035ef769f10d1c196c89614bd49a9971ab54334e153c88b5fd257cea3fe0871",
+    "data/raw/ai4i2020.csv": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+    "data/processed/test.csv": "bff6ce157829bfba0481237e632d03f53abe67b4d75bebc65feb4ba579692f14"
+  },
+  "protected_file_sha256_after": {
+    "models/modelo_seleccionado.joblib": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
+    "reports/model_selection.json": "b53dd68f699214649f10beebeda04c8df4919193a6fca2b6f7456467a93b2562",
+    "reports/test_evaluation.json": "d5cb497c419a415975b41d09d4ac872f88241c4208cf4f732accccb28695533a",
+    "reports/test_predictions.csv": "3035ef769f10d1c196c89614bd49a9971ab54334e153c88b5fd257cea3fe0871",
+    "data/raw/ai4i2020.csv": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+    "data/processed/test.csv": "bff6ce157829bfba0481237e632d03f53abe67b4d75bebc65feb4ba579692f14"
+  },
+  "limitations": [
+    "Reproducción de una reserva sintética ya evaluada; no es una nueva evaluación independiente.",
+    "Los tiempos dependen del equipo y de la carga; no son garantías industriales.",
+    "La revisión visual y los controles del navegador se documentan por separado; este script no certifica usabilidad con usuarios."
+  ]
+}

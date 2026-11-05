@@ -11,7 +11,7 @@ function applyControls() {
   const s=lastState;
   if(!s) { for(const id of ["start","pause","step","reset","load"]) el(id).disabled=true; return; }
   el("start").disabled=busy || ["running","completed","error"].includes(s.status);
-  el("start").textContent=s.status==="paused"?"Continuar":"Iniciar";
+  el("start").textContent=s.status==="paused"?"Continuar":"Iniciar simulación";
   el("pause").disabled=busy || s.status!=="running";
   el("step").disabled=busy || ["running","completed","error"].includes(s.status);
   el("reset").disabled=busy;
@@ -41,6 +41,7 @@ function render(s) {
   el("counts").textContent=`Aciertos sin falla: ${s.counts.TN} · Fallas detectadas: ${s.counts.TP} · Falsas alarmas: ${s.counts.FP} · Fallas omitidas: ${s.counts.FN}`;
   if(s.error) showError(s.error);
   applyControls();
+  window.dispatchEvent(new CustomEvent("simulation-state", {detail:s}));
 }
 async function request(path, data) {
   const response=await fetch(path, data===undefined?{}:{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});

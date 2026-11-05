@@ -14,7 +14,7 @@ from src.simulation_server import create_server
 
 def main():
     parser = argparse.ArgumentParser(description="Simulación local de detección de fallas AI4I.")
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--port", type=int, default=8771)
     args = parser.parse_args()
     try:
         model, test, _selection, fingerprints = load_frozen_experiment(ROOT)
@@ -25,7 +25,7 @@ def main():
         print("Ejecuta primero los notebooks 01 y 02 con las dependencias de requirements.txt.", file=sys.stderr)
         return 1
     simulator.start_worker()
-    print(f"Simulación lista: http://127.0.0.1:{server.server_port}", flush=True)
+    print(f"Portal alternativo local: http://127.0.0.1:{server.server_port}", flush=True)
     print("Ctrl+C para detener. El modelo no se entrena ni se modifica.", flush=True)
     try:
         server.serve_forever()

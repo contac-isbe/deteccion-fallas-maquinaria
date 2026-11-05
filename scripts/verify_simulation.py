@@ -102,6 +102,9 @@ def main():
     assert state["status"] == "completed" and state["processed"] == 2000
     assert state["counts"] == {"TN": 1919, "FP": 13, "FN": 18, "TP": 50}
     assert state["alerts"] == 63
+    assert len(state["series"]) == 60
+    assert [row["UDI"] for row in state["series"]] == list(test["UDI"].tail(60))
+    assert state["series"][-1] == state["last"]
     passed("Reproducción completa y predicciones sin cambios", ["RF2", "RF3", "RF6", "RNF1", "RNF2"], "2 000 UDI en el mismo orden y 2 000 predicciones idénticas al notebook 03; TN 1919, FP 13, FN 18, TP 50.")
     passed("Alerta activada por la predicción", ["RF4"], "63 alertas = 50 verdaderos positivos + 13 falsos positivos; las 18 omisiones no activan alerta.")
     passed("Exportación completa y trazabilidad", ["RF5"], "CSV con 2 000 filas; UDI, seis entradas, etiqueta posterior, predicción, alerta, resultado y dos tiempos por fila.")
@@ -113,6 +116,7 @@ def main():
         raise AssertionError("La sesión completada se reinició implícitamente.")
     simulator.reset()
     assert simulator.snapshot()["last"] is None and simulator.snapshot()["alerts"] == 0
+    assert simulator.snapshot()["series"] == []
     empty_export = list(csv.reader(io.StringIO(simulator.export_csv())))
     assert len(empty_export) == 1
     passed("Reinicio sin resultados residuales", ["RF3", "RF5"], "Contadores, último registro y filas exportadas vacíos; encabezado conservado.")
@@ -212,11 +216,11 @@ def main():
                         "Los tiempos dependen del equipo y de la carga; no son garantías industriales.",
                         "La revisión visual y los controles del navegador se documentan por separado; este script no certifica usabilidad con usuarios."]
     }
-    (ROOT / "reports/simulation_checks.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (ROOT / "reports/monitor_simulation_checks.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     output = ROOT / "outputs"
     output.mkdir(exist_ok=True)
     full.to_csv(output / "simulation_checked_predictions.csv", index=False)
-    print(f"Correcto: {len(cases)} comprobaciones. reports/simulation_checks.json")
+    print(f"Correcto: {len(cases)} comprobaciones. reports/monitor_simulation_checks.json")
     print(json.dumps(report["timing"], ensure_ascii=False, indent=2))
 
 
