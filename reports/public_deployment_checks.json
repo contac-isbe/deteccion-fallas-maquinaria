@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-05T00:49:31.065951+00:00",
+  "generated_at_utc": "2026-11-05T03:40:17.516842+00:00",
   "url": "https://deteccion-fallas-maquinaria.onrender.com",
   "all_checks_passed": true,
   "model_sha256": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
@@ -61,5 +61,9 @@
       "status": "passed"
     }
   ],
-  "scope": "Pruebas HTTP con dos clientes independientes y prefijo de 22 registros; sin reentrenamiento ni nueva evaluación independiente."
+  "scope": "Pruebas HTTP con dos clientes independientes y prefijo de 22 registros; sin reentrenamiento ni nueva evaluación independiente.",
+  "deployed_commit": "528ab9a57a1eaa57803a5a278148a17b68fbc04e",
+  "render_deploy_id": "dep-dblvkb08v5cc73d3g7i0",
+  "verified_word_sha256": "ddcd23e8690b6c1cb92e1e92ba4cd1ffc3cd79684e26c2d3aa7167eebddc67b9",
+  "report_note": "Verificación final realizada después de publicar main; el Word descargado corresponde al apartado 7.2. Este registro posterior al despliegue se conserva en GitHub."
 }
