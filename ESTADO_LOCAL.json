@@ -1,11 +1,13 @@
 {
   "base_commit": "4406aae",
   "remote": "https://github.com/contac-isbe/deteccion-fallas-maquinaria.git",
-  "scope": "Apartado 7.1 integrado en main: documentación, código, pruebas y manual. Despliegue del 7.2 pendiente.",
+  "scope": "Apartados 7.1 y 7.2 integrados en main. Aplicación pública en Render verificada; sesiones temporales y plan Free documentados.",
   "runtime": "Entorno virtual independiente creado con los mismos paquetes ya instalados; modelo y particiones copiados y verificados, sin entrenamiento.",
   "branch": "main",
-  "development_branch": "feature/monitor-interactivo",
-  "pull_request": "https://github.com/contac-isbe/deteccion-fallas-maquinaria/pull/1",
-  "merged_commit": "0a1f58888ff88c13f9c36008f42122f8441caecf",
-  "repository_visibility": "public"
+  "development_branch": "feature/despliegue-render",
+  "pull_request": "https://github.com/contac-isbe/deteccion-fallas-maquinaria/pull/2",
+  "merged_commit": "99f4e8846e2106d3e2008ac3c20264900ab87147",
+  "repository_visibility": "public",
+  "application_url": "https://deteccion-fallas-maquinaria.onrender.com",
+  "render_service_id": "srv-dblt3lmi0phs738bbo50"
 }

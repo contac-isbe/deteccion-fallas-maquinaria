@@ -7,7 +7,7 @@ La aplicación web utiliza Flask con Gunicorn en Render. La simulación y el mod
 ## Configuración de Render
 
 - Tipo: Web Service, repositorio público `https://github.com/contac-isbe/deteccion-fallas-maquinaria`.
-- Rama de preparación: `feature/despliegue-render`; después de revisar e integrar, utilizar `main`.
+- Rama publicada: `main`. Desarrollo revisado en `feature/despliegue-render` mediante el pull request 2.
 - Runtime: Python 3.12.14, definido en `.python-version`.
 - Plan: Free.
 - Build: `pip install -r requirements-deploy.txt && python scripts/prepare_deployment.py`.
