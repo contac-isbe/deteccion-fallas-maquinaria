@@ -1,6 +1,6 @@
 # Publicación del apartado 7.1
 
-El monitor se desarrolló a partir de la revisión `4406aae`, en la rama `feature/monitor-interactivo`. El repositorio reúne el código, la documentación y las comprobaciones del apartado 7.1. La publicación del código en GitHub permite revisarlo y descargarlo; el alojamiento de la aplicación con un enlace externo corresponde al 7.2 y sigue pendiente.
+El monitor se desarrolló a partir de la revisión `4406aae`, en la rama `feature/monitor-interactivo`. El repositorio reúne el código, la documentación y las comprobaciones del apartado 7.1. La publicación del código en GitHub permite revisarlo y descargarlo; el alojamiento del apartado 7.2 está completado y verificado en [la aplicación pública](https://deteccion-fallas-maquinaria.onrender.com). Su configuración y comprobaciones se describen en [DESPLIEGUE.md](DESPLIEGUE.md).
 
 ## Contenidos organizados
 
@@ -24,7 +24,7 @@ En una terminal situada en esta carpeta:
 
 Abrir `http://127.0.0.1:8771`. Mantener la terminal activa y usar `Ctrl+C` para detener el proceso. En Windows también se puede abrir `ABRIR_PORTAL.cmd`.
 
-El modelo y las particiones se generan localmente y están excluidos de Git. En otra computadora, crear un entorno Python 3.12, instalar `requirements.txt` y ejecutar los notebooks 01 y 02 del README. Consultar también el [manual de uso](MANUAL_USUARIO.md).
+Las carpetas de trabajo del modelo y las particiones están excluidas de Git. Para probar la interfaz sin entrenar de nuevo, seguir el inicio local del [README](../README.md), que restaura las copias congeladas de deployment/artifacts/. Los notebooks permiten reproducir el experimento completo por separado. Consultar también el [manual de uso](MANUAL_USUARIO.md).
 
 ## Comprobar
 

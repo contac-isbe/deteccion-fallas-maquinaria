@@ -14,7 +14,7 @@ La aplicación web utiliza Flask con Gunicorn en Render. La simulación y el mod
 - Inicio: `gunicorn 'src.deployment:create_app()' --workers 1 --threads 4 --bind 0.0.0.0:$PORT --timeout 60`.
 - Health check: `/health`.
 - Variables: `PYTHON_VERSION=3.12.14`, `OMP_NUM_THREADS=1`, `OPENBLAS_NUM_THREADS=1`.
-- Publicación automática desactivada durante la revisión.
+- Publicación automática desactivada; las actualizaciones se despliegan manualmente después de su revisión.
 
 `render.yaml` conserva la configuración equivalente. No se necesitan claves privadas en el repositorio. Servicio Render: `srv-dblt3lmi0phs738bbo50`. El dominio respondió por HTTPS y se comprobaron su salud, las alertas y la separación entre clientes. El control de salud verifica que el modelo pudo cargarse.
 

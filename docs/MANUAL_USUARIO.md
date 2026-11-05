@@ -4,6 +4,10 @@ Sistema de detección de fallas en maquinaria mediante aprendizaje automático.
 
 ## 1. Abrir la aplicación
 
+**Versión publicada:** entrar a https://deteccion-fallas-maquinaria.onrender.com. No se necesita instalar Python. El uso de la versión alojada y sus límites se explican en el apartado 11.
+
+### Modo local original
+
 Si el proyecto ya está preparado en esta computadora, abrir `ABRIR_PORTAL.cmd` o ejecutar desde la raíz:
 
 ```powershell
@@ -16,17 +20,18 @@ Entrar a **http://127.0.0.1:8771** en el navegador y mantener la terminal abiert
 
 ### Primera ejecución en otra computadora
 
-Se necesita Python 3.12. Clonar o descargar el repositorio completo y abrir su carpeta en VS Code o una terminal:
+Para revisar o modificar la interfaz sin entrenar el modelo, utilizar Python 3.12.14, clonar o descargar el repositorio completo y ejecutar desde su carpeta:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe scripts/execute_notebook.py 01_analisis_preparacion.ipynb
-.\.venv\Scripts\python.exe scripts/execute_notebook.py 02_entrenamiento_comparacion.ipynb
-.\.venv\Scripts\python.exe scripts/run_simulation.py --port 8771
+.\.venv\Scripts\python.exe -m pip install -r requirements-deploy.txt
+.\.venv\Scripts\python.exe scripts/prepare_deployment.py
+.\.venv\Scripts\python.exe -m flask --app src.deployment:create_app run --host 127.0.0.1 --port 8772
 ```
 
-El notebook 01 genera las particiones y el 02 guarda el modelo. Esos archivos se generan localmente y están excluidos de Git. El notebook 03 contiene la evaluación final; se ejecuta después del 02 cuando se desea reproducir también esa evaluación. La página utiliza el modelo guardado y no lo entrena mientras funciona.
+Abrir **http://127.0.0.1:8772**. Este modo de desarrollo utiliza sesiones aisladas y restaura el modelo y los datos congelados, comprobando sus huellas. No realiza entrenamiento. No debe utilizarse el servidor de desarrollo de Flask para alojar la aplicación en internet; Render utiliza Gunicorn.
+
+Para reproducir el experimento completo, instalar requirements.txt y ejecutar los notebooks 01, 02 y 03 en ese orden, como explica el README. No es necesario hacerlo para cambiar la presentación de la página.
 
 ## 2. Conocer las tres secciones
 

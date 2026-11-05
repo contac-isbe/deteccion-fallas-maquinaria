@@ -1,13 +1,14 @@
 {
   "base_commit": "4406aae",
   "remote": "https://github.com/contac-isbe/deteccion-fallas-maquinaria.git",
-  "scope": "Apartados 7.1 y 7.2 integrados en main. Aplicación pública en Render verificada; sesiones temporales y plan Free documentados.",
-  "runtime": "Entorno virtual independiente creado con los mismos paquetes ya instalados; modelo y particiones copiados y verificados, sin entrenamiento.",
+  "scope": "Proyecto completado hasta el apartado 7.2: informe, modelo, evaluación, interfaz, documentación y despliegue verificados.",
+  "runtime": "Artefactos congelados disponibles en deployment/artifacts/; restauración y comprobación sin reentrenamiento. Entorno local y despliegue documentados en README.md y docs/DESPLIEGUE.md.",
   "branch": "main",
   "development_branch": "feature/despliegue-render",
   "pull_request": "https://github.com/contac-isbe/deteccion-fallas-maquinaria/pull/2",
   "merged_commit": "99f4e8846e2106d3e2008ac3c20264900ab87147",
   "repository_visibility": "public",
   "application_url": "https://deteccion-fallas-maquinaria.onrender.com",
-  "render_service_id": "srv-dblt3lmi0phs738bbo50"
+  "render_service_id": "srv-dblt3lmi0phs738bbo50",
+  "status": "completed_through_7.2"
 }
