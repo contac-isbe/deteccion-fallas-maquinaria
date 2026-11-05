@@ -1,0 +1,4 @@
+# Conservar los bytes usados por las huellas del experimento en Windows y Linux.
+data/raw/ai4i2020.csv -text
+deployment/artifacts/*.csv -text
+deployment/artifacts/*.joblib -text

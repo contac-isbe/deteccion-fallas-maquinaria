@@ -1,0 +1,65 @@
+{
+  "generated_at_utc": "2026-11-05T00:49:31.065951+00:00",
+  "url": "https://deteccion-fallas-maquinaria.onrender.com",
+  "all_checks_passed": true,
+  "model_sha256": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
+  "checks": [
+    {
+      "test": "HTTPS y modelo congelado",
+      "status": "passed"
+    },
+    {
+      "test": "Métricas históricas y sesiones web",
+      "status": "passed"
+    },
+    {
+      "test": "Cookie segura emitida",
+      "status": "passed"
+    },
+    {
+      "test": "Segundo cliente independiente",
+      "status": "passed"
+    },
+    {
+      "test": "Predicción y alerta UDI 1392",
+      "status": "passed"
+    },
+    {
+      "test": "Comparaciones históricas del prefijo",
+      "status": "passed"
+    },
+    {
+      "test": "Reinicio y avance aislados",
+      "status": "passed"
+    },
+    {
+      "test": "CSV completo de la sesión",
+      "status": "passed"
+    },
+    {
+      "test": "Inicio y pausa remotos",
+      "status": "passed"
+    },
+    {
+      "test": "Origen ajeno rechazado",
+      "status": "passed"
+    },
+    {
+      "test": "Descarga íntegra de Git: docs/MANUAL_USUARIO.md",
+      "status": "passed"
+    },
+    {
+      "test": "Descarga íntegra de Git: docs/Informe - Proyecto de IA.docx",
+      "status": "passed"
+    },
+    {
+      "test": "Recursos de interfaz disponibles",
+      "status": "passed"
+    },
+    {
+      "test": "Reinicio remoto",
+      "status": "passed"
+    }
+  ],
+  "scope": "Pruebas HTTP con dos clientes independientes y prefijo de 22 registros; sin reentrenamiento ni nueva evaluación independiente."
+}

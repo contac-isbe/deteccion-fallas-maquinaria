@@ -1,5 +1,7 @@
 # Detección de fallas en maquinaria
 
+**Aplicación publicada:** [https://deteccion-fallas-maquinaria.onrender.com](https://deteccion-fallas-maquinaria.onrender.com). Se utiliza desde el navegador, sin instalar Python. El plan gratuito puede tardar en arrancar tras un periodo sin visitas. Las sesiones se guardan temporalmente; exportar CSV para conservar resultados.
+
 Proyecto del curso Inteligencia Artificial: Principios y Técnicas, UPAO.
 
 **Título:** Desarrollo de un sistema de detección de fallas en maquinaria mediante aprendizaje automático en un entorno simulado.
@@ -101,7 +103,7 @@ El archivo original se encuentra en `data/raw/ai4i2020.csv`. Su procedencia y li
 
 ## Informe del proyecto
 
-La copia del informe desarrollada hasta el apartado 7.1 está disponible en [Informe - Proyecto de IA.docx](docs/Informe%20-%20Proyecto%20de%20IA.docx). Descargar el archivo para revisarlo en Word.
+La copia del informe desarrollada hasta el apartado 7.2 está disponible en [Informe - Proyecto de IA.docx](docs/Informe%20-%20Proyecto%20de%20IA.docx). Descargar el archivo para revisarlo en Word.
 
 El original editable se conserva en la carpeta superior `Informe - Proyecto de IA`. Cuando se actualice, también debe actualizarse la copia de `docs/` para mantener ambas versiones iguales.
 
@@ -121,4 +123,8 @@ La evidencia original del apartado 6.2 se conserva en `reports/simulation_checks
 
 ## Publicación del apartado 7.1
 
-El repositorio reúne documentación, código, notebooks y evidencia de ejecución. La interfaz organiza estos contenidos en El proyecto, Código y Monitor. El manual completo está en `docs/MANUAL_USUARIO.md`; la página también ofrece una guía rápida. El código se integra mediante una rama de trabajo y un pull request. El despliegue con un enlace externo del apartado 7.2 sigue pendiente.
+El repositorio reúne documentación, código, notebooks y evidencia de ejecución. La interfaz organiza estos contenidos en El proyecto, Código y Monitor. El manual completo está en `docs/MANUAL_USUARIO.md`; la página también ofrece una guía rápida. El código se integra mediante una rama de trabajo y un pull request. La aplicación pública del apartado 7.2 está disponible en el enlace indicado al inicio.
+
+## Despliegue 7.2
+
+La aplicación Flask se publica en Render con sesiones separadas por navegador, sin reentrenamiento. La configuración, los límites y los pasos están en [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md). Las comprobaciones locales se guardan en `reports/deployment_checks.json`; las comprobaciones HTTP del enlace público están en `reports/public_deployment_checks.json`.

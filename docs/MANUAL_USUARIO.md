@@ -12,7 +12,7 @@ Si el proyecto ya está preparado en esta computadora, abrir `ABRIR_PORTAL.cmd` 
 
 Entrar a **http://127.0.0.1:8771** en el navegador y mantener la terminal abierta. Para detener el servidor, presionar **Ctrl+C** en esa terminal. El botón **Guía de uso** abre las instrucciones rápidas dentro de la página.
 
-`127.0.0.1` corresponde al propio equipo. Este enlace local no permite que otra persona entre desde su computadora o celular. El alojamiento con un enlace externo corresponde al despliegue del apartado 7.2 y todavía está pendiente.
+`127.0.0.1` corresponde al propio equipo. Este enlace local no permite que otra persona entre desde su computadora o celular. La aplicación alojada corresponde al apartado 7.2; las instrucciones y el estado de publicación se documentan en DESPLIEGUE.md.
 
 ### Primera ejecución en otra computadora
 
@@ -103,3 +103,9 @@ Solo se admite la reserva completa, con sus columnas, valores y orden originales
 ## 10. Alcance de la herramienta
 
 Los datos de AI4I 2020 son sintéticos. El proyecto demuestra clasificación y reproducción de observaciones; no estima vida útil restante ni anticipa horas hasta una avería. Las limitaciones de etiquetado y los errores del modelo se conservan documentados. Repetir la reproducción no crea una nueva evaluación independiente.
+
+## 11. Uso de la aplicación alojada
+
+Abrir https://deteccion-fallas-maquinaria.onrender.com desde el navegador. No se instala Python para utilizarlo desde el navegador. La etiqueta **Sesión web** identifica esta versión. Otros navegadores tienen sesiones independientes; las pestañas del mismo perfil comparten la sesión. Es necesario permitir las cookies del sitio.
+
+Se admiten hasta 12 sesiones activas. Tras 15 minutos sin solicitudes la sesión puede expirar. Una pestaña abierta consulta el estado y conserva la actividad; cerrar todas las pestañas permite que expire. Un reinicio o suspensión del servidor también elimina el avance. Exportar CSV para conservar los resultados. Si el servicio está ocupado, esperar y volver a intentarlo. El plan gratuito puede tardar en arrancar tras un periodo sin visitas.

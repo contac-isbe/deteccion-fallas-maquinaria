@@ -1,0 +1,17 @@
+{
+  "source": "Artefactos del experimento congelado; no se reentrenó el modelo.",
+  "files": {
+    "models/modelo_seleccionado.joblib": {
+      "sha256": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
+      "bytes": 18651
+    },
+    "data/processed/test.csv": {
+      "sha256": "bff6ce157829bfba0481237e632d03f53abe67b4d75bebc65feb4ba579692f14",
+      "bytes": 70895
+    },
+    "data/processed/development.csv": {
+      "sha256": "ef350eaea8ca2314b39bd993d267443df8082b1e3885b5e3cd750595a491ff2b",
+      "bytes": 283110
+    }
+  }
+}

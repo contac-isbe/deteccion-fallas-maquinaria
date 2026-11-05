@@ -53,7 +53,7 @@ def main():
         assert len(page.ids)==len(set(page.ids))
         assert len(page.tabs)==len(page.panels)==3
         assert {x["aria-controls"] for x in page.tabs}=={x["id"] for x in page.panels}
-        assert 'El despliegue del 7.2 sigue pendiente.' in html
+        assert 'La versión alojada del 7.2 está disponible en el enlace del README.' in html
         passed("Tres pestañas con paneles asociados", "Documentación, Código y Ejecución y pruebas; identificadores únicos y despliegue pendiente explícito.")
         for path in ["/app.js", "/portal.js", "/portal.css", "/monitor.js", "/monitor.css", "/theme.js", "/theme.css", "/manual.js", "/manual.css", "/fonts/Inter.ttf", "/fonts/SpaceGrotesk.ttf"]:
             assert len(get(path)[0]) > 100
@@ -61,8 +61,8 @@ def main():
         info = json.loads(get("/api/project")[0])
         final = json.loads((ROOT / "reports/test_evaluation.json").read_text(encoding="utf-8"))
         assert info["metrics"] == final["metrics"] and info["model_sha256"] == final["model_sha256"]
-        assert info["publication"] == "Código publicado; despliegue pendiente"
-        passed("Documentación basada en resultados guardados", "Métricas y huella del modelo iguales a la evaluación histórica; despliegue pendiente.")
+        assert info["publication"] == "Código y aplicación publicados"
+        passed("Documentación basada en resultados guardados", "Métricas y huella del modelo iguales a la evaluación histórica; aplicación pública documentada.")
         for path in info["source_files"]:
             assert path in SOURCE_FILES
             result=json.loads(get("/api/source?file=" + quote(path, safe=""))[0])
