@@ -122,3 +122,7 @@ La evidencia original del apartado 6.2 se conserva en `reports/simulation_checks
 ## Publicación del apartado 7.1
 
 El repositorio reúne documentación, código, notebooks y evidencia de ejecución. La interfaz organiza estos contenidos en El proyecto, Código y Monitor. El manual completo está en `docs/MANUAL_USUARIO.md`; la página también ofrece una guía rápida. El código se integra mediante una rama de trabajo y un pull request. El despliegue con un enlace externo del apartado 7.2 sigue pendiente.
+
+## Preparación del despliegue 7.2
+
+La rama `feature/despliegue-render` añade una aplicación Flask para Render con sesiones separadas por navegador, sin reentrenamiento. La configuración, los límites y los pasos están en [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md). Las comprobaciones locales se guardan en `reports/deployment_checks.json`; el enlace externo se añadirá después de verificar la publicación.

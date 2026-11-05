@@ -72,7 +72,7 @@ async function poll() {
   polling=true;
   const generation=actionGeneration;
   try {const state=await request("/api/state");if(!busy && generation===actionGeneration)render(state);}
-  catch(_error) {if(!busy && generation===actionGeneration){showError("No hay conexión con el servidor local. Comprueba que run_simulation.py siga ejecutándose.");lastState=null;applyControls();}}
+  catch(error) {if(!busy && generation===actionGeneration){showError(error instanceof TypeError?"No hay conexión con el servidor. Espera un momento y comprueba tu conexión; si usas la versión local, revisa su terminal.":error.message);lastState=null;applyControls();}}
   finally {polling=false;}
 }
 applyControls();poll();setInterval(poll,300);

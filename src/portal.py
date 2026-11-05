@@ -10,6 +10,8 @@ SOURCE_FILES = [
     "scripts/run_simulation.py", "scripts/verify_simulation.py", "scripts/verify_portal.py",
     "web/index.html", "web/portal.css", "web/app.js", "web/portal.js", "web/monitor.js", "web/monitor.css", "web/theme.js", "web/theme.css",
     "web/manual.js", "web/manual.css", "docs/MANUAL_USUARIO.md",
+    "src/deployment.py", "requirements-deploy.txt", "render.yaml",
+    "scripts/prepare_deployment.py", "scripts/verify_deployment.py", "docs/DESPLIEGUE.md",
 ]
 DOWNLOAD_FILES = SOURCE_FILES + [
     "docs/Informe - Proyecto de IA.docx", "data/raw/ai4i2020.csv",
@@ -17,6 +19,7 @@ DOWNLOAD_FILES = SOURCE_FILES + [
     "reports/simulation_review.md", "reports/model_comparison.csv",
     "reports/portal_review.md", "reports/portal_checks.json", "docs/71_preparacion_local.md",
     "reports/monitor_simulation_checks.json", "reports/monitor_review.md", "reports/theme_review.md",
+    "reports/deployment_checks.json",
 ]
 
 
