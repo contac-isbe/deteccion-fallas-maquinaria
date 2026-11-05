@@ -106,6 +106,6 @@ Los datos de AI4I 2020 son sintéticos. El proyecto demuestra clasificación y r
 
 ## 11. Uso de la aplicación alojada
 
-Abrir el enlace público indicado en el README, cuando el servicio esté verificado. No se instala Python para utilizarlo desde el navegador. La etiqueta **Sesión web** identifica esta versión. Otros navegadores tienen sesiones independientes; las pestañas del mismo perfil comparten la sesión. Es necesario permitir las cookies del sitio.
+Abrir https://deteccion-fallas-maquinaria.onrender.com desde el navegador. No se instala Python para utilizarlo desde el navegador. La etiqueta **Sesión web** identifica esta versión. Otros navegadores tienen sesiones independientes; las pestañas del mismo perfil comparten la sesión. Es necesario permitir las cookies del sitio.
 
 Se admiten hasta 12 sesiones activas. Tras 15 minutos sin solicitudes la sesión puede expirar. Una pestaña abierta consulta el estado y conserva la actividad; cerrar todas las pestañas permite que expire. Un reinicio o suspensión del servidor también elimina el avance. Exportar CSV para conservar los resultados. Si el servicio está ocupado, esperar y volver a intentarlo. El plan gratuito puede tardar en arrancar tras un periodo sin visitas.

@@ -12,6 +12,7 @@ SOURCE_FILES = [
     "web/manual.js", "web/manual.css", "docs/MANUAL_USUARIO.md",
     "src/deployment.py", "requirements-deploy.txt", "render.yaml",
     "scripts/prepare_deployment.py", "scripts/verify_deployment.py", "docs/DESPLIEGUE.md",
+    "scripts/verify_public_deployment.py",
 ]
 DOWNLOAD_FILES = SOURCE_FILES + [
     "docs/Informe - Proyecto de IA.docx", "data/raw/ai4i2020.csv",
@@ -20,6 +21,7 @@ DOWNLOAD_FILES = SOURCE_FILES + [
     "reports/portal_review.md", "reports/portal_checks.json", "docs/71_preparacion_local.md",
     "reports/monitor_simulation_checks.json", "reports/monitor_review.md", "reports/theme_review.md",
     "reports/deployment_checks.json",
+    "reports/public_deployment_checks.json", "reports/deployment_review.md",
 ]
 
 
@@ -32,7 +34,7 @@ def metadata(root):
         "title": "Detección de fallas en maquinaria",
         "repository": "https://github.com/contac-isbe/deteccion-fallas-maquinaria",
         "base_revision": "4406aae",
-        "publication": "Código publicado; despliegue pendiente",
+        "publication": "Código y aplicación publicados",
         "dataset": {"name": "AI4I 2020", "rows": 10000, "development_rows": 8000,
                     "test_rows": result["test_rows"], "test_failures": result["test_failure_count"],
                     "synthetic": True, "license": "CC BY 4.0", "label_disagreements": 27},

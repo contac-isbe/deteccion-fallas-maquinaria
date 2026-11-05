@@ -22,8 +22,14 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
     from src.evaluation import load_frozen_experiment
-    _, _, _, hashes = load_frozen_experiment(ROOT)
+    model, test, _, hashes = load_frozen_experiment(ROOT)
+    import pandas as pd
+    from src.preparation import FEATURES
+    reference = pd.read_csv(ROOT / 'reports/test_predictions.csv')
+    if list(test['UDI']) != list(reference['UDI']) or list(model.predict(test[FEATURES])) != list(reference['prediction']):
+        raise ValueError('Las predicciones no coinciden con la evaluación histórica.')
     print('Artefactos restaurados y verificados. Modelo:', hashes['model_sha256'])
+    print('Las 2 000 predicciones coinciden con el notebook 03. Sin entrenamiento.')
 
 if __name__ == '__main__':
     main()

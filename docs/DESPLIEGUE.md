@@ -1,5 +1,7 @@
 # Despliegue del apartado 7.2
 
+**Aplicación verificada:** [https://deteccion-fallas-maquinaria.onrender.com](https://deteccion-fallas-maquinaria.onrender.com). Primera publicación comprobada el 4 de noviembre de 2026.
+
 La aplicación web utiliza Flask con Gunicorn en Render. La simulación y el modelo son los mismos de los apartados anteriores. El modelo no se entrena al publicar: `scripts/prepare_deployment.py` restaura los tres artefactos congelados de `deployment/artifacts/` y comprueba sus huellas y las versiones del experimento.
 
 ## Configuración de Render
@@ -14,7 +16,7 @@ La aplicación web utiliza Flask con Gunicorn en Render. La simulación y el mod
 - Variables: `PYTHON_VERSION=3.12.14`, `OMP_NUM_THREADS=1`, `OPENBLAS_NUM_THREADS=1`.
 - Publicación automática desactivada durante la revisión.
 
-`render.yaml` conserva la configuración equivalente. No se necesitan claves privadas en el repositorio. El dominio se asigna al crear el servicio; su disponibilidad debe comprobarse antes de presentar el despliegue como terminado.
+`render.yaml` conserva la configuración equivalente. No se necesitan claves privadas en el repositorio. Servicio Render: `srv-dblt3lmi0phs738bbo50`. El dominio respondió por HTTPS y se comprobaron su salud, las alertas y la separación entre clientes. El control de salud verifica que el modelo pudo cargarse.
 
 ## Sesiones y límites
 
@@ -48,3 +50,7 @@ Ese comando es solo de desarrollo. El servidor local original en el puerto 8771 
 - https://render.com/docs/python-version
 - https://render.com/docs/free
 - https://flask.palletsprojects.com/en/stable/deploying/gunicorn/
+
+## Verificación pública
+
+`python scripts/verify_public_deployment.py https://deteccion-fallas-maquinaria.onrender.com` comprueba el servicio por HTTPS con dos clientes independientes. La ejecución inicial superó 14 comprobaciones: modelo, métricas, cookie, separación, alerta UDI 1392, prefijo de 22 predicciones, controles, CSV y descargas. La revisión visual está en `reports/deployment_review.md`. Las pruebas locales y públicas tienen alcances distintos y no constituyen una nueva evaluación del modelo.
