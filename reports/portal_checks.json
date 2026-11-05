@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-05T00:19:36.376349+00:00",
+  "generated_at_utc": "2026-11-05T00:22:33.119834+00:00",
   "all_checks_passed": true,
   "base_revision": "4406aae",
   "publication": "github_71",
@@ -50,14 +50,14 @@
     "data/processed/test.csv": "bff6ce157829bfba0481237e632d03f53abe67b4d75bebc65feb4ba579692f14",
     "data/raw/ai4i2020.csv": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
     "reports/test_evaluation.json": "d5cb497c419a415975b41d09d4ac872f88241c4208cf4f732accccb28695533a",
-    "docs/Informe - Proyecto de IA.docx": "46695debd08d56676ce63f571d6ceba79d1b1c23898e274f5a5f7fd99615ebad"
+    "docs/Informe - Proyecto de IA.docx": "ebe4f1d1d7bdd4cb9262399ef317dc7bc7bedf431530c37a8edbbf01b16ecacc"
   },
   "protected_after": {
     "models/modelo_seleccionado.joblib": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
     "data/processed/test.csv": "bff6ce157829bfba0481237e632d03f53abe67b4d75bebc65feb4ba579692f14",
     "data/raw/ai4i2020.csv": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
     "reports/test_evaluation.json": "d5cb497c419a415975b41d09d4ac872f88241c4208cf4f732accccb28695533a",
-    "docs/Informe - Proyecto de IA.docx": "46695debd08d56676ce63f571d6ceba79d1b1c23898e274f5a5f7fd99615ebad"
+    "docs/Informe - Proyecto de IA.docx": "ebe4f1d1d7bdd4cb9262399ef317dc7bc7bedf431530c37a8edbbf01b16ecacc"
   },
   "scope": "Pruebas HTTP y de estructura; navegación, lectura y diseño se revisan también en el navegador."
 }
