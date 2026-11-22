@@ -1,66 +1,958 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Monitor de maquinaria</title><script src="/theme.js"></script><link rel="preload" href="/fonts/SpaceGrotesk.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="/fonts/Inter.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="/portal.css"><link rel="stylesheet" href="/monitor.css"><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/manual.css"><script src="/app.js" defer></script><script src="/portal.js" defer></script><script src="/monitor.js" defer></script><script src="/manual.js" defer></script></head><body data-run="ready"><a class="skip-link" href="#main">Ir al contenido</a><aside class="sidebar"><a class="brand" href="#ejecucion" data-go="ejecucion"><span class="brand-mark">M<span>↗</span></span><span>MAQUINARIA<span class="brand-sub">Un laboratorio de inteligencia artificial</span></span></a><p class="nav-label">TU ESPACIO DE TRABAJO</p><nav role="tablist" aria-label="Apartados del proyecto" aria-orientation="vertical"><button id="tab-ejecucion" role="tab" aria-controls="ejecucion" aria-selected="true" data-panel="ejecucion"><span class="nav-symbol">◉</span><span>Monitor<small>Observa el modelo en acción</small></span></button><button id="tab-documentacion" role="tab" aria-controls="documentacion" aria-selected="false" tabindex="-1" data-panel="documentacion"><span class="nav-symbol">▤</span><span>El proyecto<small>Datos, método y resultados</small></span></button><button id="tab-codigo" role="tab" aria-controls="codigo" aria-selected="false" tabindex="-1" data-panel="codigo"><span class="nav-symbol">⌘</span><span>Código<small>Por dentro del sistema</small></span></button></nav><div class="side-note"><span class="local-dot"></span> Un modelo. Cada registro.<p>Árbol de decisión<br>AI4I 2020 · Datos sintéticos</p></div><a class="repo-link" href="https://github.com/contac-isbe/deteccion-fallas-maquinaria" target="_blank" rel="noopener">Ver repositorio ↗</a></aside><div class="workspace"><div class="topbar"><span><span class="topbar-square"></span> LABORATORIO / <b>DETECCIÓN DE FALLAS</b></span><div class="topbar-actions"><button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" title="Activar modo oscuro"><svg class="theme-icon theme-icon-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.2"/><path d="M10 1v2M10 17v2M1 10h2M17 10h2M3.6 3.6L5 5M15 15l1.4 1.4M3.6 16.4L5 15M15 5l1.4-1.4"/></svg><svg class="theme-icon theme-icon-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M17 12A7.5 7.5 0 018 3a7.5 7.5 0 109 9Z"/></svg><span class="theme-label">Claro</span><span class="theme-track" aria-hidden="true"><span></span></span></button><span class="badge" id="runtime-label">Sesión local</span></div></div><main id="main"><header class="page-header"><p class="eyebrow">MACHINE LEARNING · EXPLORACIÓN INTERACTIVA</p><h1 id="page-title">Monitor de maquinaria</h1><p id="page-description">Pon en marcha los registros y observa cómo responde el modelo.</p></header><p id="project-error" role="alert" hidden></p><section id="ejecucion" role="tabpanel" aria-labelledby="tab-ejecucion">
-  <div class="monitor-toolbar controls" aria-label="Controles de reproducción">
-    <div class="session-state"><span id="run-dot" class="run-dot"></span><div><strong id="status" role="status">Preparando el monitor…</strong><span>Observaciones independientes · AI4I 2020</span></div></div>
-    <div class="buttons"><button class="guide-button" data-open-manual type="button">Guía de uso</button><button id="start" class="primary">Iniciar simulación</button><button id="pause">Pausar</button><button id="step" title="Procesar un registro">Siguiente</button><button id="reset" class="reset-button">Reiniciar</button><label>Intervalo <select id="interval" aria-label="Intervalo de reproducción"><option value="0.2">0,2 s</option><option value="0.5" selected>0,5 s</option><option value="1">1 s</option><option value="2">2 s</option></select></label></div>
-  </div><p id="error" role="alert" hidden></p>
-  <div class="monitor-stage">
-    <section class="machine-panel"><div class="machine-heading"><div><span class="kicker">BANCO VIRTUAL</span><h2>Una mirada al registro actual.</h2></div><span class="machine-tag">ILUSTRACIÓN</span></div>
-    <svg class="machine-drawing" viewBox="0 0 680 370" role="img" aria-labelledby="machine-title machine-description">
-<title id="machine-title">Representación ilustrativa de una máquina de mecanizado</title><desc id="machine-description">Las lecturas mostradas proceden del registro sintético actual. La ilustración no simula procesos físicos.</desc>
-<defs><linearGradient id="body-gradient" x2="1" y2="1"><stop stop-color="#eeeafb"/><stop offset="1" stop-color="#c5bbdf"/></linearGradient><linearGradient id="glass-gradient" x2="0" y2="1"><stop stop-color="#393151"/><stop offset="1" stop-color="#251e38"/></linearGradient><linearGradient id="steel-gradient"><stop stop-color="#b4a4d4"/><stop offset=".45" stop-color="#eee8f9"/><stop offset="1" stop-color="#8c79af"/></linearGradient><pattern id="stage-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#d1c9e4"/></pattern><clipPath id="window-clip"><rect x="180" y="103" width="247" height="170" rx="9"/></clipPath></defs>
-<rect width="680" height="370" fill="url(#stage-grid)"/>
-<ellipse cx="334" cy="325" rx="223" ry="16" fill="#dcd4ec" opacity=".6"/>
-<path d="M151 82L174 63H498L522 84V298L500 317H151Z" fill="#b7a9d0" stroke="#a194ba"/>
-<rect x="146" y="79" width="355" height="233" rx="13" fill="url(#body-gradient)" stroke="#b5a9cc" stroke-width="1.5"/>
-<path d="M147 287H500V300Q500 312 488 312H159Q147 312 147 300Z" fill="#a99bbf"/>
-<rect x="167" y="93" width="273" height="192" rx="14" fill="#eee9f7" stroke="#b9adce"/>
-<rect x="180" y="103" width="247" height="170" rx="9" fill="url(#glass-gradient)"/>
-<g clip-path="url(#window-clip)"><path d="M180 140H427M180 177H427M180 214H427M220 103V273M260 103V273M300 103V273M340 103V273M380 103V273" stroke="#645379" opacity=".16"/>
-<path d="M207 245H398L415 257H194Z" fill="#8e7ba8"/><rect x="194" y="257" width="221" height="13" fill="#68587f"/><path d="M222 244L235 231H374L388 244Z" fill="#bdadd5"/>
-<path d="M237 243L249 232M260 243L272 232M284 243L296 232M308 243L320 232M332 243L344 232M355 243L367 232" stroke="#7f6b99"/>
-<rect x="275" y="214" width="67" height="18" rx="3" fill="#d5cae7"/><ellipse cx="308.5" cy="214" rx="33.5" ry="7" fill="#eee8f7"/>
-<path d="M285 103H332V148H285Z" fill="#9380b3"/><rect x="290" y="130" width="38" height="50" rx="5" fill="url(#steel-gradient)"/><path d="M297 179H321L316 194H302Z" fill="#b9a9d0"/>
-<g class="spindle-motion"><path d="M305 194V212M313 194V212" stroke="#e0d4f1" stroke-width="2"/><path d="M301 200L317 205M301 206L317 211" stroke="#a68bc8" stroke-width="1.5"/></g>
-<path d="M180 117L427 246M180 135L427 264" stroke="#c4acdf" stroke-width="13" opacity=".035"/>
-<rect class="scan-beam" x="180" y="110" width="247" height="5" fill="#b8a5f4" opacity="0"/>
-</g>
-<rect x="446" y="111" width="40" height="64" rx="5" fill="#4c3c65"/><rect x="452" y="118" width="28" height="24" rx="2" fill="#20192e"/><path d="M456 135L461 128L465 133L473 124L477 129" fill="none" stroke="#b9a3f3" stroke-width="1.6"/>
-<g fill="#c4b4da"><circle cx="456" cy="150" r="2"/><circle cx="465" cy="150" r="2"/><circle cx="474" cy="150" r="2"/><circle cx="456" cy="158" r="2"/><circle cx="465" cy="158" r="2"/><circle cx="474" cy="158" r="2"/></g>
-<circle class="machine-indicator" cx="465" cy="191" r="5" fill="#a49ab4"/>
-<path d="M159 313H201V321H159M450 313H488V321H450" fill="#78688f"/>
-<rect x="298" y="294" width="44" height="5" rx="2" fill="#7d6a98"/>
-<path d="M309 168H105V147H57" stroke="#a599bd" fill="none" stroke-dasharray="3 4"/><circle cx="309" cy="168" r="3" fill="#b9a3f3"/>
-<text x="57" y="127" class="svg-label">VELOCIDAD</text><text x="57" y="142" id="machine-rpm" class="svg-value">— rpm</text>
-<path d="M340 221H556V242H616" stroke="#a599bd" fill="none" stroke-dasharray="3 4"/><circle cx="340" cy="221" r="3" fill="#b9a3f3"/>
-<text x="551" y="260" class="svg-label">TORQUE</text><text x="551" y="279" id="machine-torque" class="svg-value">— Nm</text>
-</svg>
-    <div class="machine-footer"><p id="identity">Inicia la simulación para ver la primera observación.</p><span>Sin conexión a maquinaria física</span></div></section>
-    <section class="decision-panel"><span class="kicker">EL MODELO DECIDE</span><h2>Clasificación actual</h2><div id="prediction" class="prediction neutral" role="status">Sin predicción</div><p id="decision-explanation">El árbol de decisión analizará las seis variables de cada registro.</p><div class="decision-separator"></div><span class="kicker">COMPARACIÓN POSTERIOR</span><p id="reference">Etiqueta real: —</p><p class="hint">La etiqueta real no entra al modelo. Una predicción sin falla no garantiza ausencia de una falla.</p><div class="decision-stats"><div><span>Alertas de la sesión</span><strong id="alerts">0</strong></div><div><span>Media / p95 del modelo</span><strong id="latency">— / — ms</strong></div></div></section>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monitor de maquinaria · Detección de fallas</title>
+  <script src="/theme.js"></script>
+  <link rel="preload" href="/fonts/SpaceGrotesk.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/fonts/Inter.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/portal.css">
+  <link rel="stylesheet" href="/monitor.css">
+  <link rel="stylesheet" href="/theme.css">
+  <link rel="stylesheet" href="/manual.css">
+  <script src="/app.js" defer></script>
+  <script src="/portal.js" defer></script>
+  <script src="/monitor.js" defer></script>
+  <script src="/manual.js" defer></script>
+</head>
+<body data-run="ready" data-alert="false">
+  <a class="skip-link" href="#main">Ir al contenido principal</a>
+
+  <!-- Fondo técnico animado reactivo al cursor y a la simulación -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Pantalla de entrada cinemática / ficha de presentación (Splash Screen) -->
+  <div id="splash-screen" class="splash" role="dialog" aria-modal="true" aria-labelledby="splash-title">
+    <div class="splash-backdrop" aria-hidden="true"></div>
+    <div class="splash-shell">
+      <div class="splash-topbar">
+        <span class="splash-inst">
+          <span class="splash-pulse-dot" aria-hidden="true"></span>
+          UPAO · FACULTAD DE INGENIERÍA · SISTEMAS E INTELIGENCIA ARTIFICIAL
+        </span>
+        <span class="splash-meta">AI4I 2020 · ENTORNO DE DIAGNÓSTICO</span>
+      </div>
+
+      <div class="splash-body">
+        <div class="splash-left">
+          <span class="splash-kicker">INTELIGENCIA ARTIFICIAL: PRINCIPIOS Y TÉCNICAS</span>
+          <h2 id="splash-title" class="splash-title">
+            Detección de Fallas<br><span>en Maquinaria</span>
+          </h2>
+          <p class="splash-desc">
+            Consola interactiva de mantenimiento predictivo. Evalúa en vivo seis variables de mecanizado con un <strong>Árbol de decisión congelado</strong>, proyecta alertas y contrasta cada inferencia contra la etiqueta real del dataset.
+          </p>
+
+          <div class="splash-boot-log" aria-hidden="true">
+            <div class="boot-line" style="--d:120ms"><span>01</span> Modelo congelado verificado · <b>Árbol de decisión</b></div>
+            <div class="boot-line" style="--d:280ms"><span>02</span> Reserva independiente cargada · <b>2 000 observaciones AI4I</b></div>
+            <div class="boot-line" style="--d:440ms"><span>03</span> Evaluación histórica · <b>98,45 % exactitud · F1 0,7634</b></div>
+            <div class="boot-line is-ready" style="--d:600ms"><span>OK</span> Consola CNC y telemetría listas para inspección</div>
+          </div>
+
+          <div class="splash-actions">
+            <button id="splash-enter" class="primary splash-cta" type="button">
+              <span>Ingresar al monitor</span>
+              <svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+            </button>
+            <button id="splash-docs" class="splash-secondary" type="button">Resumen del proyecto</button>
+          </div>
+        </div>
+
+        <div class="splash-right" aria-hidden="true">
+          <svg class="splash-schematic" viewBox="0 0 420 360" fill="none">
+            <defs>
+              <linearGradient id="sp-ring-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#22b8cf" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#f08c42" stop-opacity="0.8"/>
+              </linearGradient>
+              <linearGradient id="sp-beam" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#22b8cf" stop-opacity="0"/>
+                <stop offset="50%" stop-color="#22b8cf" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#22b8cf" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Ejes y retícula técnica -->
+            <circle cx="210" cy="148" r="108" stroke="#223548" stroke-width="1" stroke-dasharray="3 5"/>
+            <circle cx="210" cy="148" r="82" stroke="#1e3144" stroke-width="1"/>
+            <line x1="78" y1="148" x2="342" y2="148" stroke="#1f3142" stroke-width="1"/>
+            <line x1="210" y1="22" x2="210" y2="274" stroke="#1f3142" stroke-width="1"/>
+
+            <!-- Anillo orbital animado -->
+            <g class="sp-orbit-slow">
+              <circle cx="210" cy="148" r="96" stroke="url(#sp-ring-grad)" stroke-width="2" stroke-dasharray="84 52 24 44" stroke-linecap="round"/>
+            </g>
+            <g class="sp-orbit-fast">
+              <circle cx="210" cy="148" r="66" stroke="#22b8cf" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="18 14"/>
+            </g>
+
+            <!-- Silueta técnica del husillo CNC -->
+            <rect x="184" y="64" width="52" height="54" rx="6" fill="#172534" stroke="#3b5a75" stroke-width="1.5"/>
+            <rect x="193" y="118" width="34" height="22" rx="3" fill="#1e3144" stroke="#4f7494" stroke-width="1.2"/>
+            <path d="M198 140H222L216 156H204Z" fill="#2b455d"/>
+            <g class="sp-bit-anim">
+              <rect x="206" y="156" width="8" height="26" rx="1.5" fill="#d8e6f2"/>
+              <path d="M204 162L216 167M204 170L216 175" stroke="#22b8cf" stroke-width="1.8" stroke-linecap="round"/>
+            </g>
+            <!-- Pieza mecanizada -->
+            <rect x="164" y="184" width="92" height="22" rx="4" fill="#1c2c3d" stroke="#3c5872" stroke-width="1.4"/>
+            <ellipse cx="210" cy="184" rx="46" ry="7" fill="#253b50" stroke="#4e7090" stroke-width="1"/>
+            <circle class="sp-spark-core" cx="210" cy="183" r="5" fill="#22b8cf"/>
+            <circle class="sp-spark-ring" cx="210" cy="183" r="14" stroke="#f08c42" stroke-width="1.5"/>
+
+            <!-- Pipeline inferior con pulsos de datos -->
+            <path d="M56 306 H364" stroke="#24374a" stroke-width="2"/>
+            <path class="sp-data-flow" d="M56 306 H364" stroke="#22b8cf" stroke-width="2" stroke-dasharray="28 96" stroke-linecap="round"/>
+
+            <g transform="translate(56, 306)">
+              <rect x="-46" y="-22" width="92" height="44" rx="8" fill="#121d29" stroke="#2c445c"/>
+              <text x="0" y="-3" text-anchor="middle" fill="#8ea6be" font-family="Inter,sans-serif" font-size="9" font-weight="600">ENTRADA</text>
+              <text x="0" y="12" text-anchor="middle" fill="#edf4fa" font-family="Consolas,monospace" font-size="11" font-weight="700">6 SENSORES</text>
+            </g>
+
+            <g transform="translate(210, 306)">
+              <rect x="-52" y="-22" width="104" height="44" rx="8" fill="#102934" stroke="#22b8cf"/>
+              <text x="0" y="-3" text-anchor="middle" fill="#7be0ef" font-family="Inter,sans-serif" font-size="9" font-weight="600">MODELO ML</text>
+              <text x="0" y="12" text-anchor="middle" fill="#ffffff" font-family="Consolas,monospace" font-size="11" font-weight="700">ÁRBOL DEC.</text>
+            </g>
+
+            <g transform="translate(364, 306)">
+              <rect x="-48" y="-22" width="96" height="44" rx="8" fill="#251a14" stroke="#f08c42"/>
+              <text x="0" y="-3" text-anchor="middle" fill="#f4b17f" font-family="Inter,sans-serif" font-size="9" font-weight="600">SALIDA</text>
+              <text x="0" y="12" text-anchor="middle" fill="#fff2e8" font-family="Consolas,monospace" font-size="11" font-weight="700">ALERTA / OK</text>
+            </g>
+
+            <!-- Etiquetas HUD del esquema -->
+            <text x="26" y="42" fill="#6f879f" font-family="Consolas,monospace" font-size="10">RPM 1168–2886</text>
+            <text x="394" y="42" text-anchor="end" fill="#6f879f" font-family="Consolas,monospace" font-size="10">TORQUE 3.8–76.6 Nm</text>
+            <text x="26" y="256" fill="#6f879f" font-family="Consolas,monospace" font-size="10">PRECISIÓN 79,37 %</text>
+            <text x="394" y="256" text-anchor="end" fill="#6f879f" font-family="Consolas,monospace" font-size="10">SENSIBILIDAD 73,53 %</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="splash-footer">
+        <span>Docente: Hernán Sagastegui Chigne · Equipo UPAO · Datos sintéticos AI4I 2020</span>
+        <span>Pulsa <kbd>Enter</kbd> o <kbd>Esc</kbd> para continuar</span>
+      </div>
+    </div>
   </div>
-  <div id="measurements" class="sensor-grid" aria-label="Mediciones del registro actual">
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">°</i> Aire</span><strong id="air">— K</strong><svg data-spark="Air temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Temperatura del aire</span></article>
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">°</i> Proceso</span><strong id="process">— K</strong><svg data-spark="Process temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Temperatura del proceso</span></article>
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">↻</i> Rotación</span><strong id="speed">— rpm</strong><svg data-spark="Rotational speed [rpm]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Velocidad del registro</span></article>
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">↗</i> Torque</span><strong id="torque">— Nm</strong><svg data-spark="Torque [Nm]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Par de giro</span></article>
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">◷</i> Desgaste</span><strong id="wear">— min</strong><svg data-spark="Tool wear [min]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Uso de la herramienta</span></article>
+
+  <!-- Nuevo Layout: Cabecera de Mando Horizontal (Command Deck) + Viewport Completo -->
+  <div class="app-shell">
+    <header class="command-deck">
+      <div class="deck-accent-line" aria-hidden="true"></div>
+      <div class="deck-inner">
+        <a class="brand" href="#ejecucion" data-go="ejecucion">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3.6"/>
+              <path d="M12 2.5v3M12 18.5v3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M2.5 12h3M18.5 12h3M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>
+            </svg>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-row">
+              <span class="brand-text">MAQUINARIA</span>
+              <span class="brand-tag">AI4I 2020</span>
+            </span>
+            <span class="brand-sub">Diagnóstico predictivo CNC</span>
+          </span>
+        </a>
+
+        <nav class="deck-nav" role="tablist" aria-label="Apartados del proyecto" aria-orientation="horizontal">
+          <span class="nav-slider" id="nav-slider" aria-hidden="true"></span>
+          <button id="tab-ejecucion" role="tab" aria-controls="ejecucion" aria-selected="true" data-panel="ejecucion">
+            <span class="nav-symbol" aria-hidden="true">◉</span>
+            <span>Monitor</span>
+          </button>
+          <button id="tab-documentacion" role="tab" aria-controls="documentacion" aria-selected="false" tabindex="-1" data-panel="documentacion">
+            <span class="nav-symbol" aria-hidden="true">▤</span>
+            <span>El proyecto</span>
+          </button>
+          <button id="tab-codigo" role="tab" aria-controls="codigo" aria-selected="false" tabindex="-1" data-panel="codigo">
+            <span class="nav-symbol" aria-hidden="true">⌘</span>
+            <span>Código</span>
+          </button>
+        </nav>
+
+        <div class="deck-actions">
+          <span class="crumb-pill" id="topbar-section">MONITOR</span>
+          <div class="deck-links">
+            <button id="replay-splash" class="deck-link" type="button" title="Ver pantalla de presentación">Portada</button>
+            <button class="deck-link guide-button" data-open-manual type="button">Guía</button>
+            <a class="deck-link" href="https://github.com/contac-isbe/deteccion-fallas-maquinaria" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+          <span class="deck-sep" aria-hidden="true"></span>
+          <button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" title="Activar modo oscuro">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 20 20" aria-hidden="true">
+              <circle cx="10" cy="10" r="3.2"/>
+              <path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2M3.8 3.8l1.4 1.4M14.8 14.8l1.4 1.4M3.8 16.2l1.4-1.4M14.8 5.2l1.4-1.4"/>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M16.5 12A7 7 0 018 3.5a7 7 0 108.5 8.5Z"/>
+            </svg>
+            <span class="theme-label">Claro</span>
+            <span class="theme-track" aria-hidden="true"><span></span></span>
+          </button>
+          <span class="badge" id="runtime-label">Sesión local</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Encabezado compacto contextual con ficha técnica inline -->
+      <header class="page-header">
+        <div class="header-copy">
+          <div class="header-title-row">
+            <h1 id="page-title">Monitor de maquinaria</h1>
+            <span class="header-pill">UPAO · IA</span>
+          </div>
+          <p id="page-description">Reproduce observaciones de prueba e inspecciona en tiempo real la cinemática simulada, telemetría y decisiones del modelo.</p>
+        </div>
+        <div class="header-specs" aria-label="Especificaciones del modelo activo">
+          <div><span>MODELO</span><b>Árbol de decisión</b></div>
+          <div><span>RESERVA</span><b>2 000 obs.</b></div>
+          <div><span>EXACTITUD</span><b>98,45 %</b></div>
+        </div>
+      </header>
+
+      <p id="project-error" role="alert" hidden></p>
+
+      <!-- ================================================================
+           PESTAÑA 1: MONITOR — COCKPIT DE TELEMETRÍA Y CNC VIVO
+           ================================================================ -->
+      <section id="ejecucion" role="tabpanel" aria-labelledby="tab-ejecucion">
+        <!-- Barra de transporte y reproducción -->
+        <div class="monitor-toolbar controls" aria-label="Controles de reproducción">
+          <div class="session-state">
+            <span id="run-dot" class="run-dot" aria-hidden="true"></span>
+            <div>
+              <strong id="status" role="status">Preparando el monitor…</strong>
+              <span>Reserva independiente · AI4I 2020 (2 000 registros)</span>
+            </div>
+          </div>
+
+          <div class="toolbar-progress" aria-hidden="true">
+            <progress id="progress" max="2000" value="0" aria-label="Progreso de reproducción"></progress>
+            <span id="progress-pct" class="progress-pct">0 %</span>
+          </div>
+
+          <div class="buttons">
+            <button id="start" class="primary" type="button">Iniciar simulación</button>
+            <button id="pause" type="button">Pausar</button>
+            <button id="step" type="button" title="Procesar un registro">Siguiente</button>
+            <button id="reset" class="reset-button" type="button">Reiniciar</button>
+            <label class="interval-control" for="interval">
+              <span>Intervalo</span>
+              <select id="interval" aria-label="Intervalo de reproducción">
+                <option value="0.2">0,2 s</option>
+                <option value="0.5" selected>0,5 s</option>
+                <option value="1">1 s</option>
+                <option value="2">2 s</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <p id="error" role="alert" hidden></p>
+
+        <!-- Escenario Principal Cockpit: Máquina CNC Reactiva + Consola de Diagnóstico y Alertas -->
+        <div class="cockpit-grid">
+          <!-- Izquierda: Banco CNC Vivo -->
+          <section class="machine-panel">
+            <div class="machine-heading">
+              <div class="machine-title-group">
+                <span class="kicker">BANCO DE MECANIZADO CNC · CINEMÁTICA REACTIVA</span>
+                <h2>Cámara de operación virtual</h2>
+              </div>
+              <div class="machine-meta-tags">
+                <span class="machine-tag" id="machine-state-pill">EN ESPERA</span>
+                <span class="machine-tag is-subtle">ILUSTRACIÓN SINTÉTICA</span>
+              </div>
+            </div>
+
+            <div class="machine-viewport">
+              <svg class="machine-drawing" viewBox="0 0 760 400" role="img" aria-labelledby="machine-title machine-description">
+                <title id="machine-title">Representación ilustrativa animada de una máquina de mecanizado CNC</title>
+                <desc id="machine-description">La velocidad del husillo, el recorrido de la mesa, la carga de torque y el color térmico responden a las lecturas del registro sintético actual. No está conectada a maquinaria física.</desc>
+                <defs>
+                  <linearGradient id="body-gradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#e3e9ef"/>
+                    <stop offset="55%" stop-color="#cfd8e2"/>
+                    <stop offset="100%" stop-color="#b4c0ce"/>
+                  </linearGradient>
+                  <linearGradient id="glass-gradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#172330"/>
+                    <stop offset="100%" stop-color="#0b121a"/>
+                  </linearGradient>
+                  <linearGradient id="steel-gradient" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#78889a"/>
+                    <stop offset="35%" stop-color="#e4ecf3"/>
+                    <stop offset="65%" stop-color="#b8c6d4"/>
+                    <stop offset="100%" stop-color="#5c6c7e"/>
+                  </linearGradient>
+                  <linearGradient id="beam-gradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#22b8cf" stop-opacity="0"/>
+                    <stop offset="75%" stop-color="#22b8cf" stop-opacity="0.45"/>
+                    <stop offset="100%" stop-color="#22b8cf" stop-opacity="0.9"/>
+                  </linearGradient>
+                  <radialGradient id="heat-gradient" cx="50%" cy="35%" r="60%">
+                    <stop offset="0%" stop-color="#ff922b" stop-opacity="0.9"/>
+                    <stop offset="55%" stop-color="#e8590c" stop-opacity="0.45"/>
+                    <stop offset="100%" stop-color="#e8590c" stop-opacity="0"/>
+                  </radialGradient>
+                  <pattern id="stage-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                    <circle cx="1" cy="1" r="0.85" fill="#c3ceda"/>
+                  </pattern>
+                  <clipPath id="window-clip">
+                    <rect x="200" y="106" width="276" height="190" rx="10"/>
+                  </clipPath>
+                </defs>
+
+                <rect width="760" height="400" fill="url(#stage-grid)"/>
+                <ellipse class="machine-shadow" cx="380" cy="360" rx="260" ry="18" fill="#c6d1dc" opacity="0.65"/>
+
+                <!-- Torre luminosa Andon superior (indicador de planta real) -->
+                <g class="andon-tower" transform="translate(508, 30)">
+                  <rect x="10" y="42" width="10" height="14" rx="2" fill="#5e6d7e"/>
+                  <rect x="6" y="4" width="18" height="40" rx="4" fill="#23303f" stroke="#4d5e70" stroke-width="1"/>
+                  <circle class="andon-lamp andon-red" cx="15" cy="13" r="5" fill="#4f2d28"/>
+                  <circle class="andon-lamp andon-cyan" cx="15" cy="24" r="5" fill="#1e444e"/>
+                  <circle class="andon-lamp andon-green" cx="15" cy="35" r="5" fill="#1f4632"/>
+                </g>
+
+                <!-- Carcasa 3D industrial de la máquina CNC -->
+                <path class="mach-depth" d="M168 86 L194 66 H556 L584 88 V328 L560 350 H168 Z" fill="#9da9b7" stroke="#8593a3" stroke-width="1.2"/>
+                <rect class="mach-shell" x="162" y="82" width="398" height="262" rx="14" fill="url(#body-gradient)" stroke="#92a0b0" stroke-width="1.5"/>
+                <path class="mach-base" d="M163 318 H559 V332 Q559 344 547 344 H175 Q163 344 163 332 Z" fill="#8290a0"/>
+
+                <!-- Pernos de esquina -->
+                <g fill="#738394" opacity="0.7">
+                  <circle cx="176" cy="96" r="2.2"/><circle cx="546" cy="96" r="2.2"/>
+                  <circle cx="176" cy="330" r="2.2"/><circle cx="546" cy="330" r="2.2"/>
+                </g>
+
+                <!-- Marco de la ventana blindada -->
+                <rect class="mach-bezel" x="186" y="96" width="304" height="212" rx="14" fill="#d7e0e9" stroke="#9aa8b8"/>
+                <rect x="200" y="106" width="276" height="190" rx="10" fill="url(#glass-gradient)"/>
+
+                <!-- INTERIOR DE LA CÁMARA CNC -->
+                <g clip-path="url(#window-clip)">
+                  <!-- Luz LED interior del techo de cámara -->
+                  <rect class="chamber-led" x="234" y="106" width="208" height="4" rx="2" fill="#22b8cf" opacity="0.5"/>
+                  <polygon class="chamber-cone" points="234,110 442,110 470,285 206,285" fill="#22b8cf" opacity="0.035"/>
+
+                  <!-- Rejilla de coordenadas CNC interna -->
+                  <path d="M200 146H476 M200 186H476 M200 226H476 M200 266H476 M246 106V296 M292 106V296 M338 106V296 M384 106V296 M430 106V296" stroke="#4f6b85" opacity="0.18"/>
+
+                  <!-- Guías verticales y husillo de bolas Z -->
+                  <rect x="310" y="106" width="6" height="132" fill="#2a3a4c"/>
+                  <rect x="360" y="106" width="6" height="132" fill="#2a3a4c"/>
+                  <line x1="338" y1="106" x2="338" y2="236" stroke="#4d6278" stroke-width="3" stroke-dasharray="3 3"/>
+
+                  <!-- MESA DE TRABAJO MÓVIL (EJE X) + MORDAZA + PIEZA -->
+                  <g class="cnc-table">
+                    <!-- Carro inferior -->
+                    <path d="M226 266 H450 L468 280 H208 Z" fill="#5e6f82"/>
+                    <rect x="208" y="280" width="260" height="16" fill="#3f4e5e"/>
+                    <!-- Mesa con ranuras en T -->
+                    <path d="M242 265 L256 250 H420 L434 265 Z" fill="#92a2b3"/>
+                    <path d="M258 264 L270 251 M282 264 L294 251 M306 264 L318 251 M330 264 L342 251 M354 264 L366 251 M378 264 L390 251 M402 264 L414 251" stroke="#536578" stroke-width="1.2"/>
+                    <!-- Mordazas laterales sujetando la pieza -->
+                    <rect x="274" y="232" width="22" height="19" rx="2" fill="#4f6073" stroke="#7c8fa3" stroke-width="1"/>
+                    <rect x="380" y="232" width="22" height="19" rx="2" fill="#4f6073" stroke="#7c8fa3" stroke-width="1"/>
+                    <!-- Pieza metálica cilíndrica (billet) -->
+                    <rect x="296" y="228" width="84" height="23" rx="3" fill="#c7d3df"/>
+                    <ellipse cx="338" cy="228" rx="42" ry="8" fill="#e7eff6"/>
+                    <ellipse cx="338" cy="228" rx="24" ry="4.5" fill="#b8c7d6" opacity="0.65"/>
+                    <!-- Resplandor térmico dinámico controlado por temperatura real -->
+                    <ellipse id="workpiece-heat" cx="338" cy="228" rx="34" ry="10" fill="url(#heat-gradient)" opacity="0.1"/>
+                  </g>
+
+                  <!-- CABEZAL Y HUSILLO MÓVIL (EJE Z) -->
+                  <g class="cnc-head">
+                    <rect x="313" y="106" width="50" height="44" fill="#637487"/>
+                    <rect x="317" y="132" width="42" height="54" rx="5" fill="url(#steel-gradient)" stroke="#5b6d80" stroke-width="1"/>
+                    <!-- Ranuras de refrigeración del cabezal -->
+                    <path d="M322 142H354 M322 148H354 M322 154H354" stroke="#4d5f72" stroke-width="1.3" opacity="0.65"/>
+                    <!-- Portaherramientas / Chuck giratorio -->
+                    <path d="M324 186 H352 L347 201 H329 Z" fill="#8fa0b3" stroke="#536578" stroke-width="0.8"/>
+                    <g class="chuck-collar">
+                      <line x1="331" y1="189" x2="331" y2="198" stroke="#1e2d3b" stroke-width="2"/>
+                      <line x1="338" y1="189" x2="338" y2="198" stroke="#e8f1f8" stroke-width="2"/>
+                      <line x1="345" y1="189" x2="345" y2="198" stroke="#1e2d3b" stroke-width="2"/>
+                    </g>
+                    <!-- Fresa helicoidal (velocidad vinculada a RPM reales) -->
+                    <g class="spindle-motion">
+                      <rect x="333.5" y="201" width="9" height="26" rx="1.5" fill="#dce6f0"/>
+                      <path class="flute-grooves" d="M332 204 L344 209 M332 210 L344 215 M332 216 L344 221 M332 222 L344 227" stroke="#22b8cf" stroke-width="1.8" stroke-linecap="round"/>
+                    </g>
+                    <!-- Punto de contacto y chispas de mecanizado -->
+                    <g class="cnc-sparks">
+                      <circle class="spindle-contact" cx="338" cy="226" r="4.5" fill="#3bc9db"/>
+                      <line class="spark s1" x1="338" y1="226" x2="320" y2="215" stroke="#ffcf70" stroke-width="1.6" stroke-linecap="round"/>
+                      <line class="spark s2" x1="338" y1="226" x2="357" y2="213" stroke="#ff922b" stroke-width="1.6" stroke-linecap="round"/>
+                      <line class="spark s3" x1="338" y1="226" x2="314" y2="224" stroke="#3bc9db" stroke-width="1.4" stroke-linecap="round"/>
+                      <line class="spark s4" x1="338" y1="226" x2="364" y2="222" stroke="#ffd88a" stroke-width="1.4" stroke-linecap="round"/>
+                      <line class="spark s5" x1="338" y1="226" x2="326" y2="208" stroke="#ff922b" stroke-width="1.3" stroke-linecap="round"/>
+                      <line class="spark s6" x1="338" y1="226" x2="352" y2="207" stroke="#ffcf70" stroke-width="1.3" stroke-linecap="round"/>
+                    </g>
+                  </g>
+
+                  <!-- Reflejo de vidrio + Haz láser de escaneo -->
+                  <path d="M200 118 L476 264 M200 138 L476 284" stroke="#9be4ef" stroke-width="14" opacity="0.03"/>
+                  <rect class="scan-beam" x="200" y="106" width="276" height="16" fill="url(#beam-gradient)" opacity="0"/>
+                </g>
+
+                <!-- Consola lateral CNC con medidores dinámicos en vivo -->
+                <rect class="mach-console" x="502" y="108" width="46" height="114" rx="6" fill="#202e3d" stroke="#425468" stroke-width="1"/>
+                <!-- Pantalla mini osciloscopio -->
+                <rect x="508" y="116" width="34" height="28" rx="3" fill="#0b131c"/>
+                <path class="console-wave" d="M511 134 L516 125 L521 131 L527 121 L533 129 L539 124" fill="none" stroke="#22b8cf" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Barras en vivo de Torque y Desgaste dentro de la consola -->
+                <rect x="510" y="150" width="12" height="36" rx="2" fill="#0f1822"/>
+                <rect id="machine-torque-bar" x="512" y="182" width="8" height="2" rx="1" fill="#22b8cf"/>
+                <rect x="528" y="150" width="12" height="36" rx="2" fill="#0f1822"/>
+                <rect id="machine-wear-bar" x="530" y="182" width="8" height="2" rx="1" fill="#f08c42"/>
+                <text x="516" y="196" text-anchor="middle" fill="#8ca2b8" font-family="Consolas,monospace" font-size="6.5">TQ</text>
+                <text x="534" y="196" text-anchor="middle" fill="#8ca2b8" font-family="Consolas,monospace" font-size="6.5">WR</text>
+                <!-- LED principal -->
+                <circle class="machine-indicator-halo" cx="525" cy="210" r="9" fill="transparent"/>
+                <circle class="machine-indicator" cx="525" cy="210" r="4.8" fill="#8898a8"/>
+
+                <!-- Rejilla de ventilación con ventilador giratorio -->
+                <g transform="translate(525, 264)">
+                  <circle cx="0" cy="0" r="20" fill="#18232f" stroke="#4d6073" stroke-width="1.2"/>
+                  <g class="cooling-fan">
+                    <path d="M0 -15 C5 -12 5 -4 0 0 C-5 -4 -5 -12 0 -15 Z" fill="#5e768e"/>
+                    <path d="M15 0 C12 5 4 5 0 0 C4 -5 12 -5 15 0 Z" fill="#5e768e"/>
+                    <path d="M0 15 C-5 12 -5 4 0 0 C5 4 5 12 0 15 Z" fill="#5e768e"/>
+                    <path d="M-15 0 C-12 -5 -4 -5 0 0 C-4 5 -12 5 -15 0 Z" fill="#5e768e"/>
+                    <circle cx="0" cy="0" r="3.5" fill="#9fb2c4"/>
+                  </g>
+                  <circle cx="0" cy="0" r="14" fill="none" stroke="#2c3e50" stroke-width="1" stroke-dasharray="2 3"/>
+                </g>
+
+                <!-- Soportes y manija de puerta -->
+                <path class="mach-feet" d="M178 345 H224 V355 H178 M496 345 H542 V355 H496" fill="#4a5868"/>
+                <rect x="316" y="325" width="48" height="6" rx="3" fill="#556577"/>
+
+                <!-- Callouts HUD 4 esquinas con lecturas reales -->
+                <g class="callout-group">
+                  <path class="callout-line" d="M338 164 H120 V138 H28" fill="none" stroke-dasharray="3 4"/>
+                  <circle class="callout-dot" cx="338" cy="164" r="3.5"/>
+                  <text x="28" y="117" class="svg-label">VELOCIDAD</text>
+                  <text x="28" y="134" id="machine-rpm" class="svg-value">— rpm</text>
+                </g>
+
+                <g class="callout-group">
+                  <path class="callout-line" d="M296 236 H120 V268 H28" fill="none" stroke-dasharray="3 4"/>
+                  <circle class="callout-dot" cx="296" cy="236" r="3.5"/>
+                  <text x="28" y="286" class="svg-label">Δ TÉRMICO (PROC − AIRE)</text>
+                  <text x="28" y="303" id="machine-delta-t" class="svg-value">— K</text>
+                </g>
+
+                <g class="callout-group">
+                  <path class="callout-line" d="M342 208 H618 V138 H732" fill="none" stroke-dasharray="3 4"/>
+                  <circle class="callout-dot" cx="342" cy="208" r="3.5"/>
+                  <text x="732" y="117" text-anchor="end" class="svg-label">DESGASTE</text>
+                  <text x="732" y="134" text-anchor="end" id="machine-wear" class="svg-value">— min</text>
+                </g>
+
+                <g class="callout-group">
+                  <path class="callout-line" d="M380 236 H618 V268 H732" fill="none" stroke-dasharray="3 4"/>
+                  <circle class="callout-dot" cx="380" cy="236" r="3.5"/>
+                  <text x="732" y="286" text-anchor="end" class="svg-label">TORQUE</text>
+                  <text x="732" y="303" text-anchor="end" id="machine-torque" class="svg-value">— Nm</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="machine-footer">
+              <p id="identity">Inicia la simulación para ver la primera observación.</p>
+              <span>Velocidad y respuesta térmica vinculadas al registro actual</span>
+            </div>
+          </section>
+
+          <!-- Derecha: Consola de Diagnóstico + Alertas en Vivo -->
+          <div class="cockpit-side">
+            <section class="decision-panel">
+              <div class="decision-head">
+                <div>
+                  <span class="kicker">DIAGNÓSTICO DEL MODELO</span>
+                  <h2>Clasificación actual</h2>
+                </div>
+                <span class="decision-latency" id="latency">— / — ms</span>
+              </div>
+
+              <div id="prediction" class="prediction neutral" role="status">Sin predicción</div>
+              <p id="decision-explanation">El árbol de decisión evalúa las seis variables de entrada de cada registro.</p>
+
+              <div class="decision-contrast">
+                <span class="kicker">CONTRASTE POSTERIOR (ETIQUETA REAL)</span>
+                <p id="reference">Etiqueta real: —</p>
+                <p class="hint">La etiqueta real no entra al modelo; solo permite auditar aciertos y errores.</p>
+              </div>
+
+              <!-- Contadores vivos de la sesión -->
+              <div class="live-matrix-strip" aria-label="Resumen acumulado de la sesión">
+                <div class="lm-cell is-ok">
+                  <strong id="live-tn">0</strong>
+                  <span>Sin falla OK</span>
+                </div>
+                <div class="lm-cell is-ok">
+                  <strong id="live-tp">0</strong>
+                  <span>Detectadas</span>
+                </div>
+                <div class="lm-cell is-warn">
+                  <strong id="live-fp">0</strong>
+                  <span>Falsas al.</span>
+                </div>
+                <div class="lm-cell is-miss">
+                  <strong id="live-fn">0</strong>
+                  <span>Omitidas</span>
+                </div>
+                <div class="lm-cell is-total">
+                  <strong id="alerts">0</strong>
+                  <span>Alertas</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel alerts-panel">
+              <div class="section-heading">
+                <div>
+                  <span class="kicker">VENTANA DE 60 REGISTROS</span>
+                  <h2>Alertas recientes</h2>
+                </div>
+                <span id="window-alerts" class="window-count">0</span>
+              </div>
+              <div id="alert-feed">
+                <div class="alert-empty">
+                  Sin alertas registradas
+                  <p>Las predicciones de falla recientes aparecerán aquí al avanzar la simulación.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Banda Unificada de Instrumentos (5 Sensores con Medidor de Rango + Sparkline) -->
+        <div id="measurements" class="sensor-strip" aria-label="Mediciones del registro actual">
+          <article class="sensor" data-sensor-feature="Air temperature [K]" tabindex="0" role="button" aria-label="Seleccionar Temperatura del aire en la gráfica">
+            <div class="sensor-top">
+              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">°</i> Aire</span>
+              <span class="sensor-range">295–305 K</span>
+            </div>
+            <strong id="air">— K</strong>
+            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-air"></span></div>
+            <svg data-spark="Air temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg>
+            <span class="sensor-foot">Temperatura ambiente</span>
+          </article>
+
+          <article class="sensor" data-sensor-feature="Process temperature [K]" tabindex="0" role="button" aria-label="Seleccionar Temperatura del proceso en la gráfica">
+            <div class="sensor-top">
+              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">°</i> Proceso</span>
+              <span class="sensor-range">305–314 K</span>
+            </div>
+            <strong id="process">— K</strong>
+            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-process"></span></div>
+            <svg data-spark="Process temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg>
+            <span class="sensor-foot">Temperatura de proceso</span>
+          </article>
+
+          <article class="sensor" data-sensor-feature="Rotational speed [rpm]" data-active="true" tabindex="0" role="button" aria-label="Seleccionar Velocidad de rotación en la gráfica">
+            <div class="sensor-top">
+              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">↻</i> Rotación</span>
+              <span class="sensor-range">1168–2886</span>
+            </div>
+            <strong id="speed">— rpm</strong>
+            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-speed"></span></div>
+            <svg data-spark="Rotational speed [rpm]" viewBox="0 0 160 28" aria-hidden="true"></svg>
+            <span class="sensor-foot">Velocidad de husillo</span>
+          </article>
+
+          <article class="sensor" data-sensor-feature="Torque [Nm]" tabindex="0" role="button" aria-label="Seleccionar Torque en la gráfica">
+            <div class="sensor-top">
+              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">↗</i> Torque</span>
+              <span class="sensor-range">3.8–76.6</span>
+            </div>
+            <strong id="torque">— Nm</strong>
+            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-torque"></span></div>
+            <svg data-spark="Torque [Nm]" viewBox="0 0 160 28" aria-hidden="true"></svg>
+            <span class="sensor-foot">Par de giro</span>
+          </article>
+
+          <article class="sensor" data-sensor-feature="Tool wear [min]" tabindex="0" role="button" aria-label="Seleccionar Desgaste en la gráfica">
+            <div class="sensor-top">
+              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">◷</i> Desgaste</span>
+              <span class="sensor-range">0–253 min</span>
+            </div>
+            <strong id="wear">— min</strong>
+            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-wear"></span></div>
+            <svg data-spark="Tool wear [min]" viewBox="0 0 160 28" aria-hidden="true"></svg>
+            <span class="sensor-foot">Uso de herramienta</span>
+          </article>
+        </div>
+
+        <!-- Panel Inferior Dividido: Osciloscopio Interactivo + Trazabilidad en Vivo -->
+        <div class="telemetry-split">
+          <section class="panel trace-panel">
+            <div class="section-heading">
+              <div>
+                <span class="kicker">OSCILOSCOPIO DE VENTANA</span>
+                <h2>Secuencia de mediciones</h2>
+              </div>
+              <span id="chart-current" class="chart-current">— rpm</span>
+            </div>
+
+            <div class="chart-switch" aria-label="Variable del gráfico">
+              <button type="button" data-feature="Rotational speed [rpm]" aria-pressed="true">Rotación</button>
+              <button type="button" data-feature="Torque [Nm]" aria-pressed="false">Torque</button>
+              <button type="button" data-feature="Air temperature [K]" aria-pressed="false">Aire</button>
+              <button type="button" data-feature="Process temperature [K]" aria-pressed="false">Proceso</button>
+              <button type="button" data-feature="Tool wear [min]" aria-pressed="false">Desgaste</button>
+            </div>
+
+            <div class="trace-chart">
+              <svg id="trace" viewBox="0 0 760 220" role="img" aria-label="Sin registros procesados. El gráfico aparecerá al avanzar la simulación."></svg>
+              <div id="trace-tooltip" class="trace-tooltip" hidden></div>
+              <p id="chart-empty">
+                Sin observaciones en ventana
+                <span>Pulsa Iniciar simulación o Siguiente para trazar la señal.</span>
+              </p>
+            </div>
+
+            <div class="chart-legend">
+              <span><i aria-hidden="true"></i> Medición</span>
+              <span><i class="legend-alert" aria-hidden="true"></i> Predicción de falla</span>
+              <span id="chart-range">Sin registros</span>
+            </div>
+            <p class="hint">Escala automática · Hasta 60 registros procesados. Pasa el cursor sobre la curva para inspeccionar cada UDI. No es una serie temporal física.</p>
+          </section>
+
+          <section class="panel history-panel">
+            <div class="section-heading">
+              <div>
+                <span class="kicker">TRAZABILIDAD EN VIVO</span>
+                <h2>Últimas predicciones</h2>
+              </div>
+              <a id="export" class="button" href="/api/export" download>Exportar CSV ↓</a>
+            </div>
+
+            <div class="table-scroll">
+              <table>
+                <caption class="sr-only">Registro de predicciones y comparación posterior</caption>
+                <thead>
+                  <tr>
+                    <th>UDI</th>
+                    <th>Tipo</th>
+                    <th>Predicción</th>
+                    <th>Real</th>
+                    <th>Resultado</th>
+                    <th>ms</th>
+                  </tr>
+                </thead>
+                <tbody id="history">
+                  <tr>
+                    <td colspan="6">Todavía no hay registros procesados.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p id="counts" class="hint">Aciertos sin falla: 0 · Fallas detectadas: 0 · Falsas alarmas: 0 · Fallas omitidas: 0</p>
+            <p class="hint">El tiempo corresponde únicamente al pipeline de transformación y clasificación; excluye red, interfaz y pausas.</p>
+          </section>
+        </div>
+
+        <!-- Opciones avanzadas desplegables -->
+        <details class="advanced-panel">
+          <summary>Datos de prueba y comprobaciones <span>Validación de CSV y evidencia JSON</span></summary>
+          <div class="advanced-content">
+            <section class="verification-strip">
+              <div>
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <div>
+                  <strong><span id="check-count">—</span> <span id="check-result">comprobaciones</span></strong>
+                  <p id="checks-date">Consultando evidencia…</p>
+                </div>
+              </div>
+              <a href="/project/file?file=reports%2Fmonitor_simulation_checks.json" download>Descargar evidencia JSON ↗</a>
+            </section>
+
+            <section class="import">
+              <h2>Validar una copia de la reserva</h2>
+              <p>La reserva ya está cargada. Este control acepta únicamente <code>data/processed/test.csv</code> con sus columnas, valores y orden originales. Una carga válida reinicia la sesión.</p>
+              <label for="csv">Archivo CSV de prueba (máximo 1 MB)</label>
+              <div class="import-row">
+                <input id="csv" type="file" accept=".csv,text/csv">
+                <button id="load" type="button">Validar y cargar CSV</button>
+              </div>
+              <p id="load-message" role="status"></p>
+            </section>
+
+            <p class="hint" id="session-help">Reiniciar borra el registro de esta sesión: expórtalo antes si deseas conservarlo. Las pestañas del mismo servidor comparten la sesión. Cambiar de pestaña no pausa la reproducción.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ================================================================
+           PESTAÑA 2: EL PROYECTO — FICHA TÉCNICA Y MÉTRICAS RADIALES
+           ================================================================ -->
+      <section id="documentacion" role="tabpanel" aria-labelledby="tab-documentacion" hidden>
+        <div class="project-banner">
+          <div class="project-banner-main">
+            <span class="pill">EXPERIMENTO VERIFICADO · UPAO</span>
+            <h2>Clasificación verificable sobre datos de mecanizado</h2>
+            <p>Se compararon 34 configuraciones de regresión logística, árbol de decisión y Random Forest mediante validación cruzada de 5 pliegues sobre 8 000 registros de desarrollo, evaluando el ganador una sola vez sobre la reserva de 2 000 registros.</p>
+            <div class="hero-actions">
+              <button class="primary" type="button" data-go="ejecucion">Abrir monitor en vivo →</button>
+              <a class="button" href="/project/file?file=docs%2FInforme%20-%20Proyecto%20de%20IA.docx" download>Descargar informe Word ↓</a>
+            </div>
+          </div>
+
+          <div class="hero-facts">
+            <span class="fact-label">MODELO SELECCIONADO</span>
+            <strong id="model-name">Cargando…</strong>
+            <div class="fact-rule"></div>
+            <span class="fact-label">DATASET Y PARTICIÓN</span>
+            <strong>AI4I 2020</strong>
+            <span class="fact-caption">10 000 observaciones sintéticas · 80 % / 20 %</span>
+            <span class="model-stamp">Modelo congelado · Sin reentrenamiento</span>
+          </div>
+        </div>
+
+        <!-- 4 Diales de Métricas con Anillo SVG Animado -->
+        <div class="section-heading">
+          <h2>Desempeño en reserva de prueba</h2>
+          <span class="subtle">2 000 observaciones independientes</span>
+        </div>
+
+        <div class="metrics-grid">
+          <article class="metric-dial">
+            <div class="dial-ring">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <circle class="dial-bg" cx="32" cy="32" r="26"/>
+                <circle id="ring-recall" class="dial-val" cx="32" cy="32" r="26"/>
+              </svg>
+            </div>
+            <div class="dial-info">
+              <span>Sensibilidad</span>
+              <strong id="recall">—</strong>
+              <small>Fallas reales detectadas</small>
+            </div>
+          </article>
+
+          <article class="metric-dial">
+            <div class="dial-ring">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <circle class="dial-bg" cx="32" cy="32" r="26"/>
+                <circle id="ring-precision" class="dial-val" cx="32" cy="32" r="26"/>
+              </svg>
+            </div>
+            <div class="dial-info">
+              <span>Precisión</span>
+              <strong id="precision">—</strong>
+              <small>Alertas que sí eran falla</small>
+            </div>
+          </article>
+
+          <article class="metric-dial">
+            <div class="dial-ring">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <circle class="dial-bg" cx="32" cy="32" r="26"/>
+                <circle id="ring-f1" class="dial-val" cx="32" cy="32" r="26"/>
+              </svg>
+            </div>
+            <div class="dial-info">
+              <span>Puntaje F1</span>
+              <strong id="f1">—</strong>
+              <small>Balance precisión / sensibilidad</small>
+            </div>
+          </article>
+
+          <article class="metric-dial">
+            <div class="dial-ring">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <circle class="dial-bg" cx="32" cy="32" r="26"/>
+                <circle id="ring-accuracy" class="dial-val" cx="32" cy="32" r="26"/>
+              </svg>
+            </div>
+            <div class="dial-info">
+              <span>Exactitud</span>
+              <strong id="accuracy">—</strong>
+              <small>Aciertos sobre 2 000 casos</small>
+            </div>
+          </article>
+        </div>
+
+        <div class="grid documentation-grid">
+          <section class="panel">
+            <div class="section-heading">
+              <h2>Flujo experimental</h2>
+              <span class="mini-label">3 NOTEBOOKS</span>
+            </div>
+            <ol class="method">
+              <li>
+                <span>01</span>
+                <div>
+                  <h3>Auditoría y preparación</h3>
+                  <p>Revisión de variables físicas, documentación de 27 discrepancias de etiquetado y separación estratificada en 8 000 desarrollo y 2 000 prueba.</p>
+                </div>
+              </li>
+              <li>
+                <span>02</span>
+                <div>
+                  <h3>Comparación y selección</h3>
+                  <p>Búsqueda sobre 34 configuraciones (Regresión Logística, Árbol de Decisión y Random Forest) mediante validación cruzada de 5 pliegues.</p>
+                </div>
+              </li>
+              <li>
+                <span>03</span>
+                <div>
+                  <h3>Evaluación final congelada</h3>
+                  <p>Prueba única sobre la reserva fijada, congelando el artefacto con huellas SHA-256 para despliegue reproducible.</p>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <section class="panel">
+            <div class="section-heading">
+              <h2>Matriz de confusión</h2>
+              <span class="mini-label">PRUEBA FINAL</span>
+            </div>
+            <div class="confusion-grid">
+              <article class="cm-correct">
+                <strong id="tn">—</strong>
+                <span>Aciertos sin falla (TN)</span>
+              </article>
+              <article class="cm-fp">
+                <strong id="fp">—</strong>
+                <span>Falsas alarmas (FP)</span>
+              </article>
+              <article class="cm-fn">
+                <strong id="fn">—</strong>
+                <span>Fallas omitidas (FN)</span>
+              </article>
+              <article class="cm-correct">
+                <strong id="tp">—</strong>
+                <span>Fallas detectadas (TP)</span>
+              </article>
+            </div>
+            <p class="hint">La exactitud debe leerse junto con las omisiones: 18 de las 68 fallas reales no se detectaron.</p>
+          </section>
+        </div>
+
+        <section class="scope-note">
+          <span class="scope-icon" aria-hidden="true">i</span>
+          <div>
+            <h3>Alcance y limitaciones</h3>
+            <p>Clasificación y reproducción de registros sintéticos. No estima vida útil restante ni anticipa horas hasta una avería. Se conservan 27 discrepancias de etiquetado documentadas y no existe validación en maquinaria física.</p>
+          </div>
+        </section>
+
+        <section class="panel resources">
+          <div>
+            <h2>Documentación y archivos descargables</h2>
+            <p>Informe del proyecto hasta el apartado 7.2, procedencia de datos y registro de comprobaciones.</p>
+          </div>
+          <div class="resource-links">
+            <button data-open-manual type="button">Manual de uso</button>
+            <a class="button" href="/project/file?file=docs%2FInforme%20-%20Proyecto%20de%20IA.docx" download>Informe Word ↗</a>
+            <a class="button" href="/project/file?file=data%2FREADME.md" download>Fuente y licencia ↗</a>
+            <a class="button" href="/project/file?file=reports%2Fportal_review.md" download>Comprobaciones ↗</a>
+          </div>
+        </section>
+
+        <p class="publication-note" id="publication-help">Base del repositorio: <code id="base-revision">—</code>. El repositorio reúne la documentación, el código y las comprobaciones del 7.1. La versión alojada del 7.2 está disponible en el enlace del README.</p>
+      </section>
+
+      <!-- ================================================================
+           PESTAÑA 3: CÓDIGO — VISOR DEL REPOSITORIO
+           ================================================================ -->
+      <section id="codigo" role="tabpanel" aria-labelledby="tab-codigo" hidden>
+        <section class="panel setup">
+          <div class="section-heading">
+            <h2>Ejecución en entorno local</h2>
+            <span class="mini-label">PYTHON 3.12</span>
+          </div>
+          <p>Desde la raíz del proyecto, inicia el servidor con el entorno virtual y abre la dirección que imprime la terminal.</p>
+          <div class="command">
+            <code id="run-command">.\.venv\Scripts\python.exe scripts/run_simulation.py --port 8771</code>
+            <button type="button" data-copy="run-command">Copiar comando</button>
+          </div>
+          <p class="hint">En una copia nueva, instala <code>requirements-deploy.txt</code> y ejecuta <code>scripts/prepare_deployment.py</code> (o <code>requirements.txt</code> + notebooks 01 y 02). El servidor utiliza el modelo congelado.</p>
+        </section>
+
+        <div class="source-layout">
+          <aside class="file-panel">
+            <h2>Explorador de archivos</h2>
+            <div id="source-tree" aria-label="Seleccionar un archivo de código"></div>
+          </aside>
+          <section class="code-panel">
+            <div class="code-toolbar">
+              <span id="source-title">Selecciona un archivo</span>
+              <a id="source-download" class="button" href="/project/file?file=README.md" download>Descargar ↓</a>
+            </div>
+            <p id="source-note" class="hint">Vista de lectura de los archivos locales.</p>
+            <pre tabindex="0" aria-label="Contenido del archivo seleccionado"><code id="source-content">Cargando código…</code></pre>
+          </section>
+        </div>
+
+        <p class="publication-note">El visor muestra los archivos en modo de solo lectura. Las modificaciones se guardan en la rama de trabajo y requieren revisión antes de integrarse en main.</p>
+      </section>
+
+      <footer>
+        <span>UPAO · Ingeniería de Sistemas e Inteligencia Artificial · IA: Principios y Técnicas</span>
+        <span>Simulación ilustrativa · Modelo congelado · Datos sintéticos AI4I 2020</span>
+      </footer>
+
+      <!-- Modal Guía de uso -->
+      <dialog id="usage-dialog" class="manual-dialog" aria-labelledby="usage-title">
+        <header class="manual-header">
+          <div>
+            <span class="kicker">INSTRUCCIONES RÁPIDAS</span>
+            <h2 id="usage-title">Guía de uso</h2>
+          </div>
+          <form method="dialog">
+            <button type="submit" aria-label="Cerrar guía" autofocus>×</button>
+          </form>
+        </header>
+        <div class="manual-body">
+          <p class="manual-intro">La reserva de prueba ya está cargada. La cámara CNC reacciona visualmente a cada observación sintética: velocidad del husillo, desplazamiento de mesa, carga de torque y estado térmico.</p>
+          <ol class="manual-steps">
+            <li>
+              <h3>Controla la simulación</h3>
+              <p>Pulsa <b>Iniciar simulación</b> para reproducir automáticamente o <b>Siguiente</b> para analizar registro por registro. Cambia el <b>Intervalo</b> cuando esté listo o pausado.</p>
+            </li>
+            <li>
+              <h3>Observa el banco CNC y el diagnóstico</h3>
+              <p>Comprueba la velocidad, torque, desgaste, salto térmico y la clasificación del modelo junto con los contadores acumulados (TN, TP, FP, FN).</p>
+            </li>
+            <li>
+              <h3>Explora los instrumentos y el osciloscopio</h3>
+              <p>Haz clic en cualquier sensor de la barra de instrumentos para cambiar la gráfica principal y pasa el cursor sobre la curva para inspeccionar cualquier UDI.</p>
+            </li>
+            <li>
+              <h3>Exporta los resultados</h3>
+              <p><b>Exportar CSV</b> descarga todos los registros procesados de la sesión completa con predicciones, etiquetas reales y latencias.</p>
+            </li>
+            <li>
+              <h3>Modo claro, oscuro y portada</h3>
+              <p>Alterna tema en la barra superior o pulsa <b>Portada</b> para mostrar nuevamente la pantalla de presentación del proyecto.</p>
+            </li>
+          </ol>
+          <div class="manual-bottom">
+            <p>Una predicción sin falla no garantiza ausencia de falla. Para instalación y carga de CSV, descarga el manual completo.</p>
+            <a class="button" href="/project/file?file=docs%2FMANUAL_USUARIO.md" download>Descargar manual ↓</a>
+          </div>
+        </div>
+      </dialog>
+    </main>
   </div>
-  <div class="trace-layout"><section class="panel trace-panel"><div class="section-heading"><div><span class="kicker">SECUENCIA DE REPRODUCCIÓN</span><h2>Así cambian las mediciones</h2></div><span id="chart-current" class="chart-current">— rpm</span></div><div class="chart-switch" aria-label="Variable del gráfico"><button data-feature="Rotational speed [rpm]" aria-pressed="true">Rotación</button><button data-feature="Torque [Nm]" aria-pressed="false">Torque</button><button data-feature="Air temperature [K]" aria-pressed="false">Aire</button><button data-feature="Process temperature [K]" aria-pressed="false">Proceso</button><button data-feature="Tool wear [min]" aria-pressed="false">Desgaste</button></div><div class="trace-chart"><svg id="trace" viewBox="0 0 760 220" role="img" aria-label="Sin registros procesados. El gráfico aparecerá al avanzar la simulación."></svg><p id="chart-empty">Cada registro cuenta una parte.<span>Inicia la simulación para dibujar los datos.</span></p></div><div class="chart-legend"><span><i></i> Medición</span><span><i class="legend-alert"></i> Predicción de falla</span><span id="chart-range">Sin registros</span></div><p class="hint">Escala automática · Hasta 60 registros procesados. La secuencia no es una serie temporal de una máquina real.</p></section>
-  <section class="panel alerts-panel"><div class="section-heading"><div><span class="kicker">LO QUE SEÑALA EL MODELO</span><h2>Alertas recientes</h2></div><span id="window-alerts" class="window-count">0</span></div><div id="alert-feed"><div class="alert-empty">Todo empieza con una observación.<p>Aquí aparecerán las predicciones de falla de los últimos 60 registros.</p></div></div></section></div>
-  <section class="panel history-panel"><div class="section-heading"><div><span class="kicker">TRAZABILIDAD DE LA SESIÓN</span><h2>El recorrido, sin ocultar errores</h2></div><a id="export" class="button" href="/api/export" download>Exportar CSV ↓</a></div><div class="table-scroll"><table><caption class="sr-only">Registro de predicciones y comparación posterior</caption><thead><tr><th>UDI</th><th>Tipo</th><th>Predicción</th><th>Etiqueta real</th><th>Comparación</th><th>Modelo (ms)</th></tr></thead><tbody id="history"><tr><td colspan="6">Todavía no hay registros procesados.</td></tr></tbody></table></div><p id="counts" class="hint">Aciertos sin falla: 0 · Fallas detectadas: 0 · Falsas alarmas: 0 · Fallas omitidas: 0</p><progress id="progress" max="2000" value="0" aria-label="Progreso de reproducción"></progress><p class="hint">Tiempo del pipeline: transformaciones y clasificación; excluye carga, interfaz y pausas. No es una garantía de tiempo real industrial.</p></section>
-  <details class="advanced-panel"><summary>Datos de prueba y comprobaciones <span>Opciones de la sesión</span></summary><div class="advanced-content"><section class="verification-strip"><div><span class="check-icon">✓</span><div><strong><span id="check-count">—</span> <span id="check-result">comprobaciones</span></strong><p id="checks-date">Consultando evidencia…</p></div></div><a href="/project/file?file=reports%2Fmonitor_simulation_checks.json" download>Descargar evidencia JSON ↗</a></section><section class="import"><h2>Comprobar una copia de los datos</h2><p>La reserva ya está cargada. Este control acepta únicamente data/processed/test.csv con sus columnas, valores y orden originales. Una carga válida reinicia la sesión.</p><label for="csv">Archivo CSV de prueba (máximo 1 MB)</label><input id="csv" type="file" accept=".csv,text/csv"><button id="load">Validar y cargar CSV</button><p id="load-message" role="status"></p></section><p class="hint" id="session-help">Reiniciar borra el registro de esta sesión: expórtalo antes si deseas conservarlo. Las pestañas del mismo servidor comparten la sesión. Cambiar de pestaña no pausa la reproducción.</p></div></details>
-</section>    <section id="documentacion" role="tabpanel" aria-labelledby="tab-documentacion" hidden>
-      <div class="project-hero"><div><span class="pill">DETECCIÓN DE FALLAS</span><h2>De los datos a una<br>clasificación verificable.</h2><p>Un sistema que aprende de observaciones de maquinaria para clasificarlas como sin falla o con falla, y permite revisar sus aciertos y errores.</p><div class="hero-actions"><button class="primary" data-go="ejecucion">Explorar la simulación <span aria-hidden="true">→</span></button><a class="button" href="/project/file?file=docs%2FInforme%20-%20Proyecto%20de%20IA.docx" download>Descargar informe ↓</a></div></div><div class="hero-facts"><span class="fact-label">MODELO SELECCIONADO</span><strong id="model-name">Cargando…</strong><div class="fact-rule"></div><span class="fact-label">UNA FUENTE DE DATOS</span><strong>AI4I 2020</strong><span class="fact-caption">Datos sintéticos · 10 000 observaciones</span><span class="model-stamp">Modelo congelado · Sin reentrenamiento</span></div></div>
-      <div class="section-heading"><h2>Resultados de la evaluación</h2><span class="subtle">Reserva de prueba · 2 000 registros</span></div>
-      <div class="metrics-grid"><article class="metric"><span>Sensibilidad</span><strong id="recall">—</strong><small>Proporción de fallas detectadas</small></article><article class="metric"><span>Precisión</span><strong id="precision">—</strong><small>Alertas que corresponden a fallas</small></article><article class="metric"><span>F1</span><strong id="f1">—</strong><small>Balance entre precisión y sensibilidad</small></article><article class="metric"><span>Exactitud</span><strong id="accuracy">—</strong><small>Aciertos sobre el total de prueba</small></article></div>
-      <div class="grid documentation-grid"><section class="panel"><div class="section-heading"><h2>Cómo se desarrolló</h2><span class="mini-label">3 NOTEBOOKS</span></div><ol class="method"><li><span>01</span><div><h3>Preparar los datos</h3><p>Auditoría del CSV, revisión de etiquetas y separación de 8 000 registros de desarrollo y 2 000 de prueba.</p></div></li><li><span>02</span><div><h3>Comparar y seleccionar</h3><p>34 configuraciones de regresión logística, árbol de decisión y Random Forest; validación cruzada de cinco pliegues.</p></div></li><li><span>03</span><div><h3>Comprobar el modelo</h3><p>Evaluación con la reserva fijada, sin reajustar el modelo con esos resultados.</p></div></li></ol></section>
-      <section class="panel"><div class="section-heading"><h2>Aciertos y errores</h2><span class="mini-label">PRUEBA FINAL</span></div><div class="confusion-grid"><article class="cm-correct"><strong id="tn">—</strong><span>Aciertos sin falla</span></article><article><strong id="fp">—</strong><span>Falsas alarmas</span></article><article><strong id="fn">—</strong><span>Fallas omitidas</span></article><article class="cm-correct"><strong id="tp">—</strong><span>Fallas detectadas</span></article></div><p class="hint">La exactitud debe leerse junto con las omisiones: 18 de las 68 fallas reales no se detectaron.</p></section></div>
-      <section class="scope-note"><span class="scope-icon" aria-hidden="true">i</span><div><h3>Qué demuestra este proyecto</h3><p>Clasificación y reproducción de registros sintéticos. No estima la vida útil restante ni anticipa horas hasta una avería. Se conservan 27 discrepancias de etiquetado documentadas. No hay validación en maquinaria física.</p></div></section>
-      <section class="panel resources"><div><h2>Documentación disponible</h2><p>Informe hasta el apartado 7.2, procedencia de los datos y evidencia de las pruebas.</p></div><div class="resource-links"><button data-open-manual type="button">Manual de uso</button><a href="/project/file?file=docs%2FInforme%20-%20Proyecto%20de%20IA.docx" download>Informe Word ↗</a><a href="/project/file?file=data%2FREADME.md" download>Fuente y licencia ↗</a><a href="/project/file?file=reports%2Fportal_review.md" download>Comprobaciones ↗</a></div></section>
-      <p class="publication-note" id="publication-help">Base del repositorio: <code id="base-revision">—</code>. El repositorio reúne la documentación, el código y las comprobaciones del 7.1. La versión alojada del 7.2 está disponible en el enlace del README.</p>
-    </section>
-    <section id="codigo" role="tabpanel" aria-labelledby="tab-codigo" hidden>
-      <section class="panel setup"><div class="section-heading"><h2>Ejecutar en tu computadora</h2><span class="mini-label">PYTHON 3.12</span></div><p>Desde la raíz de esta copia, utiliza su entorno virtual y abre la dirección que imprime la terminal. Mantenla en ejecución mientras usas la página.</p><div class="command"><code id="run-command">.\.venv\Scripts\python.exe scripts/run_simulation.py --port 8771</code><button data-copy="run-command">Copiar</button></div><p class="hint">En una copia nueva, instala requirements.txt y ejecuta primero los notebooks 01 y 02 para generar los datos preparados y el modelo. El servidor utiliza el modelo guardado, sin entrenarlo de nuevo.</p></section>
-      <div class="source-layout"><aside class="file-panel"><h2>Archivos del proyecto</h2><div id="source-tree" aria-label="Seleccionar un archivo de código"></div></aside><section class="code-panel"><div class="code-toolbar"><span id="source-title">Selecciona un archivo</span><a id="source-download" class="button" href="/project/file?file=README.md" download>Descargar ↓</a></div><p id="source-note" class="hint">Vista de lectura de los archivos locales.</p><pre tabindex="0" aria-label="Contenido del archivo seleccionado"><code id="source-content">Cargando código…</code></pre></section></div>
-      <p class="publication-note">El visor muestra los archivos de esta versión. Las modificaciones se guardan en la rama de trabajo y requieren revisión antes de integrarlas en main.</p>
-    </section>
-<footer><span>UPAO · Inteligencia Artificial: Principios y Técnicas</span><span>Representación ilustrativa · Modelo congelado · Datos sintéticos</span></footer><dialog id="usage-dialog" class="manual-dialog" aria-labelledby="usage-title"><header class="manual-header"><div><span class="kicker">A TU RITMO, REGISTRO A REGISTRO</span><h2 id="usage-title">Guía de uso</h2></div><form method="dialog"><button type="submit" aria-label="Cerrar guía" autofocus>×</button></form></header><div class="manual-body"><p class="manual-intro">La reserva ya está preparada. La máquina es ilustrativa y los datos son sintéticos: cada paso muestra cómo responde el modelo a una observación.</p><ol class="manual-steps"><li><h3>Pon en marcha el monitor</h3><p>Usa <b>Iniciar simulación</b> para avanzar automáticamente, o <b>Siguiente</b> para procesar una sola observación. El intervalo controla la pausa entre registros.</p></li><li><h3>Lee las mediciones y la decisión</h3><p>Consulta las cinco tarjetas, el UDI y el tipo de producto. Una alerta indica que el modelo predijo falla; la etiqueta real se compara después y no entra al modelo.</p></li><li><h3>Explora los gráficos</h3><p>Elige Rotación, Torque, Aire, Proceso o Desgaste. Verás hasta los últimos 60 registros procesados; no es una serie temporal de una máquina real. Las alertas recientes corresponden a esa ventana.</p></li><li><h3>Pausa, continúa o empieza de nuevo</h3><p><b>Pausar</b> conserva el avance y <b>Continuar</b> lo reanuda. <b>Reiniciar</b> borra la sesión: exporta antes si quieres guardar los resultados. Cambiar de sección no pausa la reproducción.</p></li><li><h3>Guarda lo que revisaste</h3><p><b>Exportar CSV</b> descarga todos los registros procesados, aunque la tabla muestre solo ocho. Incluye predicciones, etiquetas, aciertos, errores y tiempos del modelo.</p></li><li><h3>Hazlo cómodo para ti</h3><p>El interruptor de la esquina superior derecha alterna claro y oscuro y recuerda la elección. En <b>El proyecto</b> están los resultados y el informe; en <b>Código</b>, los archivos e instrucciones.</p></li></ol><div class="manual-bottom"><p>Una predicción sin falla no garantiza ausencia de ella. Para instalación, carga de CSV y solución de problemas, consulta el manual completo.</p><a class="button" href="/project/file?file=docs%2FMANUAL_USUARIO.md" download>Descargar manual ↓</a></div></div></dialog></main></div></body></html>
+</body>
+</html>
