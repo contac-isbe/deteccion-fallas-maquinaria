@@ -5,7 +5,7 @@ const tabs = [...document.querySelectorAll('[role="tab"]')];
 const titles = {
   documentacion: [
     "El proyecto",
-    "Metodología, resultados verificados y alcance del sistema de clasificación.",
+    "Metodología, métricas verificadas y alcance del sistema de clasificación.",
     "EL PROYECTO"
   ],
   codigo: [
@@ -15,7 +15,7 @@ const titles = {
   ],
   ejecucion: [
     "Monitor de maquinaria",
-    "Reproduce observaciones de prueba e inspecciona en tiempo real la cinemática simulada, telemetría y decisiones del modelo.",
+    "Telemetría en vivo, operación CNC simulada y diagnóstico del árbol de decisión.",
     "MONITOR"
   ]
 };
@@ -78,6 +78,18 @@ document.querySelectorAll("[data-go]").forEach(button => {
 selectPanel(location.hash.slice(1));
 
 /* ==========================================================================
+   Spotlight Interactivo en Tarjetas Bento (seguimiento suave del cursor)
+   ========================================================================== */
+
+document.querySelectorAll(".bento-card").forEach(card => {
+  card.addEventListener("pointermove", event => {
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${(event.clientX - rect.left).toFixed(1)}px`);
+    card.style.setProperty("--my", `${(event.clientY - rect.top).toFixed(1)}px`);
+  }, { passive: true });
+});
+
+/* ==========================================================================
    Control de Pantalla de Presentación (Splash Screen)
    ========================================================================== */
 
@@ -106,12 +118,13 @@ function dismissSplash(targetPanel = null) {
   const finish = () => {
     document.documentElement.dataset.splash = "done";
     splashEl.classList.remove("is-leaving");
+    window.requestAnimationFrame(moveNavSlider);
     window.dispatchEvent(new CustomEvent("portal-panel", { detail: location.hash.slice(1) || "ejecucion" }));
   };
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     finish();
   } else {
-    window.setTimeout(finish, 400);
+    window.setTimeout(finish, 420);
   }
 }
 
@@ -147,8 +160,8 @@ document.addEventListener("keydown", event => {
 });
 
 /* ==========================================================================
-   Fondo Animado Técnico Reactivo (<canvas id="bg-canvas">)
-   Retícula CAD interactiva con el cursor + ondas de telemetría reactivas.
+   Fondo Atmosférico Fluido (<canvas id="bg-canvas">)
+   Corrientes de luz suaves + cintas armónicas ondulantes + micro-partículas.
    ========================================================================== */
 
 (() => {
@@ -161,24 +174,40 @@ document.addEventListener("keydown", event => {
   let width = 0;
   let height = 0;
   let dpr = 1;
-  let phase = 0;
+  let t = 0;
   let rafId = 0;
-  const pointer = { x: -9999, y: -9999, active: false };
+  const pointer = { x: 0.5, y: 0.35, tx: 0.5, ty: 0.35 };
+  const particles = Array.from({ length: 34 }, (_, i) => ({
+    x: ((i * 97) % 100) / 100,
+    y: ((i * 53 + 17) % 100) / 100,
+    r: 1 + (i % 3) * 0.65,
+    vx: ((i % 2 ? 1 : -1) * (0.00008 + (i % 5) * 0.00003)),
+    vy: -0.00006 - (i % 4) * 0.00003
+  }));
 
-  let palette = {
-    dot: "rgba(70, 96, 122, 0.17)",
-    wave: "rgba(11, 110, 124, 0.14)",
-    alert: "rgba(207, 82, 22, 0.2)",
-    cursor: "rgba(11, 110, 124, 0.35)"
+  let pal = {
+    a: "rgba(56, 217, 232, 0.14)",
+    b: "rgba(251, 146, 60, 0.09)",
+    alert: "rgba(251, 146, 60, 0.22)",
+    part: "rgba(255, 255, 255, 0.2)"
   };
+
+  // Glow suave basado en tiempo real (independiente de FPS)
+  let bloomLevel = 0;
+  let lastFrameTime = performance.now();
+
+  window.addEventListener("alert-boom", () => {
+    if (reduced.matches) return;
+    bloomLevel = 1;
+  });
 
   function syncPalette() {
     const style = getComputedStyle(document.documentElement);
-    palette = {
-      dot: style.getPropertyValue("--canvas-dot").trim() || palette.dot,
-      wave: style.getPropertyValue("--canvas-wave").trim() || palette.wave,
-      alert: style.getPropertyValue("--canvas-alert").trim() || palette.alert,
-      cursor: style.getPropertyValue("--canvas-cursor").trim() || palette.cursor
+    pal = {
+      a: style.getPropertyValue("--canvas-a").trim() || pal.a,
+      b: style.getPropertyValue("--canvas-b").trim() || pal.b,
+      alert: style.getPropertyValue("--canvas-alert").trim() || pal.alert,
+      part: style.getPropertyValue("--canvas-particle").trim() || pal.part
     };
   }
 
@@ -192,70 +221,81 @@ document.addEventListener("keydown", event => {
     syncPalette();
   }
 
-  function drawFrame() {
+  function drawFrame(now = performance.now()) {
+    const dt = Math.min(0.05, Math.max(0.001, (now - lastFrameTime) / 1000));
+    lastFrameTime = now;
+
     ctx.clearRect(0, 0, width, height);
     const isRunning = document.body.dataset.run === "running";
-    const isAlert = document.body.dataset.alert === "true";
 
-    // 1. Retícula técnica calibrada con iluminación sutil cerca del cursor
-    const step = 42;
-    ctx.fillStyle = palette.dot;
-    for (let x = 21; x < width; x += step) {
-      for (let y = 21; y < height; y += step) {
-        let r = 1.05;
-        if (pointer.active) {
-          const dx = x - pointer.x;
-          const dy = y - pointer.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 150) {
-            const boost = 1 - dist / 150;
-            ctx.fillStyle = isAlert ? palette.alert : palette.cursor;
-            ctx.beginPath();
-            ctx.arc(x, y, 1.1 + boost * 1.9, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = palette.dot;
-            continue;
-          }
-        }
-        ctx.fillRect(x - r * 0.5, y - r * 0.5, r, r);
-      }
-    }
+    // Suavizado inercial independiente de tasa de refresco
+    const ease = 1 - Math.exp(-3.2 * dt);
+    pointer.x += (pointer.tx - pointer.x) * ease;
+    pointer.y += (pointer.ty - pointer.y) * ease;
+    t += (isRunning ? 0.95 : 0.36) * dt;
 
-    // 2. Tres ondas suaves de telemetría sincronizadas al estado del monitor
-    const waveStroke = isAlert ? palette.alert : palette.wave;
-    ctx.lineWidth = 1.25;
-    ctx.strokeStyle = waveStroke;
-    const baseSpeed = isRunning ? 0.024 : 0.006;
-    phase += baseSpeed;
+    // 1. Auras atmosféricas estables
+    const ax = width * (0.22 + Math.sin(t * 0.6) * 0.08 + (pointer.x - 0.5) * 0.08);
+    const ay = height * (0.22 + Math.cos(t * 0.5) * 0.07 + (pointer.y - 0.5) * 0.06);
+    const g1 = ctx.createRadialGradient(ax, ay, 0, ax, ay, Math.max(width, height) * 0.48);
+    g1.addColorStop(0, pal.a);
+    g1.addColorStop(1, "transparent");
+    ctx.fillStyle = g1;
+    ctx.fillRect(0, 0, width, height);
 
+    const bx = width * (0.8 + Math.cos(t * 0.45) * 0.07);
+    const by = height * (0.78 + Math.sin(t * 0.55) * 0.07);
+    const g2 = ctx.createRadialGradient(bx, by, 0, bx, by, Math.max(width, height) * 0.42);
+    g2.addColorStop(0, pal.b);
+    g2.addColorStop(1, "transparent");
+    ctx.fillStyle = g2;
+    ctx.fillRect(0, 0, width, height);
+
+    // 2. Cintas armónicas sedosas
     for (let w = 0; w < 3; w++) {
       ctx.beginPath();
-      const baseY = height * (0.28 + w * 0.25);
-      const amp = (isRunning ? 22 : 12) + w * 5;
-      const freq = 0.0032 + w * 0.0011;
-      for (let x = 0; x <= width; x += 18) {
-        const y = baseY + Math.sin(x * freq + phase * (1 + w * 0.35) + w * 1.8) * amp;
-        if (x === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+      ctx.lineWidth = w === 0 ? 1.5 : 1.1;
+      ctx.strokeStyle = w === 2 ? pal.b : pal.a;
+      const baseY = height * (0.34 + w * 0.19);
+      const amp = (isRunning ? 32 : 19) + w * 7;
+      const freq = 0.0022 + w * 0.0007;
+      for (let x = 0; x <= width; x += 20) {
+        const wave =
+          Math.sin(x * freq + t * (1 + w * 0.25) + w * 1.9) * amp +
+          Math.cos(x * freq * 0.55 - t * 0.7) * (amp * 0.35);
+        if (x === 0) ctx.moveTo(x, baseY + wave);
+        else ctx.lineTo(x, baseY + wave);
       }
       ctx.stroke();
     }
 
-    // 3. Micro-retícula de coordenadas en la posición del cursor
-    if (pointer.active) {
-      ctx.strokeStyle = isAlert ? palette.alert : palette.cursor;
-      ctx.lineWidth = 0.8;
+    // 3. Micro-partículas flotantes sutiles
+    ctx.fillStyle = pal.part;
+    const speedMul = (isRunning ? 1.9 : 1) * (dt * 60);
+    for (const p of particles) {
+      p.x = (p.x + p.vx * speedMul + 1) % 1;
+      p.y = (p.y + p.vy * speedMul + 1) % 1;
       ctx.beginPath();
-      ctx.moveTo(pointer.x - 10, pointer.y);
-      ctx.lineTo(pointer.x + 10, pointer.y);
-      ctx.moveTo(pointer.x, pointer.y - 10);
-      ctx.lineTo(pointer.x, pointer.y + 10);
-      ctx.stroke();
+      ctx.arc(p.x * width, p.y * height, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 4. Resplandor atmosférico lento y sedoso (~2.2s de decaimiento exponencial suave)
+    if (bloomLevel > 0.004) {
+      bloomLevel *= Math.exp(-1.55 * dt);
+      const radius = Math.max(width, height) * (0.58 + (1 - bloomLevel) * 0.25);
+      const bg = ctx.createRadialGradient(width * 0.5, height * 0.36, 0, width * 0.5, height * 0.36, radius);
+      bg.addColorStop(0, `rgba(251, 146, 60, ${(bloomLevel * 0.16).toFixed(3)})`);
+      bg.addColorStop(0.6, `rgba(234, 88, 12, ${(bloomLevel * 0.07).toFixed(3)})`);
+      bg.addColorStop(1, "transparent");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, width, height);
     }
   }
 
-  function loop() {
-    if (!document.hidden) drawFrame();
+  function loop(now) {
+    if (!document.hidden) drawFrame(now);
+    else lastFrameTime = now;
     if (!reduced.matches) rafId = window.requestAnimationFrame(loop);
   }
 
@@ -266,19 +306,13 @@ document.addEventListener("keydown", event => {
     if (reduced.matches) drawFrame();
   });
   window.addEventListener("pointermove", event => {
-    pointer.x = event.clientX;
-    pointer.y = event.clientY;
-    pointer.active = true;
+    if (!width || !height) return;
+    pointer.tx = event.clientX / width;
+    pointer.ty = event.clientY / height;
   }, { passive: true });
-  window.addEventListener("pointerleave", () => {
-    pointer.active = false;
-  });
 
-  if (reduced.matches) {
-    drawFrame();
-  } else {
-    rafId = window.requestAnimationFrame(loop);
-  }
+  if (reduced.matches) drawFrame();
+  else rafId = window.requestAnimationFrame(loop);
 
   reduced.addEventListener("change", () => {
     window.cancelAnimationFrame(rafId);
@@ -340,7 +374,6 @@ async function loadProject() {
       if (target) target.textContent = value;
     }
 
-    // Diales radiales SVG (radio 26 -> circunferencia 163.36)
     const circumference = 2 * Math.PI * 26;
     const ringMap = {
       "ring-recall": p.metrics.recall,

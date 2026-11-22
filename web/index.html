@@ -19,19 +19,21 @@
 <body data-run="ready" data-alert="false">
   <a class="skip-link" href="#main">Ir al contenido principal</a>
 
-  <!-- Fondo técnico animado reactivo al cursor y a la simulación -->
+  <!-- Fondo atmosférico dinámico con ondas armónicas y partículas reactivas -->
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <!-- Bloom ambiental GPU suave al detectar una falla -->
+  <div id="alert-bloom" class="alert-bloom" aria-hidden="true"></div>
 
-  <!-- Pantalla de entrada cinemática / ficha de presentación (Splash Screen) -->
+  <!-- Pantalla de entrada curva estilo estudio (Splash Screen) -->
   <div id="splash-screen" class="splash" role="dialog" aria-modal="true" aria-labelledby="splash-title">
-    <div class="splash-backdrop" aria-hidden="true"></div>
+    <div class="splash-aura" aria-hidden="true"></div>
     <div class="splash-shell">
       <div class="splash-topbar">
         <span class="splash-inst">
           <span class="splash-pulse-dot" aria-hidden="true"></span>
-          UPAO · FACULTAD DE INGENIERÍA · SISTEMAS E INTELIGENCIA ARTIFICIAL
+          UPAO · INGENIERÍA DE SISTEMAS E IA
         </span>
-        <span class="splash-meta">AI4I 2020 · ENTORNO DE DIAGNÓSTICO</span>
+        <span class="splash-meta">AI4I 2020 · DIAGNÓSTICO PREDICTIVO</span>
       </div>
 
       <div class="splash-body">
@@ -41,126 +43,111 @@
             Detección de Fallas<br><span>en Maquinaria</span>
           </h2>
           <p class="splash-desc">
-            Consola interactiva de mantenimiento predictivo. Evalúa en vivo seis variables de mecanizado con un <strong>Árbol de decisión congelado</strong>, proyecta alertas y contrasta cada inferencia contra la etiqueta real del dataset.
+            Consola interactiva de telemetría CNC. Clasifica en tiempo real observaciones de mecanizado mediante un <strong>Árbol de decisión congelado</strong> y audita cada alerta frente a la etiqueta real.
           </p>
 
           <div class="splash-boot-log" aria-hidden="true">
-            <div class="boot-line" style="--d:120ms"><span>01</span> Modelo congelado verificado · <b>Árbol de decisión</b></div>
-            <div class="boot-line" style="--d:280ms"><span>02</span> Reserva independiente cargada · <b>2 000 observaciones AI4I</b></div>
-            <div class="boot-line" style="--d:440ms"><span>03</span> Evaluación histórica · <b>98,45 % exactitud · F1 0,7634</b></div>
-            <div class="boot-line is-ready" style="--d:600ms"><span>OK</span> Consola CNC y telemetría listas para inspección</div>
+            <div class="boot-line" style="--d:100ms"><span>01</span> Modelo verificado · <b>Árbol de decisión (SHA-256)</b></div>
+            <div class="boot-line" style="--d:240ms"><span>02</span> Reserva cargada · <b>2 000 registros AI4I 2020</b></div>
+            <div class="boot-line" style="--d:380ms"><span>03</span> Métricas validadas · <b>98,45 % exactitud · F1 0,7634</b></div>
+            <div class="boot-line is-ready" style="--d:520ms"><span>OK</span> Telemetría y cámara CNC listas</div>
           </div>
 
           <div class="splash-actions">
-            <button id="splash-enter" class="primary splash-cta" type="button">
+            <button id="splash-enter" class="splash-cta" type="button">
               <span>Ingresar al monitor</span>
               <svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
             </button>
-            <button id="splash-docs" class="splash-secondary" type="button">Resumen del proyecto</button>
+            <button id="splash-docs" class="splash-secondary" type="button">Ver resumen</button>
           </div>
         </div>
 
         <div class="splash-right" aria-hidden="true">
-          <svg class="splash-schematic" viewBox="0 0 420 360" fill="none">
+          <svg class="splash-schematic" viewBox="0 0 420 350" fill="none">
             <defs>
               <linearGradient id="sp-ring-grad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#22b8cf" stop-opacity="0.9"/>
-                <stop offset="100%" stop-color="#f08c42" stop-opacity="0.8"/>
-              </linearGradient>
-              <linearGradient id="sp-beam" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#22b8cf" stop-opacity="0"/>
-                <stop offset="50%" stop-color="#22b8cf" stop-opacity="0.45"/>
-                <stop offset="100%" stop-color="#22b8cf" stop-opacity="0"/>
+                <stop offset="0%" stop-color="#38d9e8" stop-opacity="0.95"/>
+                <stop offset="50%" stop-color="#a7f3d0" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#fb923c" stop-opacity="0.9"/>
               </linearGradient>
             </defs>
 
-            <!-- Ejes y retícula técnica -->
-            <circle cx="210" cy="148" r="108" stroke="#223548" stroke-width="1" stroke-dasharray="3 5"/>
-            <circle cx="210" cy="148" r="82" stroke="#1e3144" stroke-width="1"/>
-            <line x1="78" y1="148" x2="342" y2="148" stroke="#1f3142" stroke-width="1"/>
-            <line x1="210" y1="22" x2="210" y2="274" stroke="#1f3142" stroke-width="1"/>
+            <!-- Ondas armónicas suaves de fondo en el esquema -->
+            <path class="sp-wave-a" d="M20 148 Q115 92 210 148 T400 148" stroke="#38d9e8" stroke-opacity="0.22" stroke-width="1.5"/>
+            <path class="sp-wave-b" d="M20 148 Q115 204 210 148 T400 148" stroke="#fb923c" stroke-opacity="0.18" stroke-width="1.5"/>
 
-            <!-- Anillo orbital animado -->
+            <!-- Anillos orbitales suaves -->
+            <circle cx="210" cy="146" r="106" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="3 6"/>
             <g class="sp-orbit-slow">
-              <circle cx="210" cy="148" r="96" stroke="url(#sp-ring-grad)" stroke-width="2" stroke-dasharray="84 52 24 44" stroke-linecap="round"/>
+              <circle cx="210" cy="146" r="94" stroke="url(#sp-ring-grad)" stroke-width="2.2" stroke-dasharray="90 48 26 42" stroke-linecap="round"/>
             </g>
             <g class="sp-orbit-fast">
-              <circle cx="210" cy="148" r="66" stroke="#22b8cf" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="18 14"/>
+              <circle cx="210" cy="146" r="68" stroke="#38d9e8" stroke-opacity="0.4" stroke-width="1.4" stroke-dasharray="16 14" stroke-linecap="round"/>
             </g>
 
-            <!-- Silueta técnica del husillo CNC -->
-            <rect x="184" y="64" width="52" height="54" rx="6" fill="#172534" stroke="#3b5a75" stroke-width="1.5"/>
-            <rect x="193" y="118" width="34" height="22" rx="3" fill="#1e3144" stroke="#4f7494" stroke-width="1.2"/>
-            <path d="M198 140H222L216 156H204Z" fill="#2b455d"/>
+            <!-- Husillo estilizado -->
+            <rect x="184" y="66" width="52" height="50" rx="10" fill="#181c24" stroke="rgba(255,255,255,0.18)" stroke-width="1.3"/>
+            <rect x="194" y="116" width="32" height="20" rx="5" fill="#212733" stroke="rgba(255,255,255,0.16)" stroke-width="1.1"/>
+            <path d="M199 136H221L216 152H204Z" fill="#323b4c"/>
             <g class="sp-bit-anim">
-              <rect x="206" y="156" width="8" height="26" rx="1.5" fill="#d8e6f2"/>
-              <path d="M204 162L216 167M204 170L216 175" stroke="#22b8cf" stroke-width="1.8" stroke-linecap="round"/>
+              <rect x="206" y="152" width="8" height="26" rx="2" fill="#e5edf5"/>
+              <path d="M204 158L216 163M204 166L216 171" stroke="#38d9e8" stroke-width="1.8" stroke-linecap="round"/>
             </g>
-            <!-- Pieza mecanizada -->
-            <rect x="164" y="184" width="92" height="22" rx="4" fill="#1c2c3d" stroke="#3c5872" stroke-width="1.4"/>
-            <ellipse cx="210" cy="184" rx="46" ry="7" fill="#253b50" stroke="#4e7090" stroke-width="1"/>
-            <circle class="sp-spark-core" cx="210" cy="183" r="5" fill="#22b8cf"/>
-            <circle class="sp-spark-ring" cx="210" cy="183" r="14" stroke="#f08c42" stroke-width="1.5"/>
+            <rect x="164" y="180" width="92" height="22" rx="8" fill="#1c222d" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/>
+            <ellipse cx="210" cy="180" rx="46" ry="7" fill="#283140" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <circle class="sp-spark-core" cx="210" cy="179" r="5" fill="#38d9e8"/>
+            <circle class="sp-spark-ring" cx="210" cy="179" r="15" stroke="#fb923c" stroke-width="1.6"/>
 
-            <!-- Pipeline inferior con pulsos de datos -->
-            <path d="M56 306 H364" stroke="#24374a" stroke-width="2"/>
-            <path class="sp-data-flow" d="M56 306 H364" stroke="#22b8cf" stroke-width="2" stroke-dasharray="28 96" stroke-linecap="round"/>
+            <!-- Pipeline curvo inferior -->
+            <path d="M62 296 H358" stroke="rgba(255,255,255,0.1)" stroke-width="2" stroke-linecap="round"/>
+            <path class="sp-data-flow" d="M62 296 H358" stroke="#38d9e8" stroke-width="2.2" stroke-dasharray="32 92" stroke-linecap="round"/>
 
-            <g transform="translate(56, 306)">
-              <rect x="-46" y="-22" width="92" height="44" rx="8" fill="#121d29" stroke="#2c445c"/>
-              <text x="0" y="-3" text-anchor="middle" fill="#8ea6be" font-family="Inter,sans-serif" font-size="9" font-weight="600">ENTRADA</text>
-              <text x="0" y="12" text-anchor="middle" fill="#edf4fa" font-family="Consolas,monospace" font-size="11" font-weight="700">6 SENSORES</text>
+            <g transform="translate(62, 296)">
+              <rect x="-46" y="-22" width="92" height="44" rx="14" fill="#13171f" stroke="rgba(255,255,255,0.14)"/>
+              <text x="0" y="-3" text-anchor="middle" fill="#8b95a5" font-family="Inter,sans-serif" font-size="9" font-weight="600">ENTRADA</text>
+              <text x="0" y="12" text-anchor="middle" fill="#f3f6fa" font-family="Consolas,monospace" font-size="11" font-weight="700">6 SENSORES</text>
             </g>
-
-            <g transform="translate(210, 306)">
-              <rect x="-52" y="-22" width="104" height="44" rx="8" fill="#102934" stroke="#22b8cf"/>
-              <text x="0" y="-3" text-anchor="middle" fill="#7be0ef" font-family="Inter,sans-serif" font-size="9" font-weight="600">MODELO ML</text>
+            <g transform="translate(210, 296)">
+              <rect x="-52" y="-22" width="104" height="44" rx="14" fill="#11242b" stroke="#38d9e8"/>
+              <text x="0" y="-3" text-anchor="middle" fill="#7be9f5" font-family="Inter,sans-serif" font-size="9" font-weight="600">MODELO ML</text>
               <text x="0" y="12" text-anchor="middle" fill="#ffffff" font-family="Consolas,monospace" font-size="11" font-weight="700">ÁRBOL DEC.</text>
             </g>
-
-            <g transform="translate(364, 306)">
-              <rect x="-48" y="-22" width="96" height="44" rx="8" fill="#251a14" stroke="#f08c42"/>
-              <text x="0" y="-3" text-anchor="middle" fill="#f4b17f" font-family="Inter,sans-serif" font-size="9" font-weight="600">SALIDA</text>
-              <text x="0" y="12" text-anchor="middle" fill="#fff2e8" font-family="Consolas,monospace" font-size="11" font-weight="700">ALERTA / OK</text>
+            <g transform="translate(358, 296)">
+              <rect x="-46" y="-22" width="92" height="44" rx="14" fill="#251a14" stroke="#fb923c"/>
+              <text x="0" y="-3" text-anchor="middle" fill="#fdba74" font-family="Inter,sans-serif" font-size="9" font-weight="600">SALIDA</text>
+              <text x="0" y="12" text-anchor="middle" fill="#fff7ed" font-family="Consolas,monospace" font-size="11" font-weight="700">ALERTA / OK</text>
             </g>
-
-            <!-- Etiquetas HUD del esquema -->
-            <text x="26" y="42" fill="#6f879f" font-family="Consolas,monospace" font-size="10">RPM 1168–2886</text>
-            <text x="394" y="42" text-anchor="end" fill="#6f879f" font-family="Consolas,monospace" font-size="10">TORQUE 3.8–76.6 Nm</text>
-            <text x="26" y="256" fill="#6f879f" font-family="Consolas,monospace" font-size="10">PRECISIÓN 79,37 %</text>
-            <text x="394" y="256" text-anchor="end" fill="#6f879f" font-family="Consolas,monospace" font-size="10">SENSIBILIDAD 73,53 %</text>
           </svg>
         </div>
       </div>
 
       <div class="splash-footer">
-        <span>Docente: Hernán Sagastegui Chigne · Equipo UPAO · Datos sintéticos AI4I 2020</span>
+        <span>Docente: Hernán Sagastegui Chigne · Equipo UPAO · AI4I 2020</span>
         <span>Pulsa <kbd>Enter</kbd> o <kbd>Esc</kbd> para continuar</span>
       </div>
     </div>
   </div>
 
-  <!-- Nuevo Layout: Cabecera de Mando Horizontal (Command Deck) + Viewport Completo -->
+  <!-- Contenedor principal -->
   <div class="app-shell">
+    <!-- Header curvo minimalista estilo Studio Pill -->
     <header class="command-deck">
-      <div class="deck-accent-line" aria-hidden="true"></div>
       <div class="deck-inner">
         <a class="brand" href="#ejecucion" data-go="ejecucion">
           <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3.6"/>
-              <path d="M12 2.5v3M12 18.5v3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M2.5 12h3M18.5 12h3M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>
+            <!-- Nuevo monograma geométrico M-pulso CNC -->
+            <svg viewBox="0 0 28 28" fill="none">
+              <path d="M5.5 20V8.5L11.2 15.5L15 10.5L18.5 16L22.5 8.5V20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="22.5" cy="8.5" r="2.2" fill="var(--accent-warm)"/>
             </svg>
           </span>
           <span class="brand-copy">
-            <span class="brand-row">
-              <span class="brand-text">MAQUINARIA</span>
-              <span class="brand-tag">AI4I 2020</span>
-            </span>
-            <span class="brand-sub">Diagnóstico predictivo CNC</span>
+            <span class="brand-text">Maquinaria</span>
+            <span class="brand-sub">AI4I · Diagnóstico</span>
           </span>
         </a>
 
+        <!-- Navegación en cápsula con píldora deslizante de alto contraste -->
         <nav class="deck-nav" role="tablist" aria-label="Apartados del proyecto" aria-orientation="horizontal">
           <span class="nav-slider" id="nav-slider" aria-hidden="true"></span>
           <button id="tab-ejecucion" role="tab" aria-controls="ejecucion" aria-selected="true" data-panel="ejecucion">
@@ -179,12 +166,9 @@
 
         <div class="deck-actions">
           <span class="crumb-pill" id="topbar-section">MONITOR</span>
-          <div class="deck-links">
-            <button id="replay-splash" class="deck-link" type="button" title="Ver pantalla de presentación">Portada</button>
-            <button class="deck-link guide-button" data-open-manual type="button">Guía</button>
-            <a class="deck-link" href="https://github.com/contac-isbe/deteccion-fallas-maquinaria" target="_blank" rel="noopener">GitHub ↗</a>
-          </div>
-          <span class="deck-sep" aria-hidden="true"></span>
+          <button id="replay-splash" class="deck-pill-btn" type="button" title="Ver pantalla de presentación">Portada</button>
+          <button class="deck-pill-btn guide-button" data-open-manual type="button">Guía</button>
+          <a class="deck-pill-btn" href="https://github.com/contac-isbe/deteccion-fallas-maquinaria" target="_blank" rel="noopener" title="Abrir repositorio en GitHub">GitHub ↗</a>
           <button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" title="Activar modo oscuro">
             <svg class="theme-icon theme-icon-sun" viewBox="0 0 20 20" aria-hidden="true">
               <circle cx="10" cy="10" r="3.2"/>
@@ -202,41 +186,36 @@
     </header>
 
     <main id="main">
-      <!-- Encabezado compacto contextual con ficha técnica inline -->
+      <!-- Cabecera minimalista y limpia -->
       <header class="page-header">
         <div class="header-copy">
-          <div class="header-title-row">
-            <h1 id="page-title">Monitor de maquinaria</h1>
-            <span class="header-pill">UPAO · IA</span>
-          </div>
-          <p id="page-description">Reproduce observaciones de prueba e inspecciona en tiempo real la cinemática simulada, telemetría y decisiones del modelo.</p>
+          <h1 id="page-title">Monitor de maquinaria</h1>
+          <p id="page-description">Telemetría en vivo, operación CNC simulada y diagnóstico del árbol de decisión.</p>
         </div>
-        <div class="header-specs" aria-label="Especificaciones del modelo activo">
-          <div><span>MODELO</span><b>Árbol de decisión</b></div>
-          <div><span>RESERVA</span><b>2 000 obs.</b></div>
-          <div><span>EXACTITUD</span><b>98,45 %</b></div>
+        <div class="header-pills" aria-label="Resumen del modelo activo">
+          <span class="spec-chip">Árbol de decisión</span>
+          <span class="spec-chip">2 000 pruebas</span>
+          <span class="spec-chip is-accent">98,45 % exactitud</span>
         </div>
       </header>
 
       <p id="project-error" role="alert" hidden></p>
 
       <!-- ================================================================
-           PESTAÑA 1: MONITOR — COCKPIT DE TELEMETRÍA Y CNC VIVO
+           PESTAÑA 1: MONITOR — BENTO CURVO DE ALTO PROTAGONISMO
            ================================================================ -->
       <section id="ejecucion" role="tabpanel" aria-labelledby="tab-ejecucion">
-        <!-- Barra de transporte y reproducción -->
-        <div class="monitor-toolbar controls" aria-label="Controles de reproducción">
+        <!-- Cápsula de transporte simplificada -->
+        <div class="transport-dock controls" aria-label="Controles de reproducción">
           <div class="session-state">
             <span id="run-dot" class="run-dot" aria-hidden="true"></span>
-            <div>
+            <div class="session-copy">
               <strong id="status" role="status">Preparando el monitor…</strong>
-              <span>Reserva independiente · AI4I 2020 (2 000 registros)</span>
+              <div class="dock-progress">
+                <progress id="progress" max="2000" value="0" aria-label="Progreso de reproducción"></progress>
+                <span id="progress-pct" class="progress-pct">0 %</span>
+              </div>
             </div>
-          </div>
-
-          <div class="toolbar-progress" aria-hidden="true">
-            <progress id="progress" max="2000" value="0" aria-label="Progreso de reproducción"></progress>
-            <span id="progress-pct" class="progress-pct">0 %</span>
           </div>
 
           <div class="buttons">
@@ -245,7 +224,7 @@
             <button id="step" type="button" title="Procesar un registro">Siguiente</button>
             <button id="reset" class="reset-button" type="button">Reiniciar</button>
             <label class="interval-control" for="interval">
-              <span>Intervalo</span>
+              <span>Ritmo</span>
               <select id="interval" aria-label="Intervalo de reproducción">
                 <option value="0.2">0,2 s</option>
                 <option value="0.5" selected>0,5 s</option>
@@ -258,173 +237,194 @@
 
         <p id="error" role="alert" hidden></p>
 
-        <!-- Escenario Principal Cockpit: Máquina CNC Reactiva + Consola de Diagnóstico y Alertas -->
-        <div class="cockpit-grid">
-          <!-- Izquierda: Banco CNC Vivo -->
-          <section class="machine-panel">
-            <div class="machine-heading">
-              <div class="machine-title-group">
-                <span class="kicker">BANCO DE MECANIZADO CNC · CINEMÁTICA REACTIVA</span>
-                <h2>Cámara de operación virtual</h2>
+        <!-- FILA 1 BENTO HERO: Gráfica Protagonista (Izq) + Cámara CNC Viva (Der) -->
+        <div class="bento-hero">
+          <!-- PROTAGONISTA 1: Gráfica General Suave (Curva Bézier + Cortina Vertical) -->
+          <section class="bento-card trace-panel">
+            <div class="bento-head">
+              <div>
+                <h2 class="bento-title">Secuencia de mediciones</h2>
+                <div class="hero-metric-row">
+                  <strong id="chart-current" class="hero-number">— rpm</strong>
+                  <span id="chart-delta-pill" class="delta-pill">En espera</span>
+                </div>
               </div>
-              <div class="machine-meta-tags">
-                <span class="machine-tag" id="machine-state-pill">EN ESPERA</span>
-                <span class="machine-tag is-subtle">ILUSTRACIÓN SINTÉTICA</span>
+
+              <div class="chart-switch" aria-label="Variable del gráfico">
+                <button type="button" data-feature="Rotational speed [rpm]" aria-pressed="true">Rotación</button>
+                <button type="button" data-feature="Torque [Nm]" aria-pressed="false">Torque</button>
+                <button type="button" data-feature="Air temperature [K]" aria-pressed="false">Aire</button>
+                <button type="button" data-feature="Process temperature [K]" aria-pressed="false">Proceso</button>
+                <button type="button" data-feature="Tool wear [min]" aria-pressed="false">Desgaste</button>
               </div>
             </div>
 
+            <div class="trace-chart">
+              <svg id="trace" viewBox="0 0 760 270" role="img" aria-label="Sin registros procesados. El gráfico aparecerá al avanzar la simulación."></svg>
+              <div id="trace-tooltip" class="trace-tooltip" hidden></div>
+              <p id="chart-empty">
+                Sin observaciones en ventana
+                <span>Inicia la simulación o pulsa Siguiente para dibujar la curva.</span>
+              </p>
+            </div>
+
+            <div class="chart-footer-bar">
+              <div class="chart-legend">
+                <span><i aria-hidden="true"></i> Curva suavizada</span>
+                <span><i class="legend-alert" aria-hidden="true"></i> Alerta en este sensor</span>
+                <div class="scope-switch" role="group" aria-label="Alcance temporal de la gráfica">
+                  <button type="button" data-scope="window" aria-pressed="true">Últimos 60</button>
+                  <button type="button" data-scope="session" aria-pressed="false">Sesión</button>
+                </div>
+                <span id="chart-range">Sin registros</span>
+              </div>
+              <div class="chart-stats-inline">
+                <span>Mín <b id="chart-min-val">—</b></span>
+                <span>Prom <b id="chart-avg-val">—</b></span>
+                <span>Máx <b id="chart-max-val">—</b></span>
+              </div>
+            </div>
+          </section>
+
+          <!-- PROTAGONISTA 2: Cámara de Operación Virtual CNC -->
+          <section class="bento-card machine-panel">
+            <div class="bento-head machine-heading">
+              <div>
+                <h2 class="bento-title">Cámara de operación virtual</h2>
+                <p id="identity" class="machine-sub">Inicia la simulación para ver el primer registro.</p>
+              </div>
+              <span class="machine-tag" id="machine-state-pill">EN ESPERA</span>
+            </div>
+
             <div class="machine-viewport">
-              <svg class="machine-drawing" viewBox="0 0 760 400" role="img" aria-labelledby="machine-title machine-description">
+              <svg class="machine-drawing" viewBox="0 0 740 385" role="img" aria-labelledby="machine-title machine-description">
                 <title id="machine-title">Representación ilustrativa animada de una máquina de mecanizado CNC</title>
-                <desc id="machine-description">La velocidad del husillo, el recorrido de la mesa, la carga de torque y el color térmico responden a las lecturas del registro sintético actual. No está conectada a maquinaria física.</desc>
+                <desc id="machine-description">La velocidad del husillo, el recorrido de la mesa, la carga de torque y el color térmico responden al registro sintético actual. No está conectada a maquinaria física.</desc>
                 <defs>
                   <linearGradient id="body-gradient" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stop-color="#e3e9ef"/>
-                    <stop offset="55%" stop-color="#cfd8e2"/>
                     <stop offset="100%" stop-color="#b4c0ce"/>
                   </linearGradient>
                   <linearGradient id="glass-gradient" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stop-color="#172330"/>
-                    <stop offset="100%" stop-color="#0b121a"/>
+                    <stop offset="100%" stop-color="#090e14"/>
                   </linearGradient>
                   <linearGradient id="steel-gradient" x1="0" y1="0" x2="1" y2="0">
                     <stop offset="0%" stop-color="#78889a"/>
-                    <stop offset="35%" stop-color="#e4ecf3"/>
+                    <stop offset="35%" stop-color="#edf3f8"/>
                     <stop offset="65%" stop-color="#b8c6d4"/>
-                    <stop offset="100%" stop-color="#5c6c7e"/>
+                    <stop offset="100%" stop-color="#5a6a7c"/>
                   </linearGradient>
                   <linearGradient id="beam-gradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#22b8cf" stop-opacity="0"/>
-                    <stop offset="75%" stop-color="#22b8cf" stop-opacity="0.45"/>
-                    <stop offset="100%" stop-color="#22b8cf" stop-opacity="0.9"/>
+                    <stop offset="0%" stop-color="#38d9e8" stop-opacity="0"/>
+                    <stop offset="75%" stop-color="#38d9e8" stop-opacity="0.45"/>
+                    <stop offset="100%" stop-color="#38d9e8" stop-opacity="0.95"/>
                   </linearGradient>
                   <radialGradient id="heat-gradient" cx="50%" cy="35%" r="60%">
-                    <stop offset="0%" stop-color="#ff922b" stop-opacity="0.9"/>
-                    <stop offset="55%" stop-color="#e8590c" stop-opacity="0.45"/>
-                    <stop offset="100%" stop-color="#e8590c" stop-opacity="0"/>
+                    <stop offset="0%" stop-color="#ff922b" stop-opacity="0.95"/>
+                    <stop offset="55%" stop-color="#ea580c" stop-opacity="0.5"/>
+                    <stop offset="100%" stop-color="#ea580c" stop-opacity="0"/>
                   </radialGradient>
-                  <pattern id="stage-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-                    <circle cx="1" cy="1" r="0.85" fill="#c3ceda"/>
+                  <pattern id="stage-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+                    <circle cx="1.2" cy="1.2" r="0.85" fill="#c3ceda"/>
                   </pattern>
                   <clipPath id="window-clip">
-                    <rect x="200" y="106" width="276" height="190" rx="10"/>
+                    <rect x="190" y="98" width="276" height="190" rx="14"/>
                   </clipPath>
                 </defs>
 
-                <rect width="760" height="400" fill="url(#stage-grid)"/>
-                <ellipse class="machine-shadow" cx="380" cy="360" rx="260" ry="18" fill="#c6d1dc" opacity="0.65"/>
+                <rect width="740" height="385" fill="url(#stage-grid)"/>
+                <ellipse class="machine-shadow" cx="370" cy="352" rx="250" ry="16" fill="#c6d1dc" opacity="0.65"/>
 
-                <!-- Torre luminosa Andon superior (indicador de planta real) -->
-                <g class="andon-tower" transform="translate(508, 30)">
-                  <rect x="10" y="42" width="10" height="14" rx="2" fill="#5e6d7e"/>
-                  <rect x="6" y="4" width="18" height="40" rx="4" fill="#23303f" stroke="#4d5e70" stroke-width="1"/>
+                <!-- Torre Andon superior -->
+                <g class="andon-tower" transform="translate(498, 22)">
+                  <rect x="10" y="42" width="10" height="14" rx="3" fill="#5e6d7e"/>
+                  <rect x="6" y="4" width="18" height="40" rx="6" fill="#1e2733" stroke="#4d5e70" stroke-width="1"/>
                   <circle class="andon-lamp andon-red" cx="15" cy="13" r="5" fill="#4f2d28"/>
                   <circle class="andon-lamp andon-cyan" cx="15" cy="24" r="5" fill="#1e444e"/>
                   <circle class="andon-lamp andon-green" cx="15" cy="35" r="5" fill="#1f4632"/>
                 </g>
 
-                <!-- Carcasa 3D industrial de la máquina CNC -->
-                <path class="mach-depth" d="M168 86 L194 66 H556 L584 88 V328 L560 350 H168 Z" fill="#9da9b7" stroke="#8593a3" stroke-width="1.2"/>
-                <rect class="mach-shell" x="162" y="82" width="398" height="262" rx="14" fill="url(#body-gradient)" stroke="#92a0b0" stroke-width="1.5"/>
-                <path class="mach-base" d="M163 318 H559 V332 Q559 344 547 344 H175 Q163 344 163 332 Z" fill="#8290a0"/>
+                <!-- Carcasa CNC más redondeada y moderna -->
+                <path class="mach-depth" d="M162 80 L186 58 H546 L574 82 V320 L550 342 H162 Z" fill="#9da9b7" stroke="#8593a3" stroke-width="1.1"/>
+                <rect class="mach-shell" x="152" y="74" width="398" height="262" rx="22" fill="url(#body-gradient)" stroke="#92a0b0" stroke-width="1.4"/>
+                <path class="mach-base" d="M153 310 H549 V322 Q549 336 535 336 H167 Q153 336 153 322 Z" fill="#8290a0"/>
 
-                <!-- Pernos de esquina -->
-                <g fill="#738394" opacity="0.7">
-                  <circle cx="176" cy="96" r="2.2"/><circle cx="546" cy="96" r="2.2"/>
-                  <circle cx="176" cy="330" r="2.2"/><circle cx="546" cy="330" r="2.2"/>
-                </g>
-
-                <!-- Marco de la ventana blindada -->
-                <rect class="mach-bezel" x="186" y="96" width="304" height="212" rx="14" fill="#d7e0e9" stroke="#9aa8b8"/>
-                <rect x="200" y="106" width="276" height="190" rx="10" fill="url(#glass-gradient)"/>
+                <!-- Ventana curva blindada -->
+                <rect class="mach-bezel" x="176" y="88" width="304" height="212" rx="18" fill="#d7e0e9" stroke="#9aa8b8"/>
+                <rect x="190" y="98" width="276" height="190" rx="14" fill="url(#glass-gradient)"/>
 
                 <!-- INTERIOR DE LA CÁMARA CNC -->
                 <g clip-path="url(#window-clip)">
-                  <!-- Luz LED interior del techo de cámara -->
-                  <rect class="chamber-led" x="234" y="106" width="208" height="4" rx="2" fill="#22b8cf" opacity="0.5"/>
-                  <polygon class="chamber-cone" points="234,110 442,110 470,285 206,285" fill="#22b8cf" opacity="0.035"/>
+                  <rect class="chamber-led" x="224" y="98" width="208" height="4" rx="2" fill="#38d9e8" opacity="0.55"/>
+                  <polygon class="chamber-cone" points="224,102 432,102 460,278 196,278" fill="#38d9e8" opacity="0.04"/>
+                  <path d="M190 138H466 M190 178H466 M190 218H466 M190 258H466 M236 98V288 M282 98V288 M328 98V288 M374 98V288 M420 98V288" stroke="#4f6b85" opacity="0.16"/>
 
-                  <!-- Rejilla de coordenadas CNC interna -->
-                  <path d="M200 146H476 M200 186H476 M200 226H476 M200 266H476 M246 106V296 M292 106V296 M338 106V296 M384 106V296 M430 106V296" stroke="#4f6b85" opacity="0.18"/>
+                  <!-- Guías verticales -->
+                  <rect x="300" y="98" width="6" height="132" fill="#2a3a4c"/>
+                  <rect x="350" y="98" width="6" height="132" fill="#2a3a4c"/>
+                  <line x1="328" y1="98" x2="328" y2="228" stroke="#4d6278" stroke-width="3" stroke-dasharray="3 3"/>
 
-                  <!-- Guías verticales y husillo de bolas Z -->
-                  <rect x="310" y="106" width="6" height="132" fill="#2a3a4c"/>
-                  <rect x="360" y="106" width="6" height="132" fill="#2a3a4c"/>
-                  <line x1="338" y1="106" x2="338" y2="236" stroke="#4d6278" stroke-width="3" stroke-dasharray="3 3"/>
-
-                  <!-- MESA DE TRABAJO MÓVIL (EJE X) + MORDAZA + PIEZA -->
+                  <!-- Mesa X móvil + pieza -->
                   <g class="cnc-table">
-                    <!-- Carro inferior -->
-                    <path d="M226 266 H450 L468 280 H208 Z" fill="#5e6f82"/>
-                    <rect x="208" y="280" width="260" height="16" fill="#3f4e5e"/>
-                    <!-- Mesa con ranuras en T -->
-                    <path d="M242 265 L256 250 H420 L434 265 Z" fill="#92a2b3"/>
-                    <path d="M258 264 L270 251 M282 264 L294 251 M306 264 L318 251 M330 264 L342 251 M354 264 L366 251 M378 264 L390 251 M402 264 L414 251" stroke="#536578" stroke-width="1.2"/>
-                    <!-- Mordazas laterales sujetando la pieza -->
-                    <rect x="274" y="232" width="22" height="19" rx="2" fill="#4f6073" stroke="#7c8fa3" stroke-width="1"/>
-                    <rect x="380" y="232" width="22" height="19" rx="2" fill="#4f6073" stroke="#7c8fa3" stroke-width="1"/>
-                    <!-- Pieza metálica cilíndrica (billet) -->
-                    <rect x="296" y="228" width="84" height="23" rx="3" fill="#c7d3df"/>
-                    <ellipse cx="338" cy="228" rx="42" ry="8" fill="#e7eff6"/>
-                    <ellipse cx="338" cy="228" rx="24" ry="4.5" fill="#b8c7d6" opacity="0.65"/>
-                    <!-- Resplandor térmico dinámico controlado por temperatura real -->
-                    <ellipse id="workpiece-heat" cx="338" cy="228" rx="34" ry="10" fill="url(#heat-gradient)" opacity="0.1"/>
+                    <path d="M216 258 H440 L458 272 H198 Z" fill="#5e6f82"/>
+                    <rect x="198" y="272" width="260" height="16" fill="#3f4e5e"/>
+                    <path d="M232 257 L246 242 H410 L424 257 Z" fill="#92a2b3"/>
+                    <path d="M248 256 L260 243 M272 256 L284 243 M296 256 L308 243 M320 256 L332 243 M344 256 L356 243 M368 256 L380 243 M392 256 L404 243" stroke="#536578" stroke-width="1.2"/>
+                    <rect x="264" y="224" width="22" height="19" rx="3" fill="#4f6073" stroke="#7c8fa3" stroke-width="1"/>
+                    <rect x="370" y="224" width="22" height="19" rx="3" fill="#4f6073" stroke="#7c8fa3" stroke-width="1"/>
+                    <rect x="286" y="220" width="84" height="23" rx="5" fill="#c7d3df"/>
+                    <ellipse cx="328" cy="220" rx="42" ry="8" fill="#e7eff6"/>
+                    <ellipse cx="328" cy="220" rx="24" ry="4.5" fill="#b8c7d6" opacity="0.65"/>
+                    <ellipse id="workpiece-heat" cx="328" cy="220" rx="35" ry="11" fill="url(#heat-gradient)" opacity="0.1"/>
                   </g>
 
-                  <!-- CABEZAL Y HUSILLO MÓVIL (EJE Z) -->
+                  <!-- Cabezal Z móvil + fresa helicoidal + chispas -->
                   <g class="cnc-head">
-                    <rect x="313" y="106" width="50" height="44" fill="#637487"/>
-                    <rect x="317" y="132" width="42" height="54" rx="5" fill="url(#steel-gradient)" stroke="#5b6d80" stroke-width="1"/>
-                    <!-- Ranuras de refrigeración del cabezal -->
-                    <path d="M322 142H354 M322 148H354 M322 154H354" stroke="#4d5f72" stroke-width="1.3" opacity="0.65"/>
-                    <!-- Portaherramientas / Chuck giratorio -->
-                    <path d="M324 186 H352 L347 201 H329 Z" fill="#8fa0b3" stroke="#536578" stroke-width="0.8"/>
+                    <rect x="303" y="98" width="50" height="44" fill="#637487"/>
+                    <rect x="307" y="124" width="42" height="54" rx="8" fill="url(#steel-gradient)" stroke="#5b6d80" stroke-width="1"/>
+                    <path d="M312 134H344 M312 140H344 M312 146H344" stroke="#4d5f72" stroke-width="1.3" opacity="0.65"/>
+                    <path d="M314 178 H342 L337 193 H319 Z" fill="#8fa0b3" stroke="#536578" stroke-width="0.8"/>
                     <g class="chuck-collar">
-                      <line x1="331" y1="189" x2="331" y2="198" stroke="#1e2d3b" stroke-width="2"/>
-                      <line x1="338" y1="189" x2="338" y2="198" stroke="#e8f1f8" stroke-width="2"/>
-                      <line x1="345" y1="189" x2="345" y2="198" stroke="#1e2d3b" stroke-width="2"/>
+                      <line x1="321" y1="181" x2="321" y2="190" stroke="#1e2d3b" stroke-width="2"/>
+                      <line x1="328" y1="181" x2="328" y2="190" stroke="#e8f1f8" stroke-width="2"/>
+                      <line x1="335" y1="181" x2="335" y2="190" stroke="#1e2d3b" stroke-width="2"/>
                     </g>
-                    <!-- Fresa helicoidal (velocidad vinculada a RPM reales) -->
                     <g class="spindle-motion">
-                      <rect x="333.5" y="201" width="9" height="26" rx="1.5" fill="#dce6f0"/>
-                      <path class="flute-grooves" d="M332 204 L344 209 M332 210 L344 215 M332 216 L344 221 M332 222 L344 227" stroke="#22b8cf" stroke-width="1.8" stroke-linecap="round"/>
+                      <rect x="323.5" y="193" width="9" height="26" rx="2" fill="#dce6f0"/>
+                      <path class="flute-grooves" d="M322 196 L334 201 M322 202 L334 207 M322 208 L334 213 M322 214 L334 219" stroke="#38d9e8" stroke-width="1.8" stroke-linecap="round"/>
                     </g>
-                    <!-- Punto de contacto y chispas de mecanizado -->
                     <g class="cnc-sparks">
-                      <circle class="spindle-contact" cx="338" cy="226" r="4.5" fill="#3bc9db"/>
-                      <line class="spark s1" x1="338" y1="226" x2="320" y2="215" stroke="#ffcf70" stroke-width="1.6" stroke-linecap="round"/>
-                      <line class="spark s2" x1="338" y1="226" x2="357" y2="213" stroke="#ff922b" stroke-width="1.6" stroke-linecap="round"/>
-                      <line class="spark s3" x1="338" y1="226" x2="314" y2="224" stroke="#3bc9db" stroke-width="1.4" stroke-linecap="round"/>
-                      <line class="spark s4" x1="338" y1="226" x2="364" y2="222" stroke="#ffd88a" stroke-width="1.4" stroke-linecap="round"/>
-                      <line class="spark s5" x1="338" y1="226" x2="326" y2="208" stroke="#ff922b" stroke-width="1.3" stroke-linecap="round"/>
-                      <line class="spark s6" x1="338" y1="226" x2="352" y2="207" stroke="#ffcf70" stroke-width="1.3" stroke-linecap="round"/>
+                      <circle class="spindle-contact" cx="328" cy="218" r="4.5" fill="#38d9e8"/>
+                      <line class="spark s1" x1="328" y1="218" x2="310" y2="207" stroke="#ffcf70" stroke-width="1.6" stroke-linecap="round"/>
+                      <line class="spark s2" x1="328" y1="218" x2="347" y2="205" stroke="#ff922b" stroke-width="1.6" stroke-linecap="round"/>
+                      <line class="spark s3" x1="328" y1="218" x2="304" y2="216" stroke="#38d9e8" stroke-width="1.4" stroke-linecap="round"/>
+                      <line class="spark s4" x1="328" y1="218" x2="354" y2="214" stroke="#ffd88a" stroke-width="1.4" stroke-linecap="round"/>
+                      <line class="spark s5" x1="328" y1="218" x2="316" y2="200" stroke="#ff922b" stroke-width="1.3" stroke-linecap="round"/>
+                      <line class="spark s6" x1="328" y1="218" x2="342" y2="199" stroke="#ffcf70" stroke-width="1.3" stroke-linecap="round"/>
                     </g>
                   </g>
 
-                  <!-- Reflejo de vidrio + Haz láser de escaneo -->
-                  <path d="M200 118 L476 264 M200 138 L476 284" stroke="#9be4ef" stroke-width="14" opacity="0.03"/>
-                  <rect class="scan-beam" x="200" y="106" width="276" height="16" fill="url(#beam-gradient)" opacity="0"/>
+                  <path d="M190 110 L466 256 M190 130 L466 276" stroke="#9be4ef" stroke-width="14" opacity="0.03"/>
+                  <rect class="scan-beam" x="190" y="98" width="276" height="16" fill="url(#beam-gradient)" opacity="0"/>
                 </g>
 
-                <!-- Consola lateral CNC con medidores dinámicos en vivo -->
-                <rect class="mach-console" x="502" y="108" width="46" height="114" rx="6" fill="#202e3d" stroke="#425468" stroke-width="1"/>
-                <!-- Pantalla mini osciloscopio -->
-                <rect x="508" y="116" width="34" height="28" rx="3" fill="#0b131c"/>
-                <path class="console-wave" d="M511 134 L516 125 L521 131 L527 121 L533 129 L539 124" fill="none" stroke="#22b8cf" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Barras en vivo de Torque y Desgaste dentro de la consola -->
-                <rect x="510" y="150" width="12" height="36" rx="2" fill="#0f1822"/>
-                <rect id="machine-torque-bar" x="512" y="182" width="8" height="2" rx="1" fill="#22b8cf"/>
-                <rect x="528" y="150" width="12" height="36" rx="2" fill="#0f1822"/>
-                <rect id="machine-wear-bar" x="530" y="182" width="8" height="2" rx="1" fill="#f08c42"/>
-                <text x="516" y="196" text-anchor="middle" fill="#8ca2b8" font-family="Consolas,monospace" font-size="6.5">TQ</text>
-                <text x="534" y="196" text-anchor="middle" fill="#8ca2b8" font-family="Consolas,monospace" font-size="6.5">WR</text>
-                <!-- LED principal -->
-                <circle class="machine-indicator-halo" cx="525" cy="210" r="9" fill="transparent"/>
-                <circle class="machine-indicator" cx="525" cy="210" r="4.8" fill="#8898a8"/>
+                <!-- Consola lateral CNC -->
+                <rect class="mach-console" x="492" y="100" width="46" height="114" rx="10" fill="#1c2530" stroke="#425468" stroke-width="1"/>
+                <rect x="498" y="108" width="34" height="28" rx="5" fill="#090f16"/>
+                <path class="console-wave" d="M501 126 L506 117 L511 123 L517 113 L523 121 L529 116" fill="none" stroke="#38d9e8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="500" y="142" width="12" height="36" rx="3" fill="#0d141d"/>
+                <rect id="machine-torque-bar" x="502" y="174" width="8" height="2" rx="1.5" fill="#38d9e8"/>
+                <rect x="518" y="142" width="12" height="36" rx="3" fill="#0d141d"/>
+                <rect id="machine-wear-bar" x="520" y="174" width="8" height="2" rx="1.5" fill="#fb923c"/>
+                <text x="506" y="188" text-anchor="middle" fill="#8ca2b8" font-family="Consolas,monospace" font-size="6.5">TQ</text>
+                <text x="524" y="188" text-anchor="middle" fill="#8ca2b8" font-family="Consolas,monospace" font-size="6.5">WR</text>
+                <circle class="machine-indicator-halo" cx="515" cy="202" r="9" fill="transparent"/>
+                <circle class="machine-indicator" cx="515" cy="202" r="4.8" fill="#8898a8"/>
 
-                <!-- Rejilla de ventilación con ventilador giratorio -->
-                <g transform="translate(525, 264)">
-                  <circle cx="0" cy="0" r="20" fill="#18232f" stroke="#4d6073" stroke-width="1.2"/>
+                <!-- Ventilador lateral -->
+                <g transform="translate(515, 256)">
+                  <circle cx="0" cy="0" r="20" fill="#151d27" stroke="#4d6073" stroke-width="1.2"/>
                   <g class="cooling-fan">
                     <path d="M0 -15 C5 -12 5 -4 0 0 C-5 -4 -5 -12 0 -15 Z" fill="#5e768e"/>
                     <path d="M15 0 C12 5 4 5 0 0 C4 -5 12 -5 15 0 Z" fill="#5e768e"/>
@@ -432,245 +432,215 @@
                     <path d="M-15 0 C-12 -5 -4 -5 0 0 C-4 5 -12 5 -15 0 Z" fill="#5e768e"/>
                     <circle cx="0" cy="0" r="3.5" fill="#9fb2c4"/>
                   </g>
-                  <circle cx="0" cy="0" r="14" fill="none" stroke="#2c3e50" stroke-width="1" stroke-dasharray="2 3"/>
                 </g>
 
-                <!-- Soportes y manija de puerta -->
-                <path class="mach-feet" d="M178 345 H224 V355 H178 M496 345 H542 V355 H496" fill="#4a5868"/>
-                <rect x="316" y="325" width="48" height="6" rx="3" fill="#556577"/>
+                <path class="mach-feet" d="M168 337 H214 V347 H168 M486 337 H532 V347 H486" fill="#4a5868"/>
+                <rect x="306" y="317" width="48" height="6" rx="3" fill="#556577"/>
 
-                <!-- Callouts HUD 4 esquinas con lecturas reales -->
+                <!-- 4 Callouts HUD limpios -->
                 <g class="callout-group">
-                  <path class="callout-line" d="M338 164 H120 V138 H28" fill="none" stroke-dasharray="3 4"/>
-                  <circle class="callout-dot" cx="338" cy="164" r="3.5"/>
-                  <text x="28" y="117" class="svg-label">VELOCIDAD</text>
-                  <text x="28" y="134" id="machine-rpm" class="svg-value">— rpm</text>
-                </g>
-
-                <g class="callout-group">
-                  <path class="callout-line" d="M296 236 H120 V268 H28" fill="none" stroke-dasharray="3 4"/>
-                  <circle class="callout-dot" cx="296" cy="236" r="3.5"/>
-                  <text x="28" y="286" class="svg-label">Δ TÉRMICO (PROC − AIRE)</text>
-                  <text x="28" y="303" id="machine-delta-t" class="svg-value">— K</text>
+                  <path class="callout-line" d="M328 156 H112 V130 H20" fill="none" stroke-dasharray="3 4"/>
+                  <circle class="callout-dot" cx="328" cy="156" r="3.5"/>
+                  <text x="20" y="109" class="svg-label">VELOCIDAD</text>
+                  <text x="20" y="126" id="machine-rpm" class="svg-value">— rpm</text>
                 </g>
 
                 <g class="callout-group">
-                  <path class="callout-line" d="M342 208 H618 V138 H732" fill="none" stroke-dasharray="3 4"/>
-                  <circle class="callout-dot" cx="342" cy="208" r="3.5"/>
-                  <text x="732" y="117" text-anchor="end" class="svg-label">DESGASTE</text>
-                  <text x="732" y="134" text-anchor="end" id="machine-wear" class="svg-value">— min</text>
+                  <path class="callout-line" d="M286 228 H112 V260 H20" fill="none" stroke-dasharray="3 4"/>
+                  <circle class="callout-dot" cx="286" cy="228" r="3.5"/>
+                  <text x="20" y="278" class="svg-label">Δ TÉRMICO</text>
+                  <text x="20" y="295" id="machine-delta-t" class="svg-value">— K</text>
                 </g>
 
                 <g class="callout-group">
-                  <path class="callout-line" d="M380 236 H618 V268 H732" fill="none" stroke-dasharray="3 4"/>
-                  <circle class="callout-dot" cx="380" cy="236" r="3.5"/>
-                  <text x="732" y="286" text-anchor="end" class="svg-label">TORQUE</text>
-                  <text x="732" y="303" text-anchor="end" id="machine-torque" class="svg-value">— Nm</text>
+                  <path class="callout-line" d="M332 200 H608 V130 H720" fill="none" stroke-dasharray="3 4"/>
+                  <circle class="callout-dot" cx="332" cy="200" r="3.5"/>
+                  <text x="720" y="109" text-anchor="end" class="svg-label">DESGASTE</text>
+                  <text x="720" y="126" text-anchor="end" id="machine-wear" class="svg-value">— min</text>
+                </g>
+
+                <g class="callout-group">
+                  <path class="callout-line" d="M370 228 H608 V260 H720" fill="none" stroke-dasharray="3 4"/>
+                  <circle class="callout-dot" cx="370" cy="228" r="3.5"/>
+                  <text x="720" y="278" text-anchor="end" class="svg-label">TORQUE</text>
+                  <text x="720" y="295" text-anchor="end" id="machine-torque" class="svg-value">— Nm</text>
                 </g>
               </svg>
             </div>
+          </section>
+        </div>
 
-            <div class="machine-footer">
-              <p id="identity">Inicia la simulación para ver la primera observación.</p>
-              <span>Velocidad y respuesta térmica vinculadas al registro actual</span>
+        <!-- FILA 2 BENTO TRIO: Clasificación + Dial Semicircular | Sensores Compactos | Alertas Recientes -->
+        <div class="bento-trio">
+          <!-- PROTAGONISTA 3: Clasificación Actual + Dial Semicircular Segmentado -->
+          <section class="bento-card decision-panel">
+            <div class="bento-head">
+              <h2 class="bento-title">Clasificación actual</h2>
+              <span class="latency-chip" id="latency">— / — ms</span>
+            </div>
+
+            <div id="prediction" class="prediction neutral" role="status">Sin predicción</div>
+            <p id="decision-explanation" class="decision-copy">El árbol de decisión evalúa las seis variables de cada registro.</p>
+
+            <!-- Dial Semicircular Segmentado con reborde metálico limpio -->
+            <div class="arc-gauge-box" aria-label="Indicador semicircular de carga de torque">
+              <svg class="arc-gauge-svg" viewBox="0 0 240 132" aria-hidden="true">
+                <defs>
+                  <linearGradient id="arc-rim-grad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.45"/>
+                    <stop offset="50%" stop-color="var(--border-strong)" stop-opacity="0.7"/>
+                    <stop offset="100%" stop-color="var(--accent-warm)" stop-opacity="0.5"/>
+                  </linearGradient>
+                </defs>
+                <!-- Reborde exterior e interior de precisión -->
+                <path class="arc-outer-rim" d="M 19 112 A 101 101 0 0 1 221 112" fill="none" stroke="url(#arc-rim-grad)" stroke-width="2" stroke-linecap="round"/>
+                <path class="arc-inner-rim" d="M 48 112 A 72 72 0 0 1 192 112" fill="none" stroke="var(--border)" stroke-width="1.2" stroke-linecap="round"/>
+                <g id="arc-gauge-ticks"></g>
+                <!-- Indicador móvil sobre el reborde -->
+                <circle id="arc-gauge-dot" cx="19" cy="112" r="4" fill="var(--primary)" stroke="var(--surface-solid)" stroke-width="2"/>
+                <text x="16" y="127" class="arc-scale-label" text-anchor="start">0</text>
+                <text x="120" y="9" class="arc-scale-label" text-anchor="middle">50</text>
+                <text x="224" y="127" class="arc-scale-label" text-anchor="end">100</text>
+              </svg>
+              <div class="arc-gauge-center">
+                <strong id="arc-gauge-val">0 %</strong>
+                <span id="arc-gauge-sub">Carga mecánica</span>
+              </div>
+            </div>
+
+            <div class="decision-contrast">
+              <p id="reference">Etiqueta real: —</p>
+            </div>
+
+            <div class="live-matrix-strip" aria-label="Resumen acumulado de la sesión">
+              <div class="lm-cell is-ok"><strong id="live-tn">0</strong><span>OK</span></div>
+              <div class="lm-cell is-ok"><strong id="live-tp">0</strong><span>TP</span></div>
+              <div class="lm-cell is-warn"><strong id="live-fp">0</strong><span>FP</span></div>
+              <div class="lm-cell is-miss"><strong id="live-fn">0</strong><span>FN</span></div>
+              <div class="lm-cell is-total"><strong id="alerts">0</strong><span>Alertas</span></div>
             </div>
           </section>
 
-          <!-- Derecha: Consola de Diagnóstico + Alertas en Vivo -->
-          <div class="cockpit-side">
-            <section class="decision-panel">
-              <div class="decision-head">
-                <div>
-                  <span class="kicker">DIAGNÓSTICO DEL MODELO</span>
-                  <h2>Clasificación actual</h2>
-                </div>
-                <span class="decision-latency" id="latency">— / — ms</span>
-              </div>
+          <!-- Sensores Simplificados (clic sincroniza la gráfica principal) -->
+          <section class="bento-card sensors-bento">
+            <div class="bento-head">
+              <h2 class="bento-title">Sensores en vivo</h2>
+              <span class="bento-sub-tag">Clic para graficar</span>
+            </div>
 
-              <div id="prediction" class="prediction neutral" role="status">Sin predicción</div>
-              <p id="decision-explanation">El árbol de decisión evalúa las seis variables de entrada de cada registro.</p>
+            <div id="measurements" class="sensor-list" aria-label="Mediciones del registro actual">
+              <article class="sensor" data-sensor-feature="Rotational speed [rpm]" data-active="true" tabindex="0" role="button" aria-label="Seleccionar Rotación en la gráfica">
+                <i class="sensor-icon" aria-hidden="true">↻</i>
+                <div class="sensor-main">
+                  <div class="sensor-line">
+                    <span class="sensor-name">Rotación <span class="sensor-alert-count" id="sbadge-speed" hidden>0</span></span>
+                    <strong id="speed">— rpm</strong>
+                  </div>
+                  <div class="sensor-gauge" aria-hidden="true"><span id="gauge-speed"></span></div>
+                </div>
+                <svg class="sensor-spark" data-spark="Rotational speed [rpm]" viewBox="0 0 110 26" aria-hidden="true"></svg>
+              </article>
 
-              <div class="decision-contrast">
-                <span class="kicker">CONTRASTE POSTERIOR (ETIQUETA REAL)</span>
-                <p id="reference">Etiqueta real: —</p>
-                <p class="hint">La etiqueta real no entra al modelo; solo permite auditar aciertos y errores.</p>
-              </div>
+              <article class="sensor" data-sensor-feature="Torque [Nm]" tabindex="0" role="button" aria-label="Seleccionar Torque en la gráfica">
+                <i class="sensor-icon" aria-hidden="true">↗</i>
+                <div class="sensor-main">
+                  <div class="sensor-line">
+                    <span class="sensor-name">Torque <span class="sensor-alert-count" id="sbadge-torque" hidden>0</span></span>
+                    <strong id="torque">— Nm</strong>
+                  </div>
+                  <div class="sensor-gauge" aria-hidden="true"><span id="gauge-torque"></span></div>
+                </div>
+                <svg class="sensor-spark" data-spark="Torque [Nm]" viewBox="0 0 110 26" aria-hidden="true"></svg>
+              </article>
 
-              <!-- Contadores vivos de la sesión -->
-              <div class="live-matrix-strip" aria-label="Resumen acumulado de la sesión">
-                <div class="lm-cell is-ok">
-                  <strong id="live-tn">0</strong>
-                  <span>Sin falla OK</span>
+              <article class="sensor" data-sensor-feature="Air temperature [K]" tabindex="0" role="button" aria-label="Seleccionar Temperatura del aire en la gráfica">
+                <i class="sensor-icon" aria-hidden="true">°</i>
+                <div class="sensor-main">
+                  <div class="sensor-line">
+                    <span class="sensor-name">Aire <span class="sensor-alert-count" id="sbadge-air" hidden>0</span></span>
+                    <strong id="air">— K</strong>
+                  </div>
+                  <div class="sensor-gauge" aria-hidden="true"><span id="gauge-air"></span></div>
                 </div>
-                <div class="lm-cell is-ok">
-                  <strong id="live-tp">0</strong>
-                  <span>Detectadas</span>
-                </div>
-                <div class="lm-cell is-warn">
-                  <strong id="live-fp">0</strong>
-                  <span>Falsas al.</span>
-                </div>
-                <div class="lm-cell is-miss">
-                  <strong id="live-fn">0</strong>
-                  <span>Omitidas</span>
-                </div>
-                <div class="lm-cell is-total">
-                  <strong id="alerts">0</strong>
-                  <span>Alertas</span>
-                </div>
-              </div>
-            </section>
+                <svg class="sensor-spark" data-spark="Air temperature [K]" viewBox="0 0 110 26" aria-hidden="true"></svg>
+              </article>
 
-            <section class="panel alerts-panel">
-              <div class="section-heading">
-                <div>
-                  <span class="kicker">VENTANA DE 60 REGISTROS</span>
-                  <h2>Alertas recientes</h2>
+              <article class="sensor" data-sensor-feature="Process temperature [K]" tabindex="0" role="button" aria-label="Seleccionar Temperatura del proceso en la gráfica">
+                <i class="sensor-icon" aria-hidden="true">°</i>
+                <div class="sensor-main">
+                  <div class="sensor-line">
+                    <span class="sensor-name">Proceso <span class="sensor-alert-count" id="sbadge-process" hidden>0</span></span>
+                    <strong id="process">— K</strong>
+                  </div>
+                  <div class="sensor-gauge" aria-hidden="true"><span id="gauge-process"></span></div>
                 </div>
-                <span id="window-alerts" class="window-count">0</span>
-              </div>
-              <div id="alert-feed">
-                <div class="alert-empty">
-                  Sin alertas registradas
-                  <p>Las predicciones de falla recientes aparecerán aquí al avanzar la simulación.</p>
+                <svg class="sensor-spark" data-spark="Process temperature [K]" viewBox="0 0 110 26" aria-hidden="true"></svg>
+              </article>
+
+              <article class="sensor" data-sensor-feature="Tool wear [min]" tabindex="0" role="button" aria-label="Seleccionar Desgaste en la gráfica">
+                <i class="sensor-icon" aria-hidden="true">◷</i>
+                <div class="sensor-main">
+                  <div class="sensor-line">
+                    <span class="sensor-name">Desgaste <span class="sensor-alert-count" id="sbadge-wear" hidden>0</span></span>
+                    <strong id="wear">— min</strong>
+                  </div>
+                  <div class="sensor-gauge" aria-hidden="true"><span id="gauge-wear"></span></div>
                 </div>
+                <svg class="sensor-spark" data-spark="Tool wear [min]" viewBox="0 0 110 26" aria-hidden="true"></svg>
+              </article>
+            </div>
+          </section>
+
+          <!-- Alertas Recientes -->
+          <section class="bento-card alerts-panel">
+            <div class="bento-head">
+              <h2 class="bento-title">Alertas recientes</h2>
+              <span id="window-alerts" class="window-count">0</span>
+            </div>
+            <div id="alert-feed">
+              <div class="alert-empty">
+                Sin alertas en ventana
+                <p>Las predicciones de falla de los últimos 60 registros aparecerán aquí.</p>
               </div>
-            </section>
+            </div>
+          </section>
+        </div>
+
+        <!-- FILA 3 BENTO: Trazabilidad compacta + Opciones avanzadas -->
+        <section class="bento-card history-panel">
+          <div class="bento-head">
+            <div>
+              <h2 class="bento-title">Últimas predicciones</h2>
+              <p id="counts" class="history-counts">Aciertos sin falla: 0 · Fallas detectadas: 0 · Falsas alarmas: 0 · Fallas omitidas: 0</p>
+            </div>
+            <a id="export" class="button" href="/api/export" download>Exportar CSV ↓</a>
           </div>
-        </div>
 
-        <!-- Banda Unificada de Instrumentos (5 Sensores con Medidor de Rango + Sparkline) -->
-        <div id="measurements" class="sensor-strip" aria-label="Mediciones del registro actual">
-          <article class="sensor" data-sensor-feature="Air temperature [K]" tabindex="0" role="button" aria-label="Seleccionar Temperatura del aire en la gráfica">
-            <div class="sensor-top">
-              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">°</i> Aire</span>
-              <span class="sensor-range">295–305 K</span>
-            </div>
-            <strong id="air">— K</strong>
-            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-air"></span></div>
-            <svg data-spark="Air temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg>
-            <span class="sensor-foot">Temperatura ambiente</span>
-          </article>
+          <div class="table-scroll">
+            <table>
+              <caption class="sr-only">Registro de predicciones y comparación posterior</caption>
+              <thead>
+                <tr>
+                  <th>UDI</th>
+                  <th>Tipo</th>
+                  <th>Predicción</th>
+                  <th>Etiqueta real</th>
+                  <th>Comparación</th>
+                  <th>Modelo (ms)</th>
+                </tr>
+              </thead>
+              <tbody id="history">
+                <tr>
+                  <td colspan="6">Todavía no hay registros procesados.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="hint">Tiempo del pipeline: transformaciones y clasificación; excluye red, interfaz y pausas. Una predicción sin falla no garantiza ausencia de falla.</p>
+        </section>
 
-          <article class="sensor" data-sensor-feature="Process temperature [K]" tabindex="0" role="button" aria-label="Seleccionar Temperatura del proceso en la gráfica">
-            <div class="sensor-top">
-              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">°</i> Proceso</span>
-              <span class="sensor-range">305–314 K</span>
-            </div>
-            <strong id="process">— K</strong>
-            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-process"></span></div>
-            <svg data-spark="Process temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg>
-            <span class="sensor-foot">Temperatura de proceso</span>
-          </article>
-
-          <article class="sensor" data-sensor-feature="Rotational speed [rpm]" data-active="true" tabindex="0" role="button" aria-label="Seleccionar Velocidad de rotación en la gráfica">
-            <div class="sensor-top">
-              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">↻</i> Rotación</span>
-              <span class="sensor-range">1168–2886</span>
-            </div>
-            <strong id="speed">— rpm</strong>
-            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-speed"></span></div>
-            <svg data-spark="Rotational speed [rpm]" viewBox="0 0 160 28" aria-hidden="true"></svg>
-            <span class="sensor-foot">Velocidad de husillo</span>
-          </article>
-
-          <article class="sensor" data-sensor-feature="Torque [Nm]" tabindex="0" role="button" aria-label="Seleccionar Torque en la gráfica">
-            <div class="sensor-top">
-              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">↗</i> Torque</span>
-              <span class="sensor-range">3.8–76.6</span>
-            </div>
-            <strong id="torque">— Nm</strong>
-            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-torque"></span></div>
-            <svg data-spark="Torque [Nm]" viewBox="0 0 160 28" aria-hidden="true"></svg>
-            <span class="sensor-foot">Par de giro</span>
-          </article>
-
-          <article class="sensor" data-sensor-feature="Tool wear [min]" tabindex="0" role="button" aria-label="Seleccionar Desgaste en la gráfica">
-            <div class="sensor-top">
-              <span class="sensor-label"><i class="sensor-icon" aria-hidden="true">◷</i> Desgaste</span>
-              <span class="sensor-range">0–253 min</span>
-            </div>
-            <strong id="wear">— min</strong>
-            <div class="sensor-gauge" aria-hidden="true"><span id="gauge-wear"></span></div>
-            <svg data-spark="Tool wear [min]" viewBox="0 0 160 28" aria-hidden="true"></svg>
-            <span class="sensor-foot">Uso de herramienta</span>
-          </article>
-        </div>
-
-        <!-- Panel Inferior Dividido: Osciloscopio Interactivo + Trazabilidad en Vivo -->
-        <div class="telemetry-split">
-          <section class="panel trace-panel">
-            <div class="section-heading">
-              <div>
-                <span class="kicker">OSCILOSCOPIO DE VENTANA</span>
-                <h2>Secuencia de mediciones</h2>
-              </div>
-              <span id="chart-current" class="chart-current">— rpm</span>
-            </div>
-
-            <div class="chart-switch" aria-label="Variable del gráfico">
-              <button type="button" data-feature="Rotational speed [rpm]" aria-pressed="true">Rotación</button>
-              <button type="button" data-feature="Torque [Nm]" aria-pressed="false">Torque</button>
-              <button type="button" data-feature="Air temperature [K]" aria-pressed="false">Aire</button>
-              <button type="button" data-feature="Process temperature [K]" aria-pressed="false">Proceso</button>
-              <button type="button" data-feature="Tool wear [min]" aria-pressed="false">Desgaste</button>
-            </div>
-
-            <div class="trace-chart">
-              <svg id="trace" viewBox="0 0 760 220" role="img" aria-label="Sin registros procesados. El gráfico aparecerá al avanzar la simulación."></svg>
-              <div id="trace-tooltip" class="trace-tooltip" hidden></div>
-              <p id="chart-empty">
-                Sin observaciones en ventana
-                <span>Pulsa Iniciar simulación o Siguiente para trazar la señal.</span>
-              </p>
-            </div>
-
-            <div class="chart-legend">
-              <span><i aria-hidden="true"></i> Medición</span>
-              <span><i class="legend-alert" aria-hidden="true"></i> Predicción de falla</span>
-              <span id="chart-range">Sin registros</span>
-            </div>
-            <p class="hint">Escala automática · Hasta 60 registros procesados. Pasa el cursor sobre la curva para inspeccionar cada UDI. No es una serie temporal física.</p>
-          </section>
-
-          <section class="panel history-panel">
-            <div class="section-heading">
-              <div>
-                <span class="kicker">TRAZABILIDAD EN VIVO</span>
-                <h2>Últimas predicciones</h2>
-              </div>
-              <a id="export" class="button" href="/api/export" download>Exportar CSV ↓</a>
-            </div>
-
-            <div class="table-scroll">
-              <table>
-                <caption class="sr-only">Registro de predicciones y comparación posterior</caption>
-                <thead>
-                  <tr>
-                    <th>UDI</th>
-                    <th>Tipo</th>
-                    <th>Predicción</th>
-                    <th>Real</th>
-                    <th>Resultado</th>
-                    <th>ms</th>
-                  </tr>
-                </thead>
-                <tbody id="history">
-                  <tr>
-                    <td colspan="6">Todavía no hay registros procesados.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p id="counts" class="hint">Aciertos sin falla: 0 · Fallas detectadas: 0 · Falsas alarmas: 0 · Fallas omitidas: 0</p>
-            <p class="hint">El tiempo corresponde únicamente al pipeline de transformación y clasificación; excluye red, interfaz y pausas.</p>
-          </section>
-        </div>
-
-        <!-- Opciones avanzadas desplegables -->
-        <details class="advanced-panel">
-          <summary>Datos de prueba y comprobaciones <span>Validación de CSV y evidencia JSON</span></summary>
+        <details class="bento-card advanced-panel">
+          <summary>Datos de prueba y comprobaciones <span>Validación CSV y evidencia JSON</span></summary>
           <div class="advanced-content">
             <section class="verification-strip">
               <div>
@@ -700,10 +670,10 @@
       </section>
 
       <!-- ================================================================
-           PESTAÑA 2: EL PROYECTO — FICHA TÉCNICA Y MÉTRICAS RADIALES
+           PESTAÑA 2: EL PROYECTO
            ================================================================ -->
       <section id="documentacion" role="tabpanel" aria-labelledby="tab-documentacion" hidden>
-        <div class="project-banner">
+        <div class="bento-card project-banner">
           <div class="project-banner-main">
             <span class="pill">EXPERIMENTO VERIFICADO · UPAO</span>
             <h2>Clasificación verificable sobre datos de mecanizado</h2>
@@ -725,14 +695,8 @@
           </div>
         </div>
 
-        <!-- 4 Diales de Métricas con Anillo SVG Animado -->
-        <div class="section-heading">
-          <h2>Desempeño en reserva de prueba</h2>
-          <span class="subtle">2 000 observaciones independientes</span>
-        </div>
-
         <div class="metrics-grid">
-          <article class="metric-dial">
+          <article class="bento-card metric-dial">
             <div class="dial-ring">
               <svg viewBox="0 0 64 64" aria-hidden="true">
                 <circle class="dial-bg" cx="32" cy="32" r="26"/>
@@ -746,7 +710,7 @@
             </div>
           </article>
 
-          <article class="metric-dial">
+          <article class="bento-card metric-dial">
             <div class="dial-ring">
               <svg viewBox="0 0 64 64" aria-hidden="true">
                 <circle class="dial-bg" cx="32" cy="32" r="26"/>
@@ -760,7 +724,7 @@
             </div>
           </article>
 
-          <article class="metric-dial">
+          <article class="bento-card metric-dial">
             <div class="dial-ring">
               <svg viewBox="0 0 64 64" aria-hidden="true">
                 <circle class="dial-bg" cx="32" cy="32" r="26"/>
@@ -774,7 +738,7 @@
             </div>
           </article>
 
-          <article class="metric-dial">
+          <article class="bento-card metric-dial">
             <div class="dial-ring">
               <svg viewBox="0 0 64 64" aria-hidden="true">
                 <circle class="dial-bg" cx="32" cy="32" r="26"/>
@@ -790,9 +754,9 @@
         </div>
 
         <div class="grid documentation-grid">
-          <section class="panel">
-            <div class="section-heading">
-              <h2>Flujo experimental</h2>
+          <section class="bento-card">
+            <div class="bento-head">
+              <h2 class="bento-title">Flujo experimental</h2>
               <span class="mini-label">3 NOTEBOOKS</span>
             </div>
             <ol class="method">
@@ -820,9 +784,9 @@
             </ol>
           </section>
 
-          <section class="panel">
-            <div class="section-heading">
-              <h2>Matriz de confusión</h2>
+          <section class="bento-card">
+            <div class="bento-head">
+              <h2 class="bento-title">Matriz de confusión</h2>
               <span class="mini-label">PRUEBA FINAL</span>
             </div>
             <div class="confusion-grid">
@@ -847,7 +811,7 @@
           </section>
         </div>
 
-        <section class="scope-note">
+        <section class="bento-card scope-note">
           <span class="scope-icon" aria-hidden="true">i</span>
           <div>
             <h3>Alcance y limitaciones</h3>
@@ -855,9 +819,9 @@
           </div>
         </section>
 
-        <section class="panel resources">
+        <section class="bento-card resources">
           <div>
-            <h2>Documentación y archivos descargables</h2>
+            <h2 class="bento-title">Documentación y archivos descargables</h2>
             <p>Informe del proyecto hasta el apartado 7.2, procedencia de datos y registro de comprobaciones.</p>
           </div>
           <div class="resource-links">
@@ -872,12 +836,12 @@
       </section>
 
       <!-- ================================================================
-           PESTAÑA 3: CÓDIGO — VISOR DEL REPOSITORIO
+           PESTAÑA 3: CÓDIGO
            ================================================================ -->
       <section id="codigo" role="tabpanel" aria-labelledby="tab-codigo" hidden>
-        <section class="panel setup">
-          <div class="section-heading">
-            <h2>Ejecución en entorno local</h2>
+        <section class="bento-card setup">
+          <div class="bento-head">
+            <h2 class="bento-title">Ejecución en entorno local</h2>
             <span class="mini-label">PYTHON 3.12</span>
           </div>
           <p>Desde la raíz del proyecto, inicia el servidor con el entorno virtual y abre la dirección que imprime la terminal.</p>
@@ -888,7 +852,7 @@
           <p class="hint">En una copia nueva, instala <code>requirements-deploy.txt</code> y ejecuta <code>scripts/prepare_deployment.py</code> (o <code>requirements.txt</code> + notebooks 01 y 02). El servidor utiliza el modelo congelado.</p>
         </section>
 
-        <div class="source-layout">
+        <div class="bento-card source-layout">
           <aside class="file-panel">
             <h2>Explorador de archivos</h2>
             <div id="source-tree" aria-label="Seleccionar un archivo de código"></div>
@@ -907,8 +871,8 @@
       </section>
 
       <footer>
-        <span>UPAO · Ingeniería de Sistemas e Inteligencia Artificial · IA: Principios y Técnicas</span>
-        <span>Simulación ilustrativa · Modelo congelado · Datos sintéticos AI4I 2020</span>
+        <span>UPAO · Ingeniería de Sistemas e Inteligencia Artificial</span>
+        <span>Modelo congelado · Datos sintéticos AI4I 2020</span>
       </footer>
 
       <!-- Modal Guía de uso -->
@@ -923,31 +887,27 @@
           </form>
         </header>
         <div class="manual-body">
-          <p class="manual-intro">La reserva de prueba ya está cargada. La cámara CNC reacciona visualmente a cada observación sintética: velocidad del husillo, desplazamiento de mesa, carga de torque y estado térmico.</p>
+          <p class="manual-intro">La reserva de prueba ya está cargada. La gráfica principal, la cámara CNC y el dial semicircular reaccionan en vivo a cada observación sintética.</p>
           <ol class="manual-steps">
             <li>
-              <h3>Controla la simulación</h3>
-              <p>Pulsa <b>Iniciar simulación</b> para reproducir automáticamente o <b>Siguiente</b> para analizar registro por registro. Cambia el <b>Intervalo</b> cuando esté listo o pausado.</p>
+              <h3>Controla la reproducción</h3>
+              <p>Usa <b>Iniciar simulación</b> para avanzar automáticamente o <b>Siguiente</b> para analizar caso por caso. El selector <b>Ritmo</b> ajusta la pausa entre observaciones.</p>
+            </li>
+            <li>
+              <h3>Explora la gráfica suavizada</h3>
+              <p>Alterna entre Rotación, Torque, Aire, Proceso y Desgaste desde los botones superiores o haciendo clic en cualquier sensor; pasa el cursor sobre la curva para inspeccionar cada UDI.</p>
             </li>
             <li>
               <h3>Observa el banco CNC y el diagnóstico</h3>
-              <p>Comprueba la velocidad, torque, desgaste, salto térmico y la clasificación del modelo junto con los contadores acumulados (TN, TP, FP, FN).</p>
+              <p>La cámara virtual refleja RPM, torque, desgaste y temperatura, mientras el panel de clasificación muestra el veredicto, el dial de carga y los contadores TN/TP/FP/FN.</p>
             </li>
             <li>
-              <h3>Explora los instrumentos y el osciloscopio</h3>
-              <p>Haz clic en cualquier sensor de la barra de instrumentos para cambiar la gráfica principal y pasa el cursor sobre la curva para inspeccionar cualquier UDI.</p>
-            </li>
-            <li>
-              <h3>Exporta los resultados</h3>
+              <h3>Exporta tus resultados</h3>
               <p><b>Exportar CSV</b> descarga todos los registros procesados de la sesión completa con predicciones, etiquetas reales y latencias.</p>
-            </li>
-            <li>
-              <h3>Modo claro, oscuro y portada</h3>
-              <p>Alterna tema en la barra superior o pulsa <b>Portada</b> para mostrar nuevamente la pantalla de presentación del proyecto.</p>
             </li>
           </ol>
           <div class="manual-bottom">
-            <p>Una predicción sin falla no garantiza ausencia de falla. Para instalación y carga de CSV, descarga el manual completo.</p>
+            <p>Una predicción sin falla no garantiza ausencia de falla. Para detalles completos, descarga el manual.</p>
             <a class="button" href="/project/file?file=docs%2FMANUAL_USUARIO.md" download>Descargar manual ↓</a>
           </div>
         </div>

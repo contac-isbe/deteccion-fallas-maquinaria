@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Tema oscuro (Consola CNC Nocturna) e Interruptor Claro/Oscuro
+   Modo Oscuro OLED Studio (Fitonist / Loud Aesthetic) e Interruptor de Tema
    ========================================================================== */
 
 html {
@@ -10,17 +10,17 @@ button.theme-toggle {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  min-height: 32px;
-  padding: 5px 10px;
+  min-height: 34px;
+  padding: 5px 11px;
   background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   color: var(--text-secondary);
-  font-size: 11.5px;
-  font-weight: 550;
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1;
   white-space: nowrap;
-  transition: background-color var(--t-fast) ease, border-color var(--t-fast) ease, color var(--t-fast) ease, transform var(--t-fast) var(--ease-out);
+  transition: background-color var(--t-fast) ease, border-color var(--t-fast) ease, color var(--t-fast) ease, transform var(--t-fast) var(--ease-spring);
 }
 
 button.theme-toggle:hover {
@@ -38,7 +38,7 @@ button.theme-toggle:active {
   height: 14px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.75;
+  stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -66,72 +66,79 @@ button.theme-toggle:active {
   height: 10px;
   border-radius: 50%;
   background: #ffffff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  transition: transform 200ms var(--ease-out);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 220ms var(--ease-spring);
 }
 
-/* Tokens semánticos — Modo Oscuro */
+/* ==========================================================================
+   Tokens Semánticos — Modo Oscuro OLED (Obsidian + Satin Graphite + Ice Cyan)
+   ========================================================================== */
+
 html[data-theme="dark"] {
   color-scheme: dark;
 
-  --bg: #090e14;
-  --surface: rgba(18, 26, 36, 0.88);
-  --surface-solid: #121a24;
-  --surface-2: #17222f;
-  --surface-3: #1f2d3d;
-  --deck-bg: rgba(11, 17, 24, 0.86);
-  --text: #eef4fa;
-  --text-secondary: #c1cfdd;
-  --muted: #8ea3b8;
-  --border: #233244;
-  --border-strong: #364b63;
+  --bg: #050608;
+  --surface: rgba(18, 20, 26, 0.84);
+  --surface-solid: #12141a;
+  --surface-2: #181b23;
+  --surface-3: #222631;
+  --deck-bg: rgba(14, 16, 21, 0.78);
+  --text: #f3f6fa;
+  --text-secondary: #c1cad6;
+  --muted: #8a95a6;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --specular: rgba(255, 255, 255, 0.06);
+  --spotlight: rgba(56, 217, 232, 0.1);
 
-  --primary: #22b8cf;
-  --primary-hover: #3bc9db;
-  --primary-active: #15aabf;
-  --primary-ink: #06161b;
-  --primary-soft: #102a35;
-  --primary-border: #1e596b;
+  --primary: #38d9e8;
+  --primary-hover: #67e8f9;
+  --primary-ink: #05090d;
+  --primary-soft: rgba(56, 217, 232, 0.12);
+  --primary-border: rgba(56, 217, 232, 0.34);
+  --accent-warm: #fb923c;
+  --pill-active-bg: #ffffff;
+  --pill-active-ink: #080a0f;
 
-  --success: #5cd696;
-  --success-soft: #0f2a1f;
-  --success-border: #215b40;
-  --warning: #f4a261;
-  --warning-soft: #2e1d11;
-  --warning-border: #7a4522;
-  --danger: #f27c75;
-  --danger-soft: #311717;
-  --danger-border: #803431;
-  --focus: #3bc9db;
+  --success: #4ade80;
+  --success-soft: rgba(74, 222, 128, 0.12);
+  --success-border: rgba(74, 222, 128, 0.3);
+  --warning: #fb923c;
+  --warning-soft: rgba(251, 146, 60, 0.13);
+  --warning-border: rgba(251, 146, 60, 0.36);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.13);
+  --danger-border: rgba(248, 113, 113, 0.34);
+  --focus: #38d9e8;
 
-  --chart-line: #22b8cf;
-  --chart-fill: #22b8cf;
-  --chart-grid: #223244;
-  --chart-axis: #93a8bd;
-  --chart-alert: #f08c42;
-  --spark-line: #3bc9db;
+  --chart-line: #38d9e8;
+  --chart-line-2: #fde047;
+  --chart-grid: rgba(255, 255, 255, 0.06);
+  --chart-axis: #8b96a8;
+  --chart-alert: #fb923c;
+  --spark-line: #38d9e8;
 
-  --canvas-dot: rgba(130, 165, 200, 0.16);
-  --canvas-wave: rgba(34, 184, 207, 0.16);
-  --canvas-alert: rgba(240, 140, 66, 0.24);
-  --canvas-cursor: rgba(59, 201, 219, 0.42);
+  --canvas-a: rgba(56, 217, 232, 0.14);
+  --canvas-b: rgba(251, 146, 60, 0.09);
+  --canvas-alert: rgba(251, 146, 60, 0.22);
+  --canvas-particle: rgba(255, 255, 255, 0.2);
 
-  --mach-stage-bg: #0d151e;
-  --mach-grid-dot: #26394d;
-  --mach-shadow: #05090d;
-  --mach-body-1: #556679;
-  --mach-body-2: #313f4e;
-  --mach-bezel: #425264;
-  --mach-base: #26323f;
-  --mach-depth: #2a3745;
-  --mach-glass-1: #111b26;
-  --mach-glass-2: #080e15;
-  --mach-callout: #6c839a;
+  --mach-stage-bg: #0c0e13;
+  --mach-grid-dot: rgba(255, 255, 255, 0.09);
+  --mach-shadow: #040507;
+  --mach-body-1: #4d5869;
+  --mach-body-2: #2b323e;
+  --mach-bezel: #3b4453;
+  --mach-base: #222832;
+  --mach-depth: #262d38;
+  --mach-glass-1: #10151e;
+  --mach-glass-2: #07090d;
+  --mach-callout: #647184;
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.32);
-  --shadow-md: 0 14px 36px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 6px 24px rgba(0, 0, 0, 0.36);
+  --shadow-md: 0 24px 60px rgba(0, 0, 0, 0.6);
 
-  scrollbar-color: #34475d #0c1219;
+  scrollbar-color: #2c3340 #080a0f;
 }
 
 html[data-theme="dark"] .theme-icon-sun {
@@ -148,16 +155,16 @@ html[data-theme="dark"] .theme-track {
 
 html[data-theme="dark"] .theme-track > span {
   transform: translateX(12px);
-  background: #06161b;
+  background: #06090e;
 }
 
 html[data-theme="dark"] .code-panel pre {
-  background: #080d13;
+  background: #06080c;
   color: #dce7f3;
 }
 
 html[data-theme="dark"] ::selection {
-  background: rgba(34, 184, 207, 0.35);
+  background: rgba(56, 217, 232, 0.32);
   color: #ffffff;
 }
 
@@ -169,6 +176,6 @@ html[data-theme="dark"] ::selection {
   button.theme-toggle {
     padding: 5px 8px;
     font-size: 11px;
-    gap: 6px;
+    gap: 5px;
   }
 }

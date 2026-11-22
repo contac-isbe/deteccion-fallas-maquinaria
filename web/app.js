@@ -19,6 +19,8 @@ let busy = false;
 let lastState = null;
 let polling = false;
 let actionGeneration = 0;
+let lastHistoryKey = "";
+let lastHistoryCount = 0;
 
 function showError(message) {
   el("error").textContent = message || "";
@@ -107,40 +109,48 @@ function render(s) {
     ? `Etiqueta real: ${row["Machine failure"] ? "con falla" : "sin falla"} · ${outcomes[row.outcome]}`
     : "Etiqueta real: —";
 
-  const body = el("history");
-  body.replaceChildren();
-  if (!s.recent.length) {
-    const cell = document.createElement("td");
-    cell.colSpan = 6;
-    cell.textContent = "Todavía no hay registros procesados.";
-    const tr = document.createElement("tr");
-    tr.append(cell);
-    body.append(tr);
-  }
+  const historyKey = `${s.processed}/${s.recent[0]?.UDI || ""}`;
+  if (historyKey !== lastHistoryKey) {
+    const advanced = s.processed > lastHistoryCount && lastHistoryCount > 0;
+    lastHistoryKey = historyKey;
+    lastHistoryCount = s.processed;
 
-  for (const item of s.recent) {
-    const tr = document.createElement("tr");
-    const cells = [
-      item.UDI,
-      item.Type,
-      item.prediction ? "Con falla" : "Sin falla",
-      item["Machine failure"] ? "Con falla" : "Sin falla",
-      outcomes[item.outcome],
-      item.predict_ms.toFixed(2)
-    ];
-    for (const [i, value] of cells.entries()) {
-      const td = document.createElement("td");
-      if (i === 2) {
-        td.dataset.alert = String(item.alert);
-        td.append(createBadge(value, item.alert ? "is-alert" : "is-neutral"));
-      } else if (i === 4) {
-        td.append(createBadge(value, outcomeClass(item.outcome)));
-      } else {
-        td.textContent = value;
-      }
-      tr.append(td);
+    const body = el("history");
+    body.replaceChildren();
+    if (!s.recent.length) {
+      const cell = document.createElement("td");
+      cell.colSpan = 6;
+      cell.textContent = "Todavía no hay registros procesados.";
+      const tr = document.createElement("tr");
+      tr.append(cell);
+      body.append(tr);
     }
-    body.append(tr);
+
+    s.recent.forEach((item, idx) => {
+      const tr = document.createElement("tr");
+      if (idx === 0 && advanced) tr.className = "is-new-row";
+      const cells = [
+        item.UDI,
+        item.Type,
+        item.prediction ? "Con falla" : "Sin falla",
+        item["Machine failure"] ? "Con falla" : "Sin falla",
+        outcomes[item.outcome],
+        item.predict_ms.toFixed(2)
+      ];
+      for (const [i, value] of cells.entries()) {
+        const td = document.createElement("td");
+        if (i === 2) {
+          td.dataset.alert = String(item.alert);
+          td.append(createBadge(value, item.alert ? "is-alert" : "is-neutral"));
+        } else if (i === 4) {
+          td.append(createBadge(value, outcomeClass(item.outcome)));
+        } else {
+          td.textContent = value;
+        }
+        tr.append(td);
+      }
+      body.append(tr);
+    });
   }
 
   el("counts").textContent =
