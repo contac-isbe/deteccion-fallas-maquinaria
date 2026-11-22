@@ -1,0 +1,14 @@
+{
+  "model_sha256": "36d30ebe345d48bddb1d4fabf8fb827c5d76d0f0c76490a082d1045c27c0041e",
+  "versions": {
+    "numpy": "2.3.5",
+    "scikit-learn": "1.9.1"
+  },
+  "seed": 0,
+  "chosen": {
+    "features": "char+word+palabras_clave",
+    "C": 1,
+    "reject_threshold": 0.0
+  },
+  "protocol": "Configuración y umbral elegidos con validación. LIMITACIÓN DECLARADA: el entrenamiento se ejecutó dos veces; tras ver los resultados de la primera (comprensión de intención 65-77 %) se ampliaron las frases de entrenamiento y se añadieron variables de palabras clave. Por eso la prueba y el conjunto natural ya no son totalmente independientes de las decisiones de diseño."
+}

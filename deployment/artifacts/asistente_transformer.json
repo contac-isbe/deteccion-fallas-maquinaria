@@ -1,0 +1,22 @@
+{
+  "base": "dccuchile/distilbert-base-spanish-uncased",
+  "max_len": 40,
+  "intents": [
+    "que_hago",
+    "por_que",
+    "cuanto",
+    "seguir",
+    "prevenir",
+    "planta",
+    "fuera"
+  ],
+  "causes": [
+    "ninguna",
+    "HDF",
+    "PWF_high",
+    "PWF_low",
+    "OSF",
+    "TWF"
+  ],
+  "threshold": 0.0
+}

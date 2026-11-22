@@ -55,7 +55,7 @@ def main():
         assert {x["aria-controls"] for x in page.tabs}=={x["id"] for x in page.panels}
         assert 'La versión alojada del 7.2 está disponible en el enlace del README.' in html
         passed("Tres pestañas con paneles asociados", "Documentación, Código y Ejecución y pruebas; identificadores únicos y despliegue pendiente explícito.")
-        for path in ["/app.js", "/portal.js", "/portal.css", "/monitor.js", "/monitor.css", "/theme.js", "/theme.css", "/manual.js", "/manual.css", "/fonts/Inter.ttf", "/fonts/SpaceGrotesk.ttf"]:
+        for path in ["/lab.js", "/lab.css", "/portal.js", "/portal.css", "/monitor.css", "/theme.js", "/theme.css", "/manual.js", "/manual.css", "/fonts/Inter.ttf", "/fonts/SpaceGrotesk.ttf"]:
             assert len(get(path)[0]) > 100
         passed("Recursos de la interfaz", "HTML, scripts y estilos se sirven correctamente.")
         info = json.loads(get("/api/project")[0])

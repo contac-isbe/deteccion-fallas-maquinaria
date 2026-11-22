@@ -12,8 +12,9 @@ def main():
     bundle = ROOT / 'deployment/artifacts'
     manifest = json.loads((bundle / 'manifest.json').read_text(encoding='utf-8'))
     allowed = {'models/modelo_seleccionado.joblib', 'data/processed/test.csv',
-               'data/processed/development.csv'}
-    assert set(manifest['files']) == allowed
+               'data/processed/development.csv', 'models/autoencoder.joblib', 'models/modelo_fisico.joblib', 'models/pronostico.joblib', 'models/asistente_lenguaje.joblib',
+               'models/asistente_transformer.onnx', 'models/asistente_tokenizer.json', 'models/asistente_transformer.json'}
+    assert set(manifest['files']) <= allowed and 'models/modelo_seleccionado.joblib' in manifest['files']
     for destination, item in manifest['files'].items():
         source = bundle / Path(destination).name
         if hashlib.sha256(source.read_bytes()).hexdigest() != item['sha256']:

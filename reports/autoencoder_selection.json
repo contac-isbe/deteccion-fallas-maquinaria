@@ -1,0 +1,83 @@
+{
+  "model_artifact": "models/autoencoder.joblib",
+  "model_sha256": "b57e6f5823c82e44ddceca24bf58f0d450109646e939daa6809fbe170d1ff2e8",
+  "hidden_layers": [
+    8,
+    5,
+    8
+  ],
+  "architecture": [
+    11,
+    8,
+    5,
+    8,
+    11
+  ],
+  "activation": "relu (salida lineal)",
+  "threshold": 0.18147767146096988,
+  "threshold_rule": "Percentil 99 del error de reconstrucción de las observaciones normales de desarrollo no vistas por el modelo (20 %)",
+  "trained_on": "6183 observaciones sin falla del 80 % de desarrollo; umbral con el 20 % restante",
+  "seed": 42,
+  "cv_candidates": [
+    {
+      "hidden": [
+        8,
+        3,
+        8
+      ],
+      "auc_mean": 0.740067112468248,
+      "auc_sd": 0.027137709139197067
+    },
+    {
+      "hidden": [
+        8,
+        4,
+        8
+      ],
+      "auc_mean": 0.7606611247852408,
+      "auc_sd": 0.03693258363236805
+    },
+    {
+      "hidden": [
+        8,
+        5,
+        8
+      ],
+      "auc_mean": 0.7843530635357963,
+      "auc_sd": 0.021348786008155138
+    },
+    {
+      "hidden": [
+        10,
+        3,
+        10
+      ],
+      "auc_mean": 0.6816757085924746,
+      "auc_sd": 0.03274287058043302
+    },
+    {
+      "hidden": [
+        10,
+        4,
+        10
+      ],
+      "auc_mean": 0.6733740245156616,
+      "auc_sd": 0.04143207991826093
+    },
+    {
+      "hidden": [
+        10,
+        5,
+        10
+      ],
+      "auc_mean": 0.6674115290569654,
+      "auc_sd": 0.030110251940403496
+    }
+  ],
+  "versions": {
+    "scikit-learn": "1.9.1",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "joblib": "1.6.0"
+  }
+}

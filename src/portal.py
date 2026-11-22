@@ -6,9 +6,9 @@ SOURCE_FILES = [
     "README.md", "requirements.txt", "data/README.md",
     "notebooks/01_analisis_preparacion.ipynb", "notebooks/02_entrenamiento_comparacion.ipynb",
     "notebooks/03_comprobacion_prueba.ipynb", "src/preparation.py", "src/training.py",
-    "src/evaluation.py", "src/simulation.py", "src/simulation_server.py", "src/portal.py",
+    "src/evaluation.py", "src/autoencoder.py", "scripts/train_autoencoder.py", "src/features.py", "scripts/train_physics_model.py", "src/runtime.py", "src/plant.py", "src/forecast.py", "src/assistant.py", "src/assistant_data.py", "src/assistant_features.py", "scripts/train_assistant.py", "scripts/verify_assistant.py", "scripts/train_forecast.py", "src/simulation.py", "src/simulation_server.py", "src/portal.py",
     "scripts/run_simulation.py", "scripts/verify_simulation.py", "scripts/verify_portal.py",
-    "web/index.html", "web/portal.css", "web/app.js", "web/portal.js", "web/monitor.js", "web/monitor.css", "web/theme.js", "web/theme.css",
+    "web/index.html", "web/portal.css", "web/lab.js", "web/plant.js", "web/lab.css", "web/portal.js", "web/monitor.css", "web/theme.js", "web/theme.css",
     "web/manual.js", "web/manual.css", "docs/MANUAL_USUARIO.md",
     "src/deployment.py", "requirements-deploy.txt", "render.yaml",
     "scripts/prepare_deployment.py", "scripts/verify_deployment.py", "docs/DESPLIEGUE.md",
@@ -20,7 +20,7 @@ DOWNLOAD_FILES = SOURCE_FILES + [
     "reports/simulation_review.md", "reports/model_comparison.csv",
     "reports/portal_review.md", "reports/portal_checks.json", "docs/71_preparacion_local.md",
     "reports/monitor_simulation_checks.json", "reports/monitor_review.md", "reports/theme_review.md",
-    "reports/deployment_checks.json",
+    "reports/deployment_checks.json", "reports/autoencoder_evaluation.json", "reports/autoencoder_selection.json", "reports/modelo_fisico_evaluation.json", "reports/modelo_fisico_selection.json", "reports/asistente_evaluation.json", "reports/asistente_selection.json", "reports/pronostico_evaluation.json", "reports/pronostico_selection.json",
     "reports/public_deployment_checks.json", "reports/deployment_review.md",
 ]
 

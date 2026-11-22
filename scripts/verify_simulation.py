@@ -76,6 +76,8 @@ def main():
         def __init__(self, underlying):
             self.underlying = underlying
             self.calls = 0
+        def __getattr__(self, name):
+            return getattr(self.underlying, name)
         def predict(self, X):
             assert list(X.columns) == FEATURES
             assert "UDI" not in X and TARGET not in X
@@ -138,7 +140,7 @@ def main():
     try:
         code, html, _ = request("/")
         assert code == 200 and b'lang="es"' in html
-        for asset in ("/app.js", "/style.css"):
+        for asset in ("/lab.js", "/lab.css"):
             assert request(asset)[0] == 200
         request("/api/start", {"interval": 0.2})
         timeout = time.monotonic() + 5

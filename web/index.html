@@ -1,53 +1,192 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Monitor de maquinaria</title><script src="/theme.js"></script><link rel="preload" href="/fonts/SpaceGrotesk.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="/fonts/Inter.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="/portal.css"><link rel="stylesheet" href="/monitor.css"><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/manual.css"><script src="/app.js" defer></script><script src="/portal.js" defer></script><script src="/monitor.js" defer></script><script src="/manual.js" defer></script></head><body data-run="ready"><a class="skip-link" href="#main">Ir al contenido</a><aside class="sidebar"><a class="brand" href="#ejecucion" data-go="ejecucion"><span class="brand-mark">M<span>↗</span></span><span>MAQUINARIA<span class="brand-sub">Un laboratorio de inteligencia artificial</span></span></a><p class="nav-label">TU ESPACIO DE TRABAJO</p><nav role="tablist" aria-label="Apartados del proyecto" aria-orientation="vertical"><button id="tab-ejecucion" role="tab" aria-controls="ejecucion" aria-selected="true" data-panel="ejecucion"><span class="nav-symbol">◉</span><span>Monitor<small>Observa el modelo en acción</small></span></button><button id="tab-documentacion" role="tab" aria-controls="documentacion" aria-selected="false" tabindex="-1" data-panel="documentacion"><span class="nav-symbol">▤</span><span>El proyecto<small>Datos, método y resultados</small></span></button><button id="tab-codigo" role="tab" aria-controls="codigo" aria-selected="false" tabindex="-1" data-panel="codigo"><span class="nav-symbol">⌘</span><span>Código<small>Por dentro del sistema</small></span></button></nav><div class="side-note"><span class="local-dot"></span> Un modelo. Cada registro.<p>Árbol de decisión<br>AI4I 2020 · Datos sintéticos</p></div><a class="repo-link" href="https://github.com/contac-isbe/deteccion-fallas-maquinaria" target="_blank" rel="noopener">Ver repositorio ↗</a></aside><div class="workspace"><div class="topbar"><span><span class="topbar-square"></span> LABORATORIO / <b>DETECCIÓN DE FALLAS</b></span><div class="topbar-actions"><button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" title="Activar modo oscuro"><svg class="theme-icon theme-icon-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.2"/><path d="M10 1v2M10 17v2M1 10h2M17 10h2M3.6 3.6L5 5M15 15l1.4 1.4M3.6 16.4L5 15M15 5l1.4-1.4"/></svg><svg class="theme-icon theme-icon-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M17 12A7.5 7.5 0 018 3a7.5 7.5 0 109 9Z"/></svg><span class="theme-label">Claro</span><span class="theme-track" aria-hidden="true"><span></span></span></button><span class="badge" id="runtime-label">Sesión local</span></div></div><main id="main"><header class="page-header"><p class="eyebrow">MACHINE LEARNING · EXPLORACIÓN INTERACTIVA</p><h1 id="page-title">Monitor de maquinaria</h1><p id="page-description">Pon en marcha los registros y observa cómo responde el modelo.</p></header><p id="project-error" role="alert" hidden></p><section id="ejecucion" role="tabpanel" aria-labelledby="tab-ejecucion">
-  <div class="monitor-toolbar controls" aria-label="Controles de reproducción">
-    <div class="session-state"><span id="run-dot" class="run-dot"></span><div><strong id="status" role="status">Preparando el monitor…</strong><span>Observaciones independientes · AI4I 2020</span></div></div>
-    <div class="buttons"><button class="guide-button" data-open-manual type="button">Guía de uso</button><button id="start" class="primary">Iniciar simulación</button><button id="pause">Pausar</button><button id="step" title="Procesar un registro">Siguiente</button><button id="reset" class="reset-button">Reiniciar</button><label>Intervalo <select id="interval" aria-label="Intervalo de reproducción"><option value="0.2">0,2 s</option><option value="0.5" selected>0,5 s</option><option value="1">1 s</option><option value="2">2 s</option></select></label></div>
-  </div><p id="error" role="alert" hidden></p>
-  <div class="monitor-stage">
-    <section class="machine-panel"><div class="machine-heading"><div><span class="kicker">BANCO VIRTUAL</span><h2>Una mirada al registro actual.</h2></div><span class="machine-tag">ILUSTRACIÓN</span></div>
-    <svg class="machine-drawing" viewBox="0 0 680 370" role="img" aria-labelledby="machine-title machine-description">
-<title id="machine-title">Representación ilustrativa de una máquina de mecanizado</title><desc id="machine-description">Las lecturas mostradas proceden del registro sintético actual. La ilustración no simula procesos físicos.</desc>
-<defs><linearGradient id="body-gradient" x2="1" y2="1"><stop stop-color="#eeeafb"/><stop offset="1" stop-color="#c5bbdf"/></linearGradient><linearGradient id="glass-gradient" x2="0" y2="1"><stop stop-color="#393151"/><stop offset="1" stop-color="#251e38"/></linearGradient><linearGradient id="steel-gradient"><stop stop-color="#b4a4d4"/><stop offset=".45" stop-color="#eee8f9"/><stop offset="1" stop-color="#8c79af"/></linearGradient><pattern id="stage-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#d1c9e4"/></pattern><clipPath id="window-clip"><rect x="180" y="103" width="247" height="170" rx="9"/></clipPath></defs>
-<rect width="680" height="370" fill="url(#stage-grid)"/>
-<ellipse cx="334" cy="325" rx="223" ry="16" fill="#dcd4ec" opacity=".6"/>
-<path d="M151 82L174 63H498L522 84V298L500 317H151Z" fill="#b7a9d0" stroke="#a194ba"/>
-<rect x="146" y="79" width="355" height="233" rx="13" fill="url(#body-gradient)" stroke="#b5a9cc" stroke-width="1.5"/>
-<path d="M147 287H500V300Q500 312 488 312H159Q147 312 147 300Z" fill="#a99bbf"/>
-<rect x="167" y="93" width="273" height="192" rx="14" fill="#eee9f7" stroke="#b9adce"/>
-<rect x="180" y="103" width="247" height="170" rx="9" fill="url(#glass-gradient)"/>
-<g clip-path="url(#window-clip)"><path d="M180 140H427M180 177H427M180 214H427M220 103V273M260 103V273M300 103V273M340 103V273M380 103V273" stroke="#645379" opacity=".16"/>
-<path d="M207 245H398L415 257H194Z" fill="#8e7ba8"/><rect x="194" y="257" width="221" height="13" fill="#68587f"/><path d="M222 244L235 231H374L388 244Z" fill="#bdadd5"/>
-<path d="M237 243L249 232M260 243L272 232M284 243L296 232M308 243L320 232M332 243L344 232M355 243L367 232" stroke="#7f6b99"/>
-<rect x="275" y="214" width="67" height="18" rx="3" fill="#d5cae7"/><ellipse cx="308.5" cy="214" rx="33.5" ry="7" fill="#eee8f7"/>
-<path d="M285 103H332V148H285Z" fill="#9380b3"/><rect x="290" y="130" width="38" height="50" rx="5" fill="url(#steel-gradient)"/><path d="M297 179H321L316 194H302Z" fill="#b9a9d0"/>
-<g class="spindle-motion"><path d="M305 194V212M313 194V212" stroke="#e0d4f1" stroke-width="2"/><path d="M301 200L317 205M301 206L317 211" stroke="#a68bc8" stroke-width="1.5"/></g>
-<path d="M180 117L427 246M180 135L427 264" stroke="#c4acdf" stroke-width="13" opacity=".035"/>
-<rect class="scan-beam" x="180" y="110" width="247" height="5" fill="#b8a5f4" opacity="0"/>
-</g>
-<rect x="446" y="111" width="40" height="64" rx="5" fill="#4c3c65"/><rect x="452" y="118" width="28" height="24" rx="2" fill="#20192e"/><path d="M456 135L461 128L465 133L473 124L477 129" fill="none" stroke="#b9a3f3" stroke-width="1.6"/>
-<g fill="#c4b4da"><circle cx="456" cy="150" r="2"/><circle cx="465" cy="150" r="2"/><circle cx="474" cy="150" r="2"/><circle cx="456" cy="158" r="2"/><circle cx="465" cy="158" r="2"/><circle cx="474" cy="158" r="2"/></g>
-<circle class="machine-indicator" cx="465" cy="191" r="5" fill="#a49ab4"/>
-<path d="M159 313H201V321H159M450 313H488V321H450" fill="#78688f"/>
-<rect x="298" y="294" width="44" height="5" rx="2" fill="#7d6a98"/>
-<path d="M309 168H105V147H57" stroke="#a599bd" fill="none" stroke-dasharray="3 4"/><circle cx="309" cy="168" r="3" fill="#b9a3f3"/>
-<text x="57" y="127" class="svg-label">VELOCIDAD</text><text x="57" y="142" id="machine-rpm" class="svg-value">— rpm</text>
-<path d="M340 221H556V242H616" stroke="#a599bd" fill="none" stroke-dasharray="3 4"/><circle cx="340" cy="221" r="3" fill="#b9a3f3"/>
-<text x="551" y="260" class="svg-label">TORQUE</text><text x="551" y="279" id="machine-torque" class="svg-value">— Nm</text>
-</svg>
-    <div class="machine-footer"><p id="identity">Inicia la simulación para ver la primera observación.</p><span>Sin conexión a maquinaria física</span></div></section>
-    <section class="decision-panel"><span class="kicker">EL MODELO DECIDE</span><h2>Clasificación actual</h2><div id="prediction" class="prediction neutral" role="status">Sin predicción</div><p id="decision-explanation">El árbol de decisión analizará las seis variables de cada registro.</p><div class="decision-separator"></div><span class="kicker">COMPARACIÓN POSTERIOR</span><p id="reference">Etiqueta real: —</p><p class="hint">La etiqueta real no entra al modelo. Una predicción sin falla no garantiza ausencia de una falla.</p><div class="decision-stats"><div><span>Alertas de la sesión</span><strong id="alerts">0</strong></div><div><span>Media / p95 del modelo</span><strong id="latency">— / — ms</strong></div></div></section>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Monitor de maquinaria</title><script src="/theme.js"></script><link rel="preload" href="/fonts/SpaceGrotesk.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="/fonts/Inter.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="/portal.css"><link rel="stylesheet" href="/monitor.css"><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/manual.css"><link rel="stylesheet" href="/lab.css"><script src="/lab.js" defer></script><script src="/plant.js" defer></script><script src="/portal.js" defer></script><script src="/manual.js" defer></script></head><body data-run="ready"><a class="skip-link" href="#main">Ir al contenido</a><aside class="sidebar"><a class="brand" href="#ejecucion" data-go="ejecucion"><span class="brand-mark">M<span>↗</span></span><span>MAQUINARIA<span class="brand-sub">Un laboratorio de inteligencia artificial</span></span></a><p class="nav-label">TU ESPACIO DE TRABAJO</p><nav role="tablist" aria-label="Apartados del proyecto" aria-orientation="vertical"><button id="tab-ejecucion" role="tab" aria-controls="ejecucion" aria-selected="true" data-panel="ejecucion"><span class="nav-symbol">◉</span><span>Monitor<small>Observa el modelo en acción</small></span></button><button id="tab-documentacion" role="tab" aria-controls="documentacion" aria-selected="false" tabindex="-1" data-panel="documentacion"><span class="nav-symbol">▤</span><span>El proyecto<small>Datos, método y resultados</small></span></button><button id="tab-codigo" role="tab" aria-controls="codigo" aria-selected="false" tabindex="-1" data-panel="codigo"><span class="nav-symbol">⌘</span><span>Código<small>Por dentro del sistema</small></span></button></nav><div class="side-note"><span class="local-dot"></span> Un modelo. Cada registro.<p>Árbol de decisión<br>AI4I 2020 · Datos sintéticos</p></div><a class="repo-link" href="https://github.com/contac-isbe/deteccion-fallas-maquinaria" target="_blank" rel="noopener">Ver repositorio ↗</a></aside><div class="workspace"><div class="topbar"><span><span class="topbar-square"></span> LABORATORIO / <b>DETECCIÓN DE FALLAS</b></span><div class="topbar-actions"><button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" title="Activar modo oscuro"><svg class="theme-icon theme-icon-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.2"/><path d="M10 1v2M10 17v2M1 10h2M17 10h2M3.6 3.6L5 5M15 15l1.4 1.4M3.6 16.4L5 15M15 5l1.4-1.4"/></svg><svg class="theme-icon theme-icon-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M17 12A7.5 7.5 0 018 3a7.5 7.5 0 109 9Z"/></svg><span class="theme-label">Claro</span><span class="theme-track" aria-hidden="true"><span></span></span></button><span class="badge" id="runtime-label">Sesión local</span></div></div><main id="main"><header class="page-header"><p class="eyebrow">MACHINE LEARNING · EXPLORACIÓN INTERACTIVA</p><h1 id="page-title">Monitor de maquinaria</h1><p id="page-description">Cada registro recorre el árbol de decisión del modelo: mira qué pregunta y por qué responde así.</p></header><p id="project-error" role="alert" hidden></p><section id="ejecucion" role="tabpanel" aria-labelledby="tab-ejecucion">
+<div class="lab" id="lab" data-view="plant">
+
+  <div class="view-switch" role="group" aria-label="Vista del simulador">
+    <button type="button" id="view-plant" aria-pressed="true"><b>Planta en vivo</b><small>12 máquinas y un gemelo digital que tú controlas</small></button>
+    <button type="button" id="view-test" aria-pressed="false"><b>Datos de prueba</b><small>Los 2 000 registros reales que el modelo nunca vio</small></button>
   </div>
-  <div id="measurements" class="sensor-grid" aria-label="Mediciones del registro actual">
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">°</i> Aire</span><strong id="air">— K</strong><svg data-spark="Air temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Temperatura del aire</span></article>
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">°</i> Proceso</span><strong id="process">— K</strong><svg data-spark="Process temperature [K]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Temperatura del proceso</span></article>
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">↻</i> Rotación</span><strong id="speed">— rpm</strong><svg data-spark="Rotational speed [rpm]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Velocidad del registro</span></article>
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">↗</i> Torque</span><strong id="torque">— Nm</strong><svg data-spark="Torque [Nm]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Par de giro</span></article>
-    <article class="sensor"><span class="sensor-label"><i class="sensor-icon">◷</i> Desgaste</span><strong id="wear">— min</strong><svg data-spark="Tool wear [min]" viewBox="0 0 160 28" aria-hidden="true"></svg><span class="sensor-foot">Uso de la herramienta</span></article>
+
+  <div class="lab-bar" aria-label="Controles de reproducción">
+    <div class="lab-status"><span id="run-dot" class="run-dot" aria-hidden="true"></span>
+      <div><strong id="status" role="status">Preparando el monitor…</strong>
+      <span id="status-sub" class="v-test"><b id="count">0</b> de <b id="total">2 000</b> registros de prueba</span><span id="status-plant" class="v-plant">Planta detenida · paso 0</span></div></div>
+    <div class="lab-progress v-test" aria-hidden="true"><i id="bar"></i></div>
+    <div class="lab-buttons">
+      <button id="start" class="lab-primary" type="button">Iniciar simulación</button>
+      <button id="pause" type="button">Pausar</button>
+      <button id="step" type="button" title="Avanzar un solo paso">Siguiente</button>
+      <button id="reset" type="button">Reiniciar</button><button id="plant-new" class="v-plant" type="button" title="Una planta distinta, con otra historia">Planta nueva</button>
+      <label class="lab-speed">Velocidad <select id="interval" aria-label="Velocidad de reproducción"><option value="0.2">Rápida</option><option value="0.8" selected>Normal</option><option value="2">Lenta</option></select></label>
+      <button class="lab-ghost" data-open-manual type="button">Guía</button>
+    </div>
   </div>
-  <div class="trace-layout"><section class="panel trace-panel"><div class="section-heading"><div><span class="kicker">SECUENCIA DE REPRODUCCIÓN</span><h2>Así cambian las mediciones</h2></div><span id="chart-current" class="chart-current">— rpm</span></div><div class="chart-switch" aria-label="Variable del gráfico"><button data-feature="Rotational speed [rpm]" aria-pressed="true">Rotación</button><button data-feature="Torque [Nm]" aria-pressed="false">Torque</button><button data-feature="Air temperature [K]" aria-pressed="false">Aire</button><button data-feature="Process temperature [K]" aria-pressed="false">Proceso</button><button data-feature="Tool wear [min]" aria-pressed="false">Desgaste</button></div><div class="trace-chart"><svg id="trace" viewBox="0 0 760 220" role="img" aria-label="Sin registros procesados. El gráfico aparecerá al avanzar la simulación."></svg><p id="chart-empty">Cada registro cuenta una parte.<span>Inicia la simulación para dibujar los datos.</span></p></div><div class="chart-legend"><span><i></i> Medición</span><span><i class="legend-alert"></i> Predicción de falla</span><span id="chart-range">Sin registros</span></div><p class="hint">Escala automática · Hasta 60 registros procesados. La secuencia no es una serie temporal de una máquina real.</p></section>
-  <section class="panel alerts-panel"><div class="section-heading"><div><span class="kicker">LO QUE SEÑALA EL MODELO</span><h2>Alertas recientes</h2></div><span id="window-alerts" class="window-count">0</span></div><div id="alert-feed"><div class="alert-empty">Todo empieza con una observación.<p>Aquí aparecerán las predicciones de falla de los últimos 60 registros.</p></div></div></section></div>
-  <section class="panel history-panel"><div class="section-heading"><div><span class="kicker">TRAZABILIDAD DE LA SESIÓN</span><h2>El recorrido, sin ocultar errores</h2></div><a id="export" class="button" href="/api/export" download>Exportar CSV ↓</a></div><div class="table-scroll"><table><caption class="sr-only">Registro de predicciones y comparación posterior</caption><thead><tr><th>UDI</th><th>Tipo</th><th>Predicción</th><th>Etiqueta real</th><th>Comparación</th><th>Modelo (ms)</th></tr></thead><tbody id="history"><tr><td colspan="6">Todavía no hay registros procesados.</td></tr></tbody></table></div><p id="counts" class="hint">Aciertos sin falla: 0 · Fallas detectadas: 0 · Falsas alarmas: 0 · Fallas omitidas: 0</p><progress id="progress" max="2000" value="0" aria-label="Progreso de reproducción"></progress><p class="hint">Tiempo del pipeline: transformaciones y clasificación; excluye carga, interfaz y pausas. No es una garantía de tiempo real industrial.</p></section>
-  <details class="advanced-panel"><summary>Datos de prueba y comprobaciones <span>Opciones de la sesión</span></summary><div class="advanced-content"><section class="verification-strip"><div><span class="check-icon">✓</span><div><strong><span id="check-count">—</span> <span id="check-result">comprobaciones</span></strong><p id="checks-date">Consultando evidencia…</p></div></div><a href="/project/file?file=reports%2Fmonitor_simulation_checks.json" download>Descargar evidencia JSON ↗</a></section><section class="import"><h2>Comprobar una copia de los datos</h2><p>La reserva ya está cargada. Este control acepta únicamente data/processed/test.csv con sus columnas, valores y orden originales. Una carga válida reinicia la sesión.</p><label for="csv">Archivo CSV de prueba (máximo 1 MB)</label><input id="csv" type="file" accept=".csv,text/csv"><button id="load">Validar y cargar CSV</button><p id="load-message" role="status"></p></section><p class="hint" id="session-help">Reiniciar borra el registro de esta sesión: expórtalo antes si deseas conservarlo. Las pestañas del mismo servidor comparten la sesión. Cambiar de pestaña no pausa la reproducción.</p></div></details>
+  <p id="error" role="alert" hidden></p>
+
+  <!-- PLANTA EN VIVO -->
+  <section class="lab-card v-plant plant-card" id="plant-card" aria-labelledby="plant-title">
+    <header class="split">
+      <div><span class="lab-kicker">SALA DE CONTROL · TALLER SIMULADO</span>
+        <h2 id="plant-title">Taller de fresado: 12 fresadoras CNC vigiladas por IA</h2>
+        <p class="lab-sub">Cada fresadora genera lecturas nuevas en cada paso (datos AI4I 2020, un conjunto sintético que imita fresadoras reales). La IA mira su tendencia reciente y <b>pronostica cuál va a fallar en los próximos 12 pasos</b>, antes de que ocurra. Haz clic en una fresadora para abrir su gemelo digital y corregirla a tiempo.</p></div>
+      <dl class="plant-kpis" aria-label="Estado de la planta"><div><dt>Paso</dt><dd id="pk-t">0</dd></div><div data-k="run"><dt>En marcha</dt><dd id="pk-run">12</dd></div><div data-k="alert"><dt>Con alerta</dt><dd id="pk-alert">0</dd></div><div data-k="down"><dt>Detenidas</dt><dd id="pk-down">0</dd></div></dl>
+    </header>
+    <div class="plant-grid" id="plant-grid" aria-label="Máquinas de la planta"></div>
+    <div class="plant-info">
+      <div class="pi-box" id="plant-score"><span class="lab-kicker">MARCADOR: PRONÓSTICO CONTRA REALIDAD</span><div id="ps-body"></div></div>
+      <div class="pi-box" id="plant-rules"><span class="lab-kicker">LO QUE LA IA APRENDIÓ POR SÍ SOLA</span><div id="pr-body"></div></div>
+      <div class="pi-box"><span class="lab-kicker">BITÁCORA</span><ol id="plant-log" class="plant-log"><li class="muted">Pulsa «Iniciar simulación» para poner la planta en marcha.</li></ol></div>
+    </div>
+  </section>
+
+  <section class="lab-card v-plant twin-card" id="twin-card" aria-labelledby="twin-title">
+    <header class="split">
+      <div><span class="lab-kicker">GEMELO DIGITAL</span>
+        <h2 id="twin-title">Selecciona una máquina</h2>
+        <p class="lab-sub" id="twin-sub"></p></div>
+      <span class="twin-state" id="twin-state" data-state="run">En marcha</span>
+    </header>
+    <div class="twin-grid">
+      <div class="twin-col"><h3 class="ae-h">La máquina</h3><div id="twin-svg" class="twin-svg" role="img" aria-label="Esquema de la máquina seleccionada"></div></div>
+      <div class="twin-col"><h3 class="ae-h">Las reglas físicas reales <small>(la IA no las conoce)</small></h3><div id="twin-rules" class="twin-rules"></div></div>
+      <div class="twin-col twin-ctl"><h3 class="ae-h">Controles del operador</h3>
+        <label class="ctl" for="c-rpm"><span>Velocidad</span><output id="o-rpm">—</output></label><input id="c-rpm" type="range" min="1100" max="2900" step="10">
+        <label class="ctl" for="c-power"><span>Demanda de potencia</span><output id="o-power">—</output></label><input id="c-power" type="range" min="1500" max="11500" step="50">
+        <label class="ctl" for="c-cool"><span>Refrigeración (Δ proceso − aire)</span><output id="o-cool">—</output></label><input id="c-cool" type="range" min="6" max="12" step="0.1">
+        <div class="ctl-buttons"><button type="button" id="a-tool">Cambiar herramienta</button><button type="button" id="a-safe">Parámetros seguros</button><button type="button" id="a-restart" hidden>Reiniciar máquina</button></div>
+        <p class="lab-fine">Sube la demanda de potencia o baja la refrigeración y mira cómo el pronóstico reacciona; luego pulsa «Parámetros seguros» y comprueba que bajas el riesgo a tiempo.</p></div>
+    </div>
+    <div id="twin-forecast" class="twin-forecast"></div>
+    <div id="twin-chart" class="twin-chart" role="img" aria-label="Historial reciente de la máquina seleccionada"></div>
+    <p class="lab-fine">Mundo sintético: las lecturas se generan con una dinámica sencilla y las fallas ocurren al incumplir las reglas físicas documentadas de AI4I 2020. El pronosticador se entrenó con otras simulaciones y nunca recibió esas reglas; con máquinas reales los resultados serían distintos.</p>
+  </section>
+
+  <!-- ASISTENTE: pregunta escrita, respuesta con acciones probadas por el modelo -->
+  <section class="lab-card v-plant assistant-card" id="assistant-card" aria-labelledby="as-title">
+    <header class="plant-head">
+      <div><span class="lab-kicker">ASISTENTE DE LA PLANTA</span>
+        <h2 id="as-title">Pregúntale a la IA qué hacer</h2>
+        <p class="lab-sub">Escribe un problema o elige una pregunta. El asistente entiende la pregunta con un <b>modelo entrenado por nosotros</b> (regresión logística sobre texto) y <b>prueba acciones con el pronosticador</b> para decirte cuál baja el riesgo de verdad. Habla de la fresadora seleccionada, o nómbrala («Fresadora 12»).</p></div>
+      <span class="as-mode" id="as-mode" title="Con la variable ANTHROPIC_API_KEY, Claude solo redacta el texto; las cifras siempre las calcula tu modelo.">Asistente propio · sin internet</span>
+    </header>
+    <form class="as-form" id="as-form" autocomplete="off">
+      <label class="sr-only" for="as-q">Pregunta para el asistente</label>
+      <input id="as-q" type="text" maxlength="300" placeholder="Ej.: ¿Qué hago con esta fresadora? · ¿Por qué sube el riesgo? · la potencia está muy baja, qué hago" />
+      <button class="lab-primary" id="as-send" type="submit">Preguntar</button>
+    </form>
+    <div class="as-chips" id="as-chips" aria-label="Preguntas sugeridas"></div>
+    <div class="as-log" id="as-log" aria-live="polite"></div>
+    <p class="lab-fine">Las recomendaciones de mantenimiento son una guía general sobre una fresadora simulada; con una máquina real manda el manual del fabricante. Los porcentajes salen del pronosticador entrenado, no de una plantilla.</p>
+  </section>
+
+  <!-- ESCENA PRINCIPAL: el árbol real del modelo -->
+  <section class="lab-card lab-stage" aria-labelledby="stage-title">
+    <header class="stage-head">
+      <div><span class="lab-kicker" id="stage-kicker">EL MODELO POR DENTRO · ÁRBOL DE DECISIÓN</span>
+        <h2 id="stage-title">Cada registro recorre este árbol hasta una hoja</h2></div>
+      <div class="verdict-chip" id="verdict-chip" data-state="idle" aria-live="polite">
+        <span class="vc-icon" id="vc-icon" aria-hidden="true">◌</span>
+        <div><strong id="vc-title">Esperando un registro</strong><small id="vc-sub">Pulsa «Iniciar simulación» o «Siguiente».</small></div>
+      </div>
+      <div class="mode-switch v-test" role="group" aria-label="Modo de la escena">
+        <button type="button" id="mode-play" aria-pressed="true">Reproducción</button>
+        <button type="button" id="mode-lab" aria-pressed="false">Laboratorio</button>
+      </div>
+    </header>
+    <div class="tree-wrap" id="tree-wrap">
+      <canvas id="tree" role="img" aria-label="Árbol de decisión del modelo con el camino que sigue la observación actual resaltado"></canvas>
+      <div class="tree-tip" id="tree-tip" hidden></div>
+      <div class="tree-axis"><span>Pregunta inicial</span><span id="axis-depth">↓ cada nivel es una pregunta sobre una medición</span></div>
+    </div>
+    <footer class="stage-legend">
+      <span><i class="lg lg-path"></i>Camino del registro actual</span>
+      <span><i class="lg lg-fail"></i>Hoja que predice falla</span>
+      <span><i class="lg lg-ok"></i>Hoja que predice sin falla</span>
+      <span><i class="lg lg-heat"></i>Más brillo = más registros pasaron por ahí en esta sesión</span>
+      <span class="legend-note" id="tree-meta">Árbol aprendido con 8 000 observaciones de desarrollo.</span>
+    </footer>
+  </section>
+
+  <!-- SEGUNDA OPINIÓN: autoencoder (encoder -> espacio latente -> decoder) -->
+  <section class="lab-card ae-card" id="ae-card" aria-labelledby="ae-title" hidden>
+    <header class="split ae-head">
+      <div><span class="lab-kicker">SEGUNDA OPINIÓN · APRENDIZAJE NO SUPERVISADO</span>
+        <h2 id="ae-title">Autoencoder: aprendió cómo luce un registro normal</h2>
+        <p class="lab-sub">El encoder comprime el registro, el decoder intenta reconstruirlo y se mide el error. Si no logra reconstruirlo, el registro es atípico. Se entrenó solo con registros sin falla.</p></div>
+      <div class="ae-badges"><span id="ae-verdict" class="ae-badge" data-state="idle">Sin registro</span><span id="ae-agree" class="ae-agree"></span></div>
+    </header>
+    <div class="ae-body">
+      <div id="ae-net" class="ae-net" role="img" aria-label="Red del autoencoder: entrada, encoder, espacio latente, decoder y reconstrucción"></div>
+      <div class="ae-side">
+        <h3 class="ae-h">Entrada frente a reconstrucción <small>(valores estandarizados)</small></h3>
+        <div id="ae-feats" class="ae-feats"></div>
+        <div class="ae-meter"><div class="ae-meter-bar" id="ae-bar"><i id="ae-fill"></i><b id="ae-thr"><span>umbral</span></b></div>
+          <p id="ae-text">El error es el promedio de las diferencias al cuadrado entre la entrada y su reconstrucción.</p></div>
+      </div>
+    </div>
+    <p class="lab-fine" id="ae-eval"></p>
+  </section>
+
+  <div class="lab-row">
+    <!-- 1 · Lo que ve -->
+    <section class="lab-card sensors v-test" aria-labelledby="s-title">
+      <header><span class="lab-step">1</span><div><h2 id="s-title">Lo que ve el modelo</h2>
+        <p id="identity" class="lab-sub">Sin registro todavía.</p></div></header>
+      <p class="lab-hint" id="sensor-hint">Las marcas verticales de cada barra son los cortes que el árbol aprendió para esa medición; las brillantes son las que usó para este registro.</p>
+      <div class="lab-type" role="group" aria-label="Tipo de producto"><span>Tipo de producto</span>
+        <div id="type-buttons"><button type="button" data-type="L" aria-pressed="false" disabled>L</button><button type="button" data-type="M" aria-pressed="false" disabled>M</button><button type="button" data-type="H" aria-pressed="false" disabled>H</button></div></div>
+      <div id="sensor-rows"></div>
+      <div class="lab-actions" id="lab-actions" hidden><button type="button" id="lab-sync">Copiar el registro actual</button><span id="lab-note">Mueve las barras: el modelo responde al instante. Son combinaciones libres; el laboratorio no usa ni modifica la reserva.</span></div>
+    </section>
+
+    <!-- 2 · Lo que piensa -->
+    <section class="lab-card reasoning" aria-labelledby="r-title">
+      <header><span class="lab-step">2</span><div><h2 id="r-title">Lo que se pregunta</h2>
+        <p class="lab-sub" id="r-sub">Las preguntas del camino, en orden.</p></div></header>
+      <ol id="steps" class="steps" aria-live="off"><li class="steps-empty">Aquí aparecerán las preguntas que el modelo hace a cada registro.</li></ol>
+    </section>
+
+    <!-- 3 · Lo que decide -->
+    <section class="lab-card outcome" aria-labelledby="o-title">
+      <header><span class="lab-step">3</span><div><h2 id="o-title">Lo que decide</h2>
+        <p class="lab-sub" id="o-sub">Y qué tan respaldada está la decisión.</p></div></header>
+      <div class="decision" id="decision" data-state="idle"><span id="prediction">Sin predicción</span></div>
+      <div class="evidence" id="evidence">
+        <div class="ev-meter"><i id="ev-fill"></i></div>
+        <p id="ev-text">Cuando el registro llega a una hoja, aquí verás cuántos casos de entrenamiento parecidos terminaron en falla.</p>
+      </div>
+      <div class="truth" id="truth"><span class="lab-kicker">COMPARACIÓN POSTERIOR</span><p id="reference">La etiqueta real se muestra después de decidir; el modelo nunca la ve.</p></div>
+      <dl class="mini-stats"><div><dt>Tiempo del modelo</dt><dd id="latency">— ms</dd></div><div><dt>Alertas</dt><dd id="alerts">0</dd></div></dl>
+    </section>
+  </div>
+
+  <div class="lab-row lab-row-b v-test">
+    <section class="lab-card lanes-card" aria-labelledby="l-title">
+      <header class="plain"><div><span class="lab-kicker">REALIDAD FRENTE A IA</span><h2 id="l-title">Lo que ocurrió y lo que dijo el modelo</h2></div></header>
+      <div id="lanes" class="lanes" role="img" aria-label="Línea de tiempo de los últimos 60 registros: etiqueta real arriba, predicción del modelo abajo"></div>
+      <div class="lane-legend"><span><i class="ln ln-tp"></i>Falla detectada</span><span><i class="ln ln-fn"></i>Falla omitida</span><span><i class="ln ln-fp"></i>Falsa alarma</span><span><i class="ln ln-tn"></i>Sin falla (acierto)</span></div>
+      <p class="lab-fine">Últimos 60 registros. Son observaciones independientes, no una serie temporal de una misma máquina.</p>
+    </section>
+
+    <section class="lab-card score-card" aria-labelledby="sc-title">
+      <header class="plain"><div><span class="lab-kicker">EL APORTE DE LA IA</span><h2 id="sc-title">¿Qué logró hasta ahora?</h2></div></header>
+      <div class="ai-vs"><div class="ai-vs-main"><b id="caught">0</b><span>de <b id="real">0</b> fallas reales detectadas</span></div>
+        <div class="ai-vs-base"><b>0</b><span>detectaría un sistema que siempre dijera «sin falla»</span></div></div>
+      <table class="cm" aria-label="Matriz de confusión de la sesión"><thead><tr><th></th><th>Dijo sin falla</th><th>Dijo falla</th></tr></thead>
+        <tbody><tr><th>Era sin falla</th><td data-k="TN" id="cm-tn">0</td><td data-k="FP" id="cm-fp">0</td></tr>
+        <tr><th>Era falla</th><td data-k="FN" id="cm-fn">0</td><td data-k="TP" id="cm-tp">0</td></tr></tbody></table>
+      <p class="lab-fine" id="counts">Aciertos sin falla: 0 · Fallas detectadas: 0 · Falsas alarmas: 0 · Fallas omitidas: 0</p>
+      <div class="ae-score" id="ae-score" hidden><span class="lab-kicker">SEGUNDA OPINIÓN (AUTOENCODER)</span><p id="ae-score-text"></p></div>
+      <p class="lab-match" id="match" hidden></p>
+    </section>
+  </div>
+
+  <section class="lab-card history-card v-test" aria-labelledby="h-title">
+    <header class="plain split"><div><span class="lab-kicker">TRAZABILIDAD DE LA SESIÓN</span><h2 id="h-title">El recorrido, sin ocultar errores</h2></div>
+      <a class="lab-ghost-link" href="/api/export" download="simulacion_ai4i.csv">Exportar CSV ↓</a></header>
+    <div class="table-scroll"><table class="hist"><thead><tr><th>UDI</th><th>Tipo</th><th>Predicción</th><th>Etiqueta real</th><th>Resultado</th><th title="Casos de entrenamiento de la hoja que terminaron en falla / total">Hoja (falla/casos)</th><th>Modelo (ms)</th></tr></thead><tbody id="history"></tbody></table></div>
+  </section>
+</div>
+<details class="advanced-panel"><summary>Datos de prueba y comprobaciones <span>Opciones de la sesión</span></summary><div class="advanced-content"><section class="verification-strip"><div><span class="check-icon">✓</span><div><strong><span id="check-count">—</span> <span id="check-result">comprobaciones</span></strong><p id="checks-date">Consultando evidencia…</p></div></div><a href="/project/file?file=reports%2Fmonitor_simulation_checks.json" download>Descargar evidencia JSON ↗</a></section><section class="import"><h2>Comprobar una copia de los datos</h2><p>La reserva ya está cargada. Este control acepta únicamente data/processed/test.csv con sus columnas, valores y orden originales. Una carga válida reinicia la sesión.</p><label for="csv">Archivo CSV de prueba (máximo 1 MB)</label><input id="csv" type="file" accept=".csv,text/csv"><button id="load">Validar y cargar CSV</button><p id="load-message" role="status"></p></section><p class="hint" id="session-help">Reiniciar borra el registro de esta sesión: expórtalo antes si deseas conservarlo. Las pestañas del mismo servidor comparten la sesión. Cambiar de pestaña no pausa la reproducción.</p></div></details>
 </section>    <section id="documentacion" role="tabpanel" aria-labelledby="tab-documentacion" hidden>
       <div class="project-hero"><div><span class="pill">DETECCIÓN DE FALLAS</span><h2>De los datos a una<br>clasificación verificable.</h2><p>Un sistema que aprende de observaciones de maquinaria para clasificarlas como sin falla o con falla, y permite revisar sus aciertos y errores.</p><div class="hero-actions"><button class="primary" data-go="ejecucion">Explorar la simulación <span aria-hidden="true">→</span></button><a class="button" href="/project/file?file=docs%2FInforme%20-%20Proyecto%20de%20IA.docx" download>Descargar informe ↓</a></div></div><div class="hero-facts"><span class="fact-label">MODELO SELECCIONADO</span><strong id="model-name">Cargando…</strong><div class="fact-rule"></div><span class="fact-label">UNA FUENTE DE DATOS</span><strong>AI4I 2020</strong><span class="fact-caption">Datos sintéticos · 10 000 observaciones</span><span class="model-stamp">Modelo congelado · Sin reentrenamiento</span></div></div>
       <div class="section-heading"><h2>Resultados de la evaluación</h2><span class="subtle">Reserva de prueba · 2 000 registros</span></div>
@@ -63,4 +202,4 @@
       <div class="source-layout"><aside class="file-panel"><h2>Archivos del proyecto</h2><div id="source-tree" aria-label="Seleccionar un archivo de código"></div></aside><section class="code-panel"><div class="code-toolbar"><span id="source-title">Selecciona un archivo</span><a id="source-download" class="button" href="/project/file?file=README.md" download>Descargar ↓</a></div><p id="source-note" class="hint">Vista de lectura de los archivos locales.</p><pre tabindex="0" aria-label="Contenido del archivo seleccionado"><code id="source-content">Cargando código…</code></pre></section></div>
       <p class="publication-note">El visor muestra los archivos de esta versión. Las modificaciones se guardan en la rama de trabajo y requieren revisión antes de integrarlas en main.</p>
     </section>
-<footer><span>UPAO · Inteligencia Artificial: Principios y Técnicas</span><span>Representación ilustrativa · Modelo congelado · Datos sintéticos</span></footer><dialog id="usage-dialog" class="manual-dialog" aria-labelledby="usage-title"><header class="manual-header"><div><span class="kicker">A TU RITMO, REGISTRO A REGISTRO</span><h2 id="usage-title">Guía de uso</h2></div><form method="dialog"><button type="submit" aria-label="Cerrar guía" autofocus>×</button></form></header><div class="manual-body"><p class="manual-intro">La reserva ya está preparada. La máquina es ilustrativa y los datos son sintéticos: cada paso muestra cómo responde el modelo a una observación.</p><ol class="manual-steps"><li><h3>Pon en marcha el monitor</h3><p>Usa <b>Iniciar simulación</b> para avanzar automáticamente, o <b>Siguiente</b> para procesar una sola observación. El intervalo controla la pausa entre registros.</p></li><li><h3>Lee las mediciones y la decisión</h3><p>Consulta las cinco tarjetas, el UDI y el tipo de producto. Una alerta indica que el modelo predijo falla; la etiqueta real se compara después y no entra al modelo.</p></li><li><h3>Explora los gráficos</h3><p>Elige Rotación, Torque, Aire, Proceso o Desgaste. Verás hasta los últimos 60 registros procesados; no es una serie temporal de una máquina real. Las alertas recientes corresponden a esa ventana.</p></li><li><h3>Pausa, continúa o empieza de nuevo</h3><p><b>Pausar</b> conserva el avance y <b>Continuar</b> lo reanuda. <b>Reiniciar</b> borra la sesión: exporta antes si quieres guardar los resultados. Cambiar de sección no pausa la reproducción.</p></li><li><h3>Guarda lo que revisaste</h3><p><b>Exportar CSV</b> descarga todos los registros procesados, aunque la tabla muestre solo ocho. Incluye predicciones, etiquetas, aciertos, errores y tiempos del modelo.</p></li><li><h3>Hazlo cómodo para ti</h3><p>El interruptor de la esquina superior derecha alterna claro y oscuro y recuerda la elección. En <b>El proyecto</b> están los resultados y el informe; en <b>Código</b>, los archivos e instrucciones.</p></li></ol><div class="manual-bottom"><p>Una predicción sin falla no garantiza ausencia de ella. Para instalación, carga de CSV y solución de problemas, consulta el manual completo.</p><a class="button" href="/project/file?file=docs%2FMANUAL_USUARIO.md" download>Descargar manual ↓</a></div></div></dialog></main></div></body></html>
+<footer><span>UPAO · Inteligencia Artificial: Principios y Técnicas</span><span>Árbol real del modelo congelado · Datos sintéticos</span></footer><dialog id="usage-dialog" class="manual-dialog" aria-labelledby="usage-title"><header class="manual-header"><div><span class="kicker">A TU RITMO, REGISTRO A REGISTRO</span><h2 id="usage-title">Guía de uso</h2></div><form method="dialog"><button type="submit" aria-label="Cerrar guía" autofocus>×</button></form></header><div class="manual-body"><p class="manual-intro">La reserva ya está preparada. La máquina es ilustrativa y los datos son sintéticos: cada paso muestra cómo responde el modelo a una observación.</p><ol class="manual-steps"><li><h3>Pon en marcha el monitor</h3><p>Usa <b>Iniciar simulación</b> para avanzar automáticamente, o <b>Siguiente</b> para procesar una sola observación. El intervalo controla la pausa entre registros.</p></li><li><h3>Lee las mediciones y la decisión</h3><p>Consulta las cinco tarjetas, el UDI y el tipo de producto. Una alerta indica que el modelo predijo falla; la etiqueta real se compara después y no entra al modelo.</p></li><li><h3>Explora los gráficos</h3><p>Elige Rotación, Torque, Aire, Proceso o Desgaste. Verás hasta los últimos 60 registros procesados; no es una serie temporal de una máquina real. Las alertas recientes corresponden a esa ventana.</p></li><li><h3>Pausa, continúa o empieza de nuevo</h3><p><b>Pausar</b> conserva el avance y <b>Continuar</b> lo reanuda. <b>Reiniciar</b> borra la sesión: exporta antes si quieres guardar los resultados. Cambiar de sección no pausa la reproducción.</p></li><li><h3>Guarda lo que revisaste</h3><p><b>Exportar CSV</b> descarga todos los registros procesados, aunque la tabla muestre solo ocho. Incluye predicciones, etiquetas, aciertos, errores y tiempos del modelo.</p></li><li><h3>Hazlo cómodo para ti</h3><p>El interruptor de la esquina superior derecha alterna claro y oscuro y recuerda la elección. En <b>El proyecto</b> están los resultados y el informe; en <b>Código</b>, los archivos e instrucciones.</p></li></ol><div class="manual-bottom"><p>Una predicción sin falla no garantiza ausencia de ella. Para instalación, carga de CSV y solución de problemas, consulta el manual completo.</p><a class="button" href="/project/file?file=docs%2FMANUAL_USUARIO.md" download>Descargar manual ↓</a></div></div></dialog></main></div></body></html>

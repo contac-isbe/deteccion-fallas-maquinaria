@@ -1,0 +1,285 @@
+{
+  "nota": "Resultados de la SEGUNDA ejecución (ver reports/asistente_selection.json: limitación declarada). Primera ejecución, sin palabras clave ni frases ampliadas: intención 77 % y falla 73 % en prueba; 65 % y 88 % en el conjunto natural.",
+  "rows": {
+    "train": 4437,
+    "val": 700,
+    "test": 723,
+    "natural": 69
+  },
+  "chosen": {
+    "features": "char+word+palabras_clave",
+    "C": 1,
+    "reject_threshold": 0.0
+  },
+  "grid": [
+    {
+      "features": "char",
+      "C": 1,
+      "val_intent_macro_f1": 0.7635108865236367,
+      "val_cause_macro_f1": 0.6831026427926093,
+      "score": 0.723306764658123
+    },
+    {
+      "features": "char",
+      "C": 10,
+      "val_intent_macro_f1": 0.7614005099095887,
+      "val_cause_macro_f1": 0.698481662458097,
+      "score": 0.7299410861838429
+    },
+    {
+      "features": "char",
+      "C": 100,
+      "val_intent_macro_f1": 0.7584261474959091,
+      "val_cause_macro_f1": 0.6918822563789083,
+      "score": 0.7251542019374086
+    },
+    {
+      "features": "char+word",
+      "C": 1,
+      "val_intent_macro_f1": 0.7735486724160806,
+      "val_cause_macro_f1": 0.6439277343497357,
+      "score": 0.7087382033829082
+    },
+    {
+      "features": "char+word",
+      "C": 10,
+      "val_intent_macro_f1": 0.7707481647740931,
+      "val_cause_macro_f1": 0.6758070169762074,
+      "score": 0.7232775908751503
+    },
+    {
+      "features": "char+word",
+      "C": 100,
+      "val_intent_macro_f1": 0.7736459850396132,
+      "val_cause_macro_f1": 0.693702641579245,
+      "score": 0.7336743133094291
+    },
+    {
+      "features": "char+word+palabras_clave",
+      "C": 1,
+      "val_intent_macro_f1": 0.7916722763081806,
+      "val_cause_macro_f1": 0.915845766257482,
+      "score": 0.8537590212828313
+    },
+    {
+      "features": "char+word+palabras_clave",
+      "C": 10,
+      "val_intent_macro_f1": 0.7851737416661057,
+      "val_cause_macro_f1": 0.9174535975497579,
+      "score": 0.8513136696079318
+    },
+    {
+      "features": "char+word+palabras_clave",
+      "C": 100,
+      "val_intent_macro_f1": 0.7787264767849439,
+      "val_cause_macro_f1": 0.9197730974115584,
+      "score": 0.8492497870982512
+    }
+  ],
+  "test_plantillas_no_vistas": {
+    "modelo_entrenado": {
+      "intent_accuracy": 0.8298755186721992,
+      "intent_macro_f1": 0.8158435859513175,
+      "cause_accuracy": 0.8630705394190872,
+      "cause_macro_f1": 0.8165077734569041
+    },
+    "linea_base_similitud": {
+      "intent_accuracy": 0.5006915629322268,
+      "intent_macro_f1": 0.5259087584817442,
+      "cause_accuracy": 0.8658367911479945,
+      "cause_macro_f1": 0.8275139116026992
+    }
+  },
+  "natural_a_mano": {
+    "modelo_entrenado": {
+      "intent_accuracy": 0.7971014492753623,
+      "intent_macro_f1": 0.8067997104374813,
+      "cause_accuracy": 0.9565217391304348,
+      "cause_macro_f1": 0.9301948051948052
+    },
+    "linea_base_similitud": {
+      "intent_accuracy": 0.4927536231884058,
+      "intent_macro_f1": 0.4910168778589831,
+      "cause_accuracy": 0.927536231884058,
+      "cause_macro_f1": 0.8647907647907648
+    },
+    "errores": [
+      {
+        "texto": "el motor está jalando muchísimo, creo que se sobrecarga",
+        "esperado": [
+          "que_hago",
+          "PWF_high"
+        ],
+        "predicho": [
+          "por_que",
+          "PWF_high"
+        ]
+      },
+      {
+        "texto": "la máquina casi no está cortando, tiene poca potencia",
+        "esperado": [
+          "que_hago",
+          "PWF_low"
+        ],
+        "predicho": [
+          "seguir",
+          "PWF_low"
+        ]
+      },
+      {
+        "texto": "el refrigerante no está enfriando como antes",
+        "esperado": [
+          "por_que",
+          "HDF"
+        ],
+        "predicho": [
+          "que_hago",
+          "HDF"
+        ]
+      },
+      {
+        "texto": "¿se podrá terminar el pedido con esta herramienta tan vieja?",
+        "esperado": [
+          "seguir",
+          "TWF"
+        ],
+        "predicho": [
+          "cuanto",
+          "TWF"
+        ]
+      },
+      {
+        "texto": "¿qué máquina reviso primero hoy?",
+        "esperado": [
+          "planta",
+          "ninguna"
+        ],
+        "predicho": [
+          "fuera",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "¿hay riesgo de que se me rompa la fresa?",
+        "esperado": [
+          "cuanto",
+          "TWF"
+        ],
+        "predicho": [
+          "por_que",
+          "TWF"
+        ]
+      },
+      {
+        "texto": "auxilio, la 12 está en rojo",
+        "esperado": [
+          "que_hago",
+          "ninguna"
+        ],
+        "predicho": [
+          "planta",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "qué pasa si la dejo funcionando así",
+        "esperado": [
+          "seguir",
+          "ninguna"
+        ],
+        "predicho": [
+          "por_que",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "está muy caliente la temperatura del proceso",
+        "esperado": [
+          "por_que",
+          "HDF"
+        ],
+        "predicho": [
+          "que_hago",
+          "HDF"
+        ]
+      },
+      {
+        "texto": "¿debo cambiar la herramienta ya?",
+        "esperado": [
+          "que_hago",
+          "TWF"
+        ],
+        "predicho": [
+          "seguir",
+          "TWF"
+        ]
+      },
+      {
+        "texto": "¿es normal que el torque suba tanto con una fresa gastada?",
+        "esperado": [
+          "por_que",
+          "OSF"
+        ],
+        "predicho": [
+          "cuanto",
+          "OSF"
+        ]
+      },
+      {
+        "texto": "la potencia está altísima, ¿la apago?",
+        "esperado": [
+          "seguir",
+          "PWF_high"
+        ],
+        "predicho": [
+          "seguir",
+          "PWF_low"
+        ]
+      },
+      {
+        "texto": "dame consejos para mantener las fresas en buen estado",
+        "esperado": [
+          "prevenir",
+          "TWF"
+        ],
+        "predicho": [
+          "planta",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "¿qué puede estar causando tanta potencia?",
+        "esperado": [
+          "por_que",
+          "PWF_high"
+        ],
+        "predicho": [
+          "por_que",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "¿hay alguna máquina que deba apagar?",
+        "esperado": [
+          "planta",
+          "ninguna"
+        ],
+        "predicho": [
+          "por_que",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "¿qué opinas del reggaetón?",
+        "esperado": [
+          "fuera",
+          "ninguna"
+        ],
+        "predicho": [
+          "por_que",
+          "ninguna"
+        ]
+      }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "source": "Artefactos del experimento congelado; no se reentrenó el modelo.",
+  "source": "Artefactos del experimento congelado; no se reentren\u00f3 el modelo.",
   "files": {
     "models/modelo_seleccionado.joblib": {
       "sha256": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
@@ -12,6 +12,34 @@
     "data/processed/development.csv": {
       "sha256": "ef350eaea8ca2314b39bd993d267443df8082b1e3885b5e3cd750595a491ff2b",
       "bytes": 283110
+    },
+    "models/autoencoder.joblib": {
+      "sha256": "b57e6f5823c82e44ddceca24bf58f0d450109646e939daa6809fbe170d1ff2e8",
+      "bytes": 20705
+    },
+    "models/modelo_fisico.joblib": {
+      "sha256": "ffdf01419cd6ae124b669b15dc2458fa214507c3933507d66bf7f27448ef73b7",
+      "bytes": 6404
+    },
+    "models/pronostico.joblib": {
+      "sha256": "622fc9d383aab0e7eed7f605216cee0f18381c04dacb7df30f6c906fdffe9976",
+      "bytes": 310953
+    },
+    "models/asistente_lenguaje.joblib": {
+      "sha256": "36d30ebe345d48bddb1d4fabf8fb827c5d76d0f0c76490a082d1045c27c0041e",
+      "bytes": 2611841
+    },
+    "models/asistente_transformer.onnx": {
+      "sha256": "7db340c9f363ad84a47963fd21e2498cb81f3636fb7fcfc8bcbd53b58a9210e8",
+      "bytes": 67120405
+    },
+    "models/asistente_tokenizer.json": {
+      "sha256": "2ef212f08cf4c7153897b9753d1974309350c26128f0caafd0323e37f51a0ade",
+      "bytes": 735532
+    },
+    "models/asistente_transformer.json": {
+      "sha256": "780d4277fa6f21e7f55d02437ca2ef878ad37a4f83284273718c40070b5de376",
+      "bytes": 333
     }
   }
 }

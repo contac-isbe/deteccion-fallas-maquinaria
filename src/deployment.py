@@ -1,5 +1,6 @@
 """Aplicación WSGI de demostración con sesiones aisladas y modelo congelado."""
 import atexit
+import json
 import os
 import secrets
 import threading
@@ -9,16 +10,17 @@ from pathlib import Path
 from flask import Flask, jsonify, request, send_file
 from werkzeug.exceptions import HTTPException
 
-from src.evaluation import load_frozen_experiment
+from src.plant import plant_dispatch
+from src.runtime import load_runtime
 from src.portal import DOWNLOAD_FILES, metadata, source_content
-from src.simulation import Simulator
+from src.simulation import Simulator, describe_tree
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class SessionStore:
-    def __init__(self, model, test, hashes, *, limit=12, ttl=900, clock=time.monotonic):
-        self.model, self.test, self.hashes = model, test, hashes
+    def __init__(self, model, test, hashes, *, ae=None, reference=None, limit=12, ttl=900, clock=time.monotonic):
+        self.model, self.test, self.hashes, self.ae, self.reference = model, test, hashes, ae, reference
         self.limit, self.ttl, self.clock = limit, ttl, clock
         self.lock = threading.RLock()
         self.items = {}
@@ -34,7 +36,7 @@ class SessionStore:
                 if len(self.items) >= self.limit:
                     raise OverflowError("La demostración está ocupada. Intenta de nuevo en unos minutos.")
                 token = secrets.token_urlsafe(32)
-                sim = Simulator(self.model, self.test, self.hashes)
+                sim = Simulator(self.model, self.test, self.hashes, self.ae, self.reference)
                 sim.start_worker()
             else:
                 sim = self.items[token][0]
@@ -50,8 +52,8 @@ class SessionStore:
 
 def create_app(*, root=ROOT, secure_cookie=None, public_origin=None, session_limit=12, session_ttl=900):
     root = Path(root)
-    model, test, _selection, hashes = load_frozen_experiment(root)
-    store = SessionStore(model, test, hashes, limit=session_limit, ttl=session_ttl)
+    model, test, hashes, ae, reference = load_runtime(root)
+    store = SessionStore(model, test, hashes, ae=ae, reference=reference, limit=session_limit, ttl=session_ttl)
     app = Flask(__name__, static_folder=None)
     app.config['MAX_CONTENT_LENGTH'] = 2_000_000
     app.json.ensure_ascii = False
@@ -82,6 +84,51 @@ def create_app(*, root=ROOT, secure_cookie=None, public_origin=None, session_lim
         info['runtime'] = {'mode': 'web', 'session_ttl_minutes': store.ttl // 60,
                            'session_scope': 'browser', 'session_limit': store.limit}
         return jsonify(info)
+
+    tree_description = describe_tree(model, ae, reference)
+
+    @app.get('/api/model')
+    def model_structure():
+        return jsonify(tree_description)
+
+    @app.post('/api/whatif')
+    def whatif():
+        allowed = {origin} if origin else {'http://127.0.0.1:8772', 'http://localhost:8772'}
+        if request.headers.get('Sec-Fetch-Site') == 'cross-site' or (
+                request.headers.get('Origin') and request.headers['Origin'].rstrip('/') not in allowed):
+            return jsonify(error='Utiliza los controles de esta misma página.'), 403
+        data = request.get_json(silent=True)
+        try:
+            _, sim = store.get(request.cookies.get('ai4i_session'))
+            return jsonify(sim.explain(data))
+        except OverflowError as error:
+            return jsonify(error=str(error)), 429
+        except ValueError as error:
+            return jsonify(error=str(error)), 400
+
+    def _same_origin():
+        allowed = {origin} if origin else {'http://127.0.0.1:8772', 'http://localhost:8772'}
+        return not (request.headers.get('Sec-Fetch-Site') == 'cross-site' or (
+            request.headers.get('Origin') and request.headers['Origin'].rstrip('/') not in allowed))
+
+    @app.route('/api/plant', defaults={'name': 'state'}, methods=['GET'])
+    @app.route('/api/plant/<name>', methods=['POST'])
+    def plant(name):
+        if request.method == 'POST':
+            if not _same_origin():
+                return jsonify(error='Utiliza los controles de esta misma página.'), 403
+            data = request.get_json(silent=True)
+        else:
+            data = {'sel': request.args.get('sel', 0, type=int)}
+        try:
+            token, sim = store.get(request.cookies.get('ai4i_session'))
+            result = jsonify(plant_dispatch(sim, name, data))
+            result.set_cookie('ai4i_session', token, httponly=True, secure=secure, samesite='Lax')
+            return result
+        except OverflowError as error:
+            return jsonify(error=str(error)), 429
+        except ValueError as error:
+            return jsonify(error=str(error)), 400
 
     @app.get('/api/source')
     def source():
@@ -134,8 +181,7 @@ def create_app(*, root=ROOT, secure_cookie=None, public_origin=None, session_lim
         except ValueError as error:
             return jsonify(error=str(error)), 400
 
-    assets = {'/', '/app.js', '/style.css', '/portal.js', '/portal.css', '/monitor.js',
-              '/monitor.css', '/theme.js', '/theme.css', '/manual.js', '/manual.css',
+    assets = {'/', '/lab.js', '/plant.js', '/lab.css', '/portal.js', '/portal.css', '/monitor.css', '/theme.js', '/theme.css', '/manual.js', '/manual.css',
               '/fonts/Inter.ttf', '/fonts/SpaceGrotesk.ttf'}
 
     @app.get('/')

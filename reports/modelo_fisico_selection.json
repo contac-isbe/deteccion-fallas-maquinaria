@@ -1,0 +1,208 @@
+{
+  "model_artifact": "models/modelo_fisico.joblib",
+  "model_sha256": "ffdf01419cd6ae124b669b15dc2458fa214507c3933507d66bf7f27448ef73b7",
+  "features": [
+    "Type",
+    "Air temperature [K]",
+    "Process temperature [K]",
+    "Rotational speed [rpm]",
+    "Torque [Nm]",
+    "Tool wear [min]"
+  ],
+  "positive_class": 1,
+  "derived_features": [
+    "Power [W] = Torque × rpm × 2π/60",
+    "Temp diff [K] = Process − Air",
+    "Wear x torque [minNm]"
+  ],
+  "chosen": {
+    "min_samples_leaf": 10,
+    "max_depth": 6,
+    "precision": 0.9819819819819819,
+    "recall": 0.8044280442804428,
+    "f1": 0.8843813387423936
+  },
+  "cv_grid": [
+    {
+      "min_samples_leaf": 1,
+      "max_depth": 4,
+      "precision": 0.9867549668874173,
+      "recall": 0.5498154981549815,
+      "f1": 0.7061611374407583
+    },
+    {
+      "min_samples_leaf": 1,
+      "max_depth": 6,
+      "precision": 0.9732142857142857,
+      "recall": 0.8044280442804428,
+      "f1": 0.8808080808080808
+    },
+    {
+      "min_samples_leaf": 1,
+      "max_depth": 8,
+      "precision": 0.9411764705882353,
+      "recall": 0.8265682656826568,
+      "f1": 0.8801571709233792
+    },
+    {
+      "min_samples_leaf": 1,
+      "max_depth": 10,
+      "precision": 0.8951612903225806,
+      "recall": 0.8191881918819188,
+      "f1": 0.8554913294797688
+    },
+    {
+      "min_samples_leaf": 1,
+      "max_depth": null,
+      "precision": 0.8333333333333334,
+      "recall": 0.8302583025830258,
+      "f1": 0.8317929759704251
+    },
+    {
+      "min_samples_leaf": 3,
+      "max_depth": 4,
+      "precision": 0.9866666666666667,
+      "recall": 0.5461254612546126,
+      "f1": 0.7030878859857482
+    },
+    {
+      "min_samples_leaf": 3,
+      "max_depth": 6,
+      "precision": 0.9819004524886877,
+      "recall": 0.8007380073800738,
+      "f1": 0.8821138211382114
+    },
+    {
+      "min_samples_leaf": 3,
+      "max_depth": 8,
+      "precision": 0.9523809523809523,
+      "recall": 0.8118081180811808,
+      "f1": 0.8764940239043825
+    },
+    {
+      "min_samples_leaf": 3,
+      "max_depth": 10,
+      "precision": 0.944206008583691,
+      "recall": 0.8118081180811808,
+      "f1": 0.873015873015873
+    },
+    {
+      "min_samples_leaf": 3,
+      "max_depth": null,
+      "precision": 0.876984126984127,
+      "recall": 0.8154981549815498,
+      "f1": 0.8451242829827916
+    },
+    {
+      "min_samples_leaf": 5,
+      "max_depth": 4,
+      "precision": 0.9866666666666667,
+      "recall": 0.5461254612546126,
+      "f1": 0.7030878859857482
+    },
+    {
+      "min_samples_leaf": 5,
+      "max_depth": 6,
+      "precision": 0.9908675799086758,
+      "recall": 0.8007380073800738,
+      "f1": 0.8857142857142857
+    },
+    {
+      "min_samples_leaf": 5,
+      "max_depth": 8,
+      "precision": 0.9491525423728814,
+      "recall": 0.8265682656826568,
+      "f1": 0.883629191321499
+    },
+    {
+      "min_samples_leaf": 5,
+      "max_depth": 10,
+      "precision": 0.9451476793248945,
+      "recall": 0.8265682656826568,
+      "f1": 0.8818897637795275
+    },
+    {
+      "min_samples_leaf": 5,
+      "max_depth": null,
+      "precision": 0.9253112033195021,
+      "recall": 0.8228782287822878,
+      "f1": 0.87109375
+    },
+    {
+      "min_samples_leaf": 10,
+      "max_depth": 4,
+      "precision": 0.9735099337748344,
+      "recall": 0.5424354243542435,
+      "f1": 0.6966824644549763
+    },
+    {
+      "min_samples_leaf": 10,
+      "max_depth": 6,
+      "precision": 0.9819819819819819,
+      "recall": 0.8044280442804428,
+      "f1": 0.8843813387423936
+    },
+    {
+      "min_samples_leaf": 10,
+      "max_depth": 8,
+      "precision": 0.9819004524886877,
+      "recall": 0.8007380073800738,
+      "f1": 0.8821138211382114
+    },
+    {
+      "min_samples_leaf": 10,
+      "max_depth": 10,
+      "precision": 0.9819819819819819,
+      "recall": 0.8044280442804428,
+      "f1": 0.8843813387423936
+    },
+    {
+      "min_samples_leaf": 10,
+      "max_depth": null,
+      "precision": 0.9819004524886877,
+      "recall": 0.8007380073800738,
+      "f1": 0.8821138211382114
+    },
+    {
+      "min_samples_leaf": 20,
+      "max_depth": 4,
+      "precision": 0.9929577464788732,
+      "recall": 0.5202952029520295,
+      "f1": 0.6828087167070218
+    },
+    {
+      "min_samples_leaf": 20,
+      "max_depth": 6,
+      "precision": 0.9521739130434783,
+      "recall": 0.8081180811808119,
+      "f1": 0.874251497005988
+    },
+    {
+      "min_samples_leaf": 20,
+      "max_depth": 8,
+      "precision": 0.9521739130434783,
+      "recall": 0.8081180811808119,
+      "f1": 0.874251497005988
+    },
+    {
+      "min_samples_leaf": 20,
+      "max_depth": 10,
+      "precision": 0.9521739130434783,
+      "recall": 0.8081180811808119,
+      "f1": 0.874251497005988
+    },
+    {
+      "min_samples_leaf": 20,
+      "max_depth": null,
+      "precision": 0.9521739130434783,
+      "recall": 0.8081180811808119,
+      "f1": 0.874251497005988
+    }
+  ],
+  "versions": {
+    "scikit-learn": "1.9.1",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "joblib": "1.6.0"
+  }
+}

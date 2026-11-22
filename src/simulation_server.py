@@ -4,17 +4,20 @@ import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit, parse_qs
 
+from src.plant import plant_dispatch
+from src.simulation import describe_tree
 from src.portal import DOWNLOAD_FILES, metadata, source_content
 
 
 def create_server(simulator, web_root, port=8765):
+    tree_description = describe_tree(simulator.model, simulator.ae, simulator.reference)
     assets = {"/": ("index.html", "text/html; charset=utf-8"),
-              "/app.js": ("app.js", "text/javascript; charset=utf-8"),
-              "/style.css": ("style.css", "text/css; charset=utf-8"),
+              "/lab.js": ("lab.js", "text/javascript; charset=utf-8"),
+              "/lab.css": ("lab.css", "text/css; charset=utf-8"),
               "/portal.js": ("portal.js", "text/javascript; charset=utf-8")}
-    assets["/portal.css"] = ("portal.css", "text/css; charset=utf-8")
+    assets["/plant.js"] = ("plant.js", "text/javascript; charset=utf-8")
     assets["/monitor.css"] = ("monitor.css", "text/css; charset=utf-8")
-    assets["/monitor.js"] = ("monitor.js", "text/javascript; charset=utf-8")
+    assets["/portal.css"] = ("portal.css", "text/css; charset=utf-8")
     assets["/theme.js"] = ("theme.js", "text/javascript; charset=utf-8")
     assets["/theme.css"] = ("theme.css", "text/css; charset=utf-8")
     assets["/manual.js"] = ("manual.js", "text/javascript; charset=utf-8")
@@ -62,6 +65,10 @@ def create_server(simulator, web_root, port=8765):
             elif path in assets:
                 filename, mime = assets[path]
                 self.respond(200, (web_root / filename).read_bytes(), mime)
+            elif path == "/api/model":
+                self.respond(200, tree_description)
+            elif path == "/api/plant":
+                self.respond(200, plant_dispatch(simulator, "state", {"sel": int((parse_qs(urlsplit(self.path).query).get("sel") or ["0"])[0] or 0)}))
             elif path == "/api/state":
                 self.respond(200, simulator.snapshot())
             elif path == "/api/export":
@@ -90,6 +97,10 @@ def create_server(simulator, web_root, port=8765):
                     result = simulator.reset()
                 elif path == "/api/step":
                     result = simulator.step()
+                elif path.startswith("/api/plant/"):
+                    result = plant_dispatch(simulator, path.rsplit("/", 1)[1], data)
+                elif path == "/api/whatif":
+                    result = simulator.explain(data)
                 elif path == "/api/load":
                     if not isinstance(data.get("csv"), str):
                         raise ValueError("Selecciona un archivo CSV de prueba válido.")

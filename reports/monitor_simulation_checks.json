@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-05T00:15:27.576930+00:00",
+  "generated_at_utc": "2026-11-21T20:34:01.374819+00:00",
   "purpose": "Comprobación funcional de la simulación local, sin entrenamiento ni selección de modelo.",
   "all_checks_passed": true,
   "checks": [
@@ -191,21 +191,21 @@
   "timing": {
     "predict": {
       "observations": 2000,
-      "mean_ms": 1.8686233,
-      "median_ms": 1.7959,
-      "p95_ms": 2.2369399999999997
+      "mean_ms": 2.1282317859999997,
+      "median_ms": 2.0429025,
+      "p95_ms": 2.92160055
     },
     "processing": {
       "observations": 2000,
-      "mean_ms": 3.52945735,
-      "median_ms": 3.4248000000000003,
-      "p95_ms": 4.095859999999999
+      "mean_ms": 5.980674973499999,
+      "median_ms": 5.7607800000000005,
+      "p95_ms": 8.16854545
     },
     "http_step_roundtrip": {
       "observations": 20,
-      "mean_ms": 26.141700000000004,
-      "median_ms": 29.8251,
-      "p95_ms": 34.23131500000001
+      "mean_ms": 11.2823921,
+      "median_ms": 11.718926,
+      "p95_ms": 13.93298505
     },
     "definitions": {
       "predict": "Transformaciones y clasificación de una fila, después de tres calentamientos excluidos.",
@@ -214,9 +214,9 @@
     }
   },
   "environment": {
-    "platform": "Windows-11-10.0.26300-SP0",
-    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
-    "python": "3.12.14",
+    "platform": "Linux-6.18.44-fc-v726-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "python": "3.13.18",
     "versions": {
       "scikit-learn": "1.9.1",
       "pandas": "3.0.1",
@@ -226,17 +226,17 @@
   },
   "protected_file_sha256_before": {
     "models/modelo_seleccionado.joblib": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
-    "reports/model_selection.json": "b53dd68f699214649f10beebeda04c8df4919193a6fca2b6f7456467a93b2562",
-    "reports/test_evaluation.json": "d5cb497c419a415975b41d09d4ac872f88241c4208cf4f732accccb28695533a",
-    "reports/test_predictions.csv": "3035ef769f10d1c196c89614bd49a9971ab54334e153c88b5fd257cea3fe0871",
+    "reports/model_selection.json": "4fc277d76637e390e1a4a6a8e2bfe1b19437d854e56a907937cbfeb88c901bbb",
+    "reports/test_evaluation.json": "2ee9bb0c61562a13a91e49fd223c2432ae581ca365a092bc673c6096847575e7",
+    "reports/test_predictions.csv": "015ab78c1fd30189aa75a786ca75c2124543d4ea0dc3cdfd1c642ae54c54b343",
     "data/raw/ai4i2020.csv": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
     "data/processed/test.csv": "bff6ce157829bfba0481237e632d03f53abe67b4d75bebc65feb4ba579692f14"
   },
   "protected_file_sha256_after": {
     "models/modelo_seleccionado.joblib": "df47cbe10f767c64f7ba90eecf7f3c7d834eef8e12e0a08a120abf82bf19a96a",
-    "reports/model_selection.json": "b53dd68f699214649f10beebeda04c8df4919193a6fca2b6f7456467a93b2562",
-    "reports/test_evaluation.json": "d5cb497c419a415975b41d09d4ac872f88241c4208cf4f732accccb28695533a",
-    "reports/test_predictions.csv": "3035ef769f10d1c196c89614bd49a9971ab54334e153c88b5fd257cea3fe0871",
+    "reports/model_selection.json": "4fc277d76637e390e1a4a6a8e2bfe1b19437d854e56a907937cbfeb88c901bbb",
+    "reports/test_evaluation.json": "2ee9bb0c61562a13a91e49fd223c2432ae581ca365a092bc673c6096847575e7",
+    "reports/test_predictions.csv": "015ab78c1fd30189aa75a786ca75c2124543d4ea0dc3cdfd1c642ae54c54b343",
     "data/raw/ai4i2020.csv": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
     "data/processed/test.csv": "bff6ce157829bfba0481237e632d03f53abe67b4d75bebc65feb4ba579692f14"
   },

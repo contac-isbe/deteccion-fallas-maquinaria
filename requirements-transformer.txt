@@ -1,0 +1,7 @@
+# Solo para entrenar y exportar el Transformer (notebook 05); no se usa en Render
+torch
+transformers
+onnx
+onnxscript
+onnxruntime==1.32.0
+tokenizers==0.23.3

@@ -7,3 +7,6 @@ scipy==1.18.1
 threadpoolctl==3.7.0
 Flask==3.1.2
 gunicorn==23.0.0
+# Transformer del asistente (ONNX int8, sin PyTorch)
+onnxruntime==1.32.0
+tokenizers==0.23.3

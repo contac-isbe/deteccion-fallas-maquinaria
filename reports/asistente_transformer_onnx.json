@@ -1,0 +1,15 @@
+{
+  "bytes_onnx_int8": 67120405,
+  "test_plantillas_no_vistas": {
+    "intent_accuracy": 0.8672199170124482,
+    "intent_macro_f1": 0.8598429168953421,
+    "cause_accuracy": 0.7717842323651453,
+    "cause_macro_f1": 0.6913326125640963
+  },
+  "natural_a_mano": {
+    "intent_accuracy": 0.7971014492753623,
+    "intent_macro_f1": 0.8016701552415838,
+    "cause_accuracy": 0.9565217391304348,
+    "cause_macro_f1": 0.8989898989898991
+  }
+}

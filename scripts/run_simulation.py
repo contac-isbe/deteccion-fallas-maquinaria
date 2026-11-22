@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.evaluation import load_frozen_experiment
+from src.runtime import load_runtime
 from src.simulation import Simulator
 from src.simulation_server import create_server
 
@@ -17,8 +17,8 @@ def main():
     parser.add_argument("--port", type=int, default=8771)
     args = parser.parse_args()
     try:
-        model, test, _selection, fingerprints = load_frozen_experiment(ROOT)
-        simulator = Simulator(model, test, fingerprints)
+        model, test, fingerprints, ae, reference = load_runtime(ROOT)
+        simulator = Simulator(model, test, fingerprints, ae, reference)
         server = create_server(simulator, ROOT / "web", args.port)
     except (OSError, ValueError, AssertionError) as exc:
         print(f"No se pudo iniciar: {exc}", file=sys.stderr)

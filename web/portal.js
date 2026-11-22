@@ -1,7 +1,7 @@
 "use strict";
 const panels = [...document.querySelectorAll('[role="tabpanel"]')];
 const tabs = [...document.querySelectorAll('[role="tab"]')];
-const titles = {documentacion:["Detrás del modelo","Los datos, las decisiones y los resultados de nuestro proyecto."],codigo:["Explora el código","Consulta los archivos y descubre cómo ejecutar el sistema."],ejecucion:["Monitor de maquinaria","Pon en marcha los registros y observa cómo responde el modelo."]};
+const titles = {documentacion:["Detrás del modelo","Los datos, las decisiones y los resultados de nuestro proyecto."],codigo:["Explora el código","Consulta los archivos y descubre cómo ejecutar el sistema."],ejecucion:["Monitor de maquinaria","Cada registro recorre el árbol de decisión del modelo: mira qué pregunta y por qué responde así."]};
 function selectPanel(name, focus=false) {
   if(!titles[name]) name="ejecucion";
   for(const p of panels) p.hidden=p.id!==name;

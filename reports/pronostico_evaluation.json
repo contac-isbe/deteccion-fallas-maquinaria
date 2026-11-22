@@ -1,0 +1,82 @@
+{
+  "protocol": "Prueba con semillas 500-539 (nunca usadas para entrenar ni elegir); evaluada una sola vez.",
+  "horizon": 12,
+  "window": 8,
+  "rows": {
+    "test": 218839,
+    "positives": 19512
+  },
+  "row_level": {
+    "precision": 0.6887183350597985,
+    "recall": 0.7496412464124641,
+    "f1": 0.7178895705521472,
+    "average_precision": 0.8314470267831482,
+    "base_rate": 0.08916143831766733
+  },
+  "forecast_events": {
+    "failures": 1626,
+    "warned": 1416,
+    "recall_events": 0.8708487084870848,
+    "mean_lead": 10.38135593220339,
+    "median_lead": 12.0,
+    "alert_runs": 1655,
+    "false_runs": 184,
+    "false_runs_per_1000_ticks": 0.9231062525397964,
+    "by_cause": {
+      "HDF": {
+        "failures": 178,
+        "warned": 178
+      },
+      "OSF": {
+        "failures": 5,
+        "warned": 5
+      },
+      "PWF": {
+        "failures": 532,
+        "warned": 532
+      },
+      "TWF": {
+        "failures": 911,
+        "warned": 701
+      }
+    }
+  },
+  "without_trend": {
+    "description": "Mismo modelo pero solo con el valor actual (sin tendencias); umbral elegido en validación.",
+    "row_level": {
+      "precision": 0.6334199650632696,
+      "recall": 0.7619413694136942,
+      "f1": 0.691761859339739,
+      "average_precision": 0.7915104417161127
+    },
+    "events": {
+      "failures": 1626,
+      "warned": 1473,
+      "recall_events": 0.9059040590405905,
+      "mean_lead": 10.63611676849966,
+      "median_lead": 12.0,
+      "alert_runs": 3450,
+      "false_runs": 1383,
+      "false_runs_per_1000_ticks": 6.938347539470318,
+      "by_cause": {
+        "HDF": {
+          "failures": 178,
+          "warned": 178
+        },
+        "OSF": {
+          "failures": 5,
+          "warned": 5
+        },
+        "PWF": {
+          "failures": 532,
+          "warned": 532
+        },
+        "TWF": {
+          "failures": 911,
+          "warned": 758
+        }
+      }
+    }
+  },
+  "note": "El árbol v2 clasifica solo la lectura actual: por construcción no avisa antes de que se cumpla la condición de falla (adelanto 0)."
+}

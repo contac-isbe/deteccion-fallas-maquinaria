@@ -1,0 +1,230 @@
+{
+  "model": "dccuchile/distilbert-base-spanish-uncased",
+  "parameters_millions": 66.7,
+  "epochs": 4,
+  "batch": 32,
+  "lr": 5e-05,
+  "max_len": 40,
+  "best_epoch": 1,
+  "reject_threshold": 0.0,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.9118616351383828,
+      "val_loss": 1.154334613255092,
+      "val_intent_macro_f1": 0.854010595584122,
+      "val_cause_macro_f1": 0.7892702734949107,
+      "seconds": 582
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.14430435424838917,
+      "val_loss": 1.3132745947156634,
+      "val_intent_macro_f1": 0.8776578919359953,
+      "val_cause_macro_f1": 0.7552334016043692,
+      "seconds": 1541
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.03345458413158783,
+      "val_loss": 1.4527453027452741,
+      "val_intent_macro_f1": 0.8598204401775789,
+      "val_cause_macro_f1": 0.7691183537608697,
+      "seconds": 1803
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.01877561397766554,
+      "val_loss": 1.4328656659807477,
+      "val_intent_macro_f1": 0.8577421196289586,
+      "val_cause_macro_f1": 0.7772348483222499,
+      "seconds": 2635
+    }
+  ],
+  "train_seconds": 2747,
+  "test_plantillas_no_vistas": {
+    "transformer": {
+      "intent_accuracy": 0.8741355463347165,
+      "intent_macro_f1": 0.8591486887022045,
+      "cause_accuracy": 0.7745504840940526,
+      "cause_macro_f1": 0.6932205385217478
+    },
+    "tfidf_logistica": {
+      "intent_accuracy": 0.8298755186721992,
+      "intent_macro_f1": 0.8158435859513175,
+      "cause_accuracy": 0.8630705394190872,
+      "cause_macro_f1": 0.8165077734569041
+    },
+    "linea_base_similitud": {
+      "intent_accuracy": 0.5006915629322268,
+      "intent_macro_f1": 0.5259087584817442,
+      "cause_accuracy": 0.8658367911479945,
+      "cause_macro_f1": 0.8275139116026992
+    }
+  },
+  "natural_a_mano": {
+    "transformer": {
+      "intent_accuracy": 0.855072463768116,
+      "intent_macro_f1": 0.8600582338198437,
+      "cause_accuracy": 0.9420289855072463,
+      "cause_macro_f1": 0.8884892884892884
+    },
+    "tfidf_logistica": {
+      "intent_accuracy": 0.7971014492753623,
+      "intent_macro_f1": 0.8067997104374813,
+      "cause_accuracy": 0.9565217391304348,
+      "cause_macro_f1": 0.9301948051948052
+    },
+    "linea_base_similitud": {
+      "intent_accuracy": 0.4927536231884058,
+      "intent_macro_f1": 0.4910168778589831,
+      "cause_accuracy": 0.927536231884058,
+      "cause_macro_f1": 0.8647907647907648
+    },
+    "errores_transformer": [
+      {
+        "texto": "el refrigerante no está enfriando como antes",
+        "esperado": [
+          "por_que",
+          "HDF"
+        ],
+        "predicho": [
+          "que_hago",
+          "HDF"
+        ]
+      },
+      {
+        "texto": "¿se podrá terminar el pedido con esta herramienta tan vieja?",
+        "esperado": [
+          "seguir",
+          "TWF"
+        ],
+        "predicho": [
+          "que_hago",
+          "TWF"
+        ]
+      },
+      {
+        "texto": "¿hay riesgo de que se me rompa la fresa?",
+        "esperado": [
+          "cuanto",
+          "TWF"
+        ],
+        "predicho": [
+          "prevenir",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "auxilio, la 12 está en rojo",
+        "esperado": [
+          "que_hago",
+          "ninguna"
+        ],
+        "predicho": [
+          "planta",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "la potencia se pasó del límite, ¿es grave?",
+        "esperado": [
+          "cuanto",
+          "PWF_high"
+        ],
+        "predicho": [
+          "cuanto",
+          "PWF_low"
+        ]
+      },
+      {
+        "texto": "está muy caliente la temperatura del proceso",
+        "esperado": [
+          "por_que",
+          "HDF"
+        ],
+        "predicho": [
+          "que_hago",
+          "HDF"
+        ]
+      },
+      {
+        "texto": "resumen del turno por favor",
+        "esperado": [
+          "planta",
+          "ninguna"
+        ],
+        "predicho": [
+          "fuera",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "la potencia está altísima, ¿la apago?",
+        "esperado": [
+          "seguir",
+          "PWF_high"
+        ],
+        "predicho": [
+          "que_hago",
+          "PWF_high"
+        ]
+      },
+      {
+        "texto": "¿podrías explicarme qué es un gradiente descendente?",
+        "esperado": [
+          "fuera",
+          "ninguna"
+        ],
+        "predicho": [
+          "por_que",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "¿qué puede estar causando tanta potencia?",
+        "esperado": [
+          "por_que",
+          "PWF_high"
+        ],
+        "predicho": [
+          "por_que",
+          "PWF_low"
+        ]
+      },
+      {
+        "texto": "ayúdame, algo anda mal con la 2",
+        "esperado": [
+          "que_hago",
+          "ninguna"
+        ],
+        "predicho": [
+          "por_que",
+          "ninguna"
+        ]
+      },
+      {
+        "texto": "¿por qué hay poca potencia en el husillo?",
+        "esperado": [
+          "por_que",
+          "PWF_low"
+        ],
+        "predicho": [
+          "por_que",
+          "PWF_high"
+        ]
+      },
+      {
+        "texto": "¿hay alguna máquina que deba apagar?",
+        "esperado": [
+          "planta",
+          "ninguna"
+        ],
+        "predicho": [
+          "seguir",
+          "ninguna"
+        ]
+      }
+    ]
+  }
+}

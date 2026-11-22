@@ -1,0 +1,52 @@
+{
+  "model_artifact": "models/pronostico.joblib",
+  "model_sha256": "622fc9d383aab0e7eed7f605216cee0f18381c04dacb7df30f6c906fdffe9976",
+  "grid": [
+    {
+      "max_depth": 3,
+      "max_iter": 80,
+      "val_average_precision": 0.8331720014165439
+    },
+    {
+      "max_depth": 3,
+      "max_iter": 200,
+      "val_average_precision": 0.833827853394501
+    },
+    {
+      "max_depth": 5,
+      "max_iter": 80,
+      "val_average_precision": 0.8340133339597259
+    },
+    {
+      "max_depth": 5,
+      "max_iter": 200,
+      "val_average_precision": 0.8323022956159942
+    }
+  ],
+  "chosen": {
+    "max_depth": 5,
+    "max_iter": 80
+  },
+  "threshold": 0.38999999999999996,
+  "threshold_rule": "umbral que maximiza F1 en validación",
+  "seeds": {
+    "train": [
+      100,
+      219
+    ],
+    "validation": [
+      300,
+      339
+    ],
+    "test": [
+      500,
+      539
+    ]
+  },
+  "ticks_per_run": 500,
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1"
+  }
+}
