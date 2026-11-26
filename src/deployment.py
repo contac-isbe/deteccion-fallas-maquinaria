@@ -181,7 +181,7 @@ def create_app(*, root=ROOT, secure_cookie=None, public_origin=None, session_lim
         except ValueError as error:
             return jsonify(error=str(error)), 400
 
-    assets = {'/', '/lab.js', '/plant.js', '/lab.css', '/portal.js', '/portal.css', '/monitor.css', '/theme.js', '/theme.css', '/manual.js', '/manual.css',
+    assets = {'/', '/app.js', '/monitor.js', '/style.css', '/assistant.js', '/assistant.css', '/portal.js', '/portal.css', '/monitor.css', '/theme.js', '/theme.css', '/manual.js', '/manual.css',
               '/fonts/Inter.ttf', '/fonts/SpaceGrotesk.ttf'}
 
     @app.get('/')

@@ -12,10 +12,12 @@ from src.portal import DOWNLOAD_FILES, metadata, source_content
 def create_server(simulator, web_root, port=8765):
     tree_description = describe_tree(simulator.model, simulator.ae, simulator.reference)
     assets = {"/": ("index.html", "text/html; charset=utf-8"),
-              "/lab.js": ("lab.js", "text/javascript; charset=utf-8"),
-              "/lab.css": ("lab.css", "text/css; charset=utf-8"),
+              "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+              "/monitor.js": ("monitor.js", "text/javascript; charset=utf-8"),
+              "/style.css": ("style.css", "text/css; charset=utf-8"),
+              "/assistant.js": ("assistant.js", "text/javascript; charset=utf-8"),
+              "/assistant.css": ("assistant.css", "text/css; charset=utf-8"),
               "/portal.js": ("portal.js", "text/javascript; charset=utf-8")}
-    assets["/plant.js"] = ("plant.js", "text/javascript; charset=utf-8")
     assets["/monitor.css"] = ("monitor.css", "text/css; charset=utf-8")
     assets["/portal.css"] = ("portal.css", "text/css; charset=utf-8")
     assets["/theme.js"] = ("theme.js", "text/javascript; charset=utf-8")
